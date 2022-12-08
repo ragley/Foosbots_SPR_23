@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1669220487",
+        "python_version": "3.7.7 (default, May  6 2020, 11:45:54) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\meado\\anaconda3\\envs\\foosbot_env\\Scripts\\mlagents-learn config/foosball_config.yaml --run-id attack_1_11",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.5",
+        "end_time_seconds": "1669220521"
+    },
+    "total": 34.501669,
+    "count": 1,
+    "self": 0.012275300000005984,
+    "children": {
+        "run_training.setup": {
+            "total": 0.2181668000000001,
+            "count": 1,
+            "self": 0.2181668000000001
+        },
+        "TrainerController.start_learning": {
+            "total": 34.271226899999995,
+            "count": 1,
+            "self": 0.0017753999999996495,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 34.2694346,
+                    "count": 1,
+                    "self": 34.2694346
+                },
+                "trainer_threads": {
+                    "total": 1.3999999950442543e-06,
+                    "count": 1,
+                    "self": 1.3999999950442543e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 1.5500000003498826e-05,
+                    "count": 1,
+                    "self": 1.5500000003498826e-05
+                }
+            }
+        }
+    }
+}

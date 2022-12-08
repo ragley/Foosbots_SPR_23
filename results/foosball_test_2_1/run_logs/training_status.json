@@ -1,0 +1,57 @@
+{
+    "Foosbots_MultiRod_5": {
+        "checkpoints": [
+            {
+                "steps": 499926,
+                "file_path": "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-499926.onnx",
+                "reward": 0.016827024179636628,
+                "creation_time": 1669764157.4980483,
+                "auxillary_file_paths": [
+                    "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-499926.pt"
+                ]
+            },
+            {
+                "steps": 500426,
+                "file_path": "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500426.onnx",
+                "reward": 0.016726312975056078,
+                "creation_time": 1669764157.619945,
+                "auxillary_file_paths": [
+                    "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500426.pt"
+                ]
+            },
+            {
+                "steps": 999581,
+                "file_path": "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-999581.onnx",
+                "reward": 0.029497138121431427,
+                "creation_time": 1669774248.5225372,
+                "auxillary_file_paths": [
+                    "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-999581.pt"
+                ]
+            },
+            {
+                "steps": 1000081,
+                "file_path": "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-1000081.onnx",
+                "reward": 0.03007777299434464,
+                "creation_time": 1669774248.6410332,
+                "auxillary_file_paths": [
+                    "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-1000081.pt"
+                ]
+            }
+        ],
+        "elo": 1246.323136368656,
+        "final_checkpoint": {
+            "steps": 1000081,
+            "file_path": "results\\foosball_test_2_1\\Foosbots_MultiRod_5.onnx",
+            "reward": 0.03007777299434464,
+            "creation_time": 1669774248.6410332,
+            "auxillary_file_paths": [
+                "results\\foosball_test_2_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-1000081.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

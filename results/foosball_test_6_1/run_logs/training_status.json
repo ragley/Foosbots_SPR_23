@@ -1,0 +1,39 @@
+{
+    "Foosbots_MultiRod_5": {
+        "checkpoints": [
+            {
+                "steps": 499519,
+                "file_path": "results\\foosball_test_6_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-499519.onnx",
+                "reward": 0.01881794198953475,
+                "creation_time": 1670011873.2800071,
+                "auxillary_file_paths": [
+                    "results\\foosball_test_6_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-499519.pt"
+                ]
+            },
+            {
+                "steps": 500019,
+                "file_path": "results\\foosball_test_6_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500019.onnx",
+                "reward": 0.01981499313551467,
+                "creation_time": 1670011873.402385,
+                "auxillary_file_paths": [
+                    "results\\foosball_test_6_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500019.pt"
+                ]
+            }
+        ],
+        "elo": 1223.2461353851265,
+        "final_checkpoint": {
+            "steps": 500019,
+            "file_path": "results\\foosball_test_6_1\\Foosbots_MultiRod_5.onnx",
+            "reward": 0.01981499313551467,
+            "creation_time": 1670011873.402385,
+            "auxillary_file_paths": [
+                "results\\foosball_test_6_1\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500019.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

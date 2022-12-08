@@ -1,0 +1,30 @@
+{
+    "Foosbots_MultiRod_5": {
+        "elo": 1199.4985650303872,
+        "checkpoints": [
+            {
+                "steps": 4123,
+                "file_path": "results\\selfPlay_3_3\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-4123.onnx",
+                "reward": -0.3333333333333333,
+                "creation_time": 1669596651.2186358,
+                "auxillary_file_paths": [
+                    "results\\selfPlay_3_3\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-4123.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4123,
+            "file_path": "results\\selfPlay_3_3\\Foosbots_MultiRod_5.onnx",
+            "reward": -0.3333333333333333,
+            "creation_time": 1669596651.2186358,
+            "auxillary_file_paths": [
+                "results\\selfPlay_3_3\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-4123.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "Attack_Rod": {
+        "checkpoints": [
+            {
+                "steps": 499913,
+                "file_path": "results\\attack_5_1\\Attack_Rod\\Attack_Rod-499913.onnx",
+                "reward": 0.2,
+                "creation_time": 1669562878.5796766,
+                "auxillary_file_paths": [
+                    "results\\attack_5_1\\Attack_Rod\\Attack_Rod-499913.pt"
+                ]
+            },
+            {
+                "steps": 999421,
+                "file_path": "results\\attack_5_1\\Attack_Rod\\Attack_Rod-999421.onnx",
+                "reward": -0.625,
+                "creation_time": 1669567332.6882648,
+                "auxillary_file_paths": [
+                    "results\\attack_5_1\\Attack_Rod\\Attack_Rod-999421.pt"
+                ]
+            },
+            {
+                "steps": 1000421,
+                "file_path": "results\\attack_5_1\\Attack_Rod\\Attack_Rod-1000421.onnx",
+                "reward": -0.625,
+                "creation_time": 1669567332.773024,
+                "auxillary_file_paths": [
+                    "results\\attack_5_1\\Attack_Rod\\Attack_Rod-1000421.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000421,
+            "file_path": "results\\attack_5_1\\Attack_Rod.onnx",
+            "reward": -0.625,
+            "creation_time": 1669567332.773024,
+            "auxillary_file_paths": [
+                "results\\attack_5_1\\Attack_Rod\\Attack_Rod-1000421.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

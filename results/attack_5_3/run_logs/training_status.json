@@ -1,0 +1,29 @@
+{
+    "Attack_Rod": {
+        "checkpoints": [
+            {
+                "steps": 145951,
+                "file_path": "results\\attack_5_3\\Attack_Rod\\Attack_Rod-145951.onnx",
+                "reward": null,
+                "creation_time": 1669570741.385997,
+                "auxillary_file_paths": [
+                    "results\\attack_5_3\\Attack_Rod\\Attack_Rod-145951.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 145951,
+            "file_path": "results\\attack_5_3\\Attack_Rod.onnx",
+            "reward": null,
+            "creation_time": 1669570741.385997,
+            "auxillary_file_paths": [
+                "results\\attack_5_3\\Attack_Rod\\Attack_Rod-145951.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

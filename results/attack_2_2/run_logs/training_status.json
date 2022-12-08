@@ -1,0 +1,38 @@
+{
+    "Foosbots_MultiRod_5": {
+        "checkpoints": [
+            {
+                "steps": 499650,
+                "file_path": "results\\attack_2_2\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-499650.onnx",
+                "reward": 601.3187713623047,
+                "creation_time": 1669231191.3534963,
+                "auxillary_file_paths": [
+                    "results\\attack_2_2\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-499650.pt"
+                ]
+            },
+            {
+                "steps": 500252,
+                "file_path": "results\\attack_2_2\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500252.onnx",
+                "reward": 1136.5000430836396,
+                "creation_time": 1669231191.4296412,
+                "auxillary_file_paths": [
+                    "results\\attack_2_2\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500252.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500252,
+            "file_path": "results\\attack_2_2\\Foosbots_MultiRod_5.onnx",
+            "reward": 1136.5000430836396,
+            "creation_time": 1669231191.4296412,
+            "auxillary_file_paths": [
+                "results\\attack_2_2\\Foosbots_MultiRod_5\\Foosbots_MultiRod_5-500252.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

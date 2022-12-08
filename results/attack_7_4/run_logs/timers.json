@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1669650826",
+        "python_version": "3.7.7 (default, May  6 2020, 11:45:54) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\meado\\anaconda3\\envs\\foosbot_env\\Scripts\\mlagents-learn config/attack_config.yaml --run-id attack_7_4",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.5",
+        "end_time_seconds": "1669650895"
+    },
+    "total": 69.3331969,
+    "count": 1,
+    "self": 0.010696999999993295,
+    "children": {
+        "run_training.setup": {
+            "total": 0.22045950000000003,
+            "count": 1,
+            "self": 0.22045950000000003
+        },
+        "TrainerController.start_learning": {
+            "total": 69.1020404,
+            "count": 1,
+            "self": 0.00019120000000327764,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 69.10182110000001,
+                    "count": 1,
+                    "self": 69.10182110000001
+                },
+                "TrainerController._save_models": {
+                    "total": 2.8099999994424252e-05,
+                    "count": 1,
+                    "self": 2.8099999994424252e-05
+                }
+            }
+        }
+    }
+}
