@@ -16,7 +16,7 @@ Once your virtual environment is activated follow these steps to install all nec
     
   3.) Install ML Agents' Python package by running the following command from the command line:
   
-      python -m pip install mlagents==0.30.0
+      python -m pip install mlagents==0.28.0
       
   
 ## Training the Network
