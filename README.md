@@ -46,6 +46,8 @@ This component determines how an agent makes decisions and  has several importan
 
 ![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png)
 
+Behavior Name: This field must match the behavior named specified in the .yaml file referenced during training
+
 Vector Observation Space: The number of elements in the CollectObservations() method, we have 20 in our script
 
 Actions: The size of the action space, for this project there are 8 continuous action outputs (2 per rod) and 0 discrete actions
