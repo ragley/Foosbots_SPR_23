@@ -80,4 +80,6 @@ This correlates to how large a step the algorithm is taking as it searches for a
 ### Policy Value Estimate
 This measures the mean estimated value for all states visited by the agent and should be expected to increase over time
 
+Note: "test_documentation.txt" contains the various hyperparameters used on each of the included training runs
+
 More information about the use of tensorboard and evaluation of these statisitics can be found at the following link: <https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Using-Tensorboard.md>
