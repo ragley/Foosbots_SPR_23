@@ -52,9 +52,32 @@ Actions: The size of the action space, for this project there are 8 continuous a
 
 Team ID: Which team each agent is on, it is important for the self play training that each team have a different ID
 ### Decision Requester
-## Accessing and Evaluating Results
-  // tensorboard --logdir results --port 6006
-  
-  // navigate to localhost:6006
+This component determines how often the agent makes decisions within a training run
 
-AGENT COMPONENTS:
+![foosball_decison_requester](https://user-images.githubusercontent.com/35296087/206738764-6a268c05-15dd-489e-bd67-06885dccc74e.png)
+
+Note that "Take Actions Between" is unchecked and that the "Decision Period" is >1, we found that when allowed to make decisions at every step the agent would get stuck moving its rods only in one direction but when it was slightly throttled it had full range of motion.
+## Accessing and Evaluating Results
+In order to view tensorboard graphs to evaluate training, activate the virtual environment and navigate to the directory containing the Unity project then run the following command:
+
+    tensorboard --logdir results --port 6006
+  
+Then, navigate to [localhost:6006](http://localhost:6006).
+
+There are 7 statistics used primarily to evaluate the network
+### ELO
+This measures the relative skill between two players and in a proper training run this should steadily increase
+### Cumulative Reward
+This measures the mean cumulative reward over all agents and should increase through training
+### Policy Loss
+This correlates to how much the policy is changing throughout training and should decrease over time
+### Value Loss
+This correlates to how well the model can predict the value of each state and should initially increase but ultimately stabilize
+### Policy Entropy
+This correlates to how random the model's decisions are and should decrease over the course of training
+### Policy Learning Rate
+This correlates to how large a step the algorithm is taking as it searches for an optimal policy and should decrease over time
+### Policy Value Estimate
+This measures the mean estimated value for all states visited by the agent and should be expected to increase over time
+
+More information about the use of tensorboard and evaluation of these statisitics can be found at the following link: <https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Using-Tensorboard.md>
