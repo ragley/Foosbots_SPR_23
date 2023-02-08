@@ -10,12 +10,26 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
+
 public class SelfPlayAgent : Agent
 {
     // Utility variables:
     public Ball ball;
     private int counter;
     private int endStep;
+    private int idleTimer;
+    private int maxIdleTime;
+    
+    private float episodeSumReward;
+
+    [Tooltip("Maximum per step penalty for spinning player rods, 0 -> disabled")]
+    [SerializeField]
+    [Range(0f, 0.1f)]
+    float maxSpinPenalty = 0.01f;
+    float shotRewardMultiplier = 0.1f;
+    bool useSpinPenalty;
+    bool useShotReward;
+
     Vector3 initialKick;
     Vector3 autoKick;
     Rigidbody ballBody;
@@ -27,13 +41,27 @@ public class SelfPlayAgent : Agent
     public GameObject allyGoalkeeper;
     public GameObject allyMidfield;
     public GameObject allyGoal;
+    
     Rigidbody allyAttackRod;
     Rigidbody allyDefenceRod;
     Rigidbody allyGoalkeeperRod;
     Rigidbody allyMidfieldRod;
 
+  
+
     // Enemy variables:
+    public GameObject enemyAttack;
+    public GameObject enemyDefence;
+    public GameObject enemyGoalkeeper;
+    public GameObject enemyMidfield;
     public GameObject enemyGoal;
+    
+    Rigidbody enemyAttackRod;
+    Rigidbody enemyDefenceRod;
+    Rigidbody enemyGoalkeeperRod;
+    Rigidbody enemyMidfieldRod;
+
+    
 
     // Start up procedures:  
     void Start()
@@ -43,19 +71,29 @@ public class SelfPlayAgent : Agent
         allyDefenceRod = allyDefence.GetComponent<Rigidbody>();
         allyGoalkeeperRod = allyGoalkeeper.GetComponent<Rigidbody>();
         allyMidfieldRod = allyMidfield.GetComponent<Rigidbody>();
+        
+        enemyAttackRod = enemyAttack.GetComponent<Rigidbody>();
+        enemyDefenceRod = enemyDefence.GetComponent<Rigidbody>();
+        enemyGoalkeeperRod = enemyGoalkeeper.GetComponent<Rigidbody>();
+        enemyMidfieldRod = enemyMidfield.GetComponent<Rigidbody>();
+        
         ballBody = ball.GetComponent<Rigidbody>();
 
         // Initialize utility variables
         initialKick = Vector3.zero;
         autoKick = Vector3.zero;
+        useSpinPenalty = true;
+        useShotReward = true;
         counter = 0;
-
-        endStep = 1000;
+        maxIdleTime = 40;
+        endStep = 2500;
     }
 
     // Episode initialization:
     public override void OnEpisodeBegin()
     {
+        Debug.Log("Start New Episode - Self-Play Agent: " + allyColor);
+
         // domain randomization
         ballBody.mass = Random.Range(.995f, 1f);
         ballBody.drag = Random.Range(0f, .005f);
@@ -90,7 +128,9 @@ public class SelfPlayAgent : Agent
             allyDefence.transform.localPosition = new Vector3(0.003690999f, 0.003497f, 0f);
             allyGoalkeeper.transform.localPosition = new Vector3(0.005166999f, 0.003497f, 0f);
             allyMidfield.transform.localPosition = new Vector3(0.0007380001f, 0.003497f, 0f);
+
         }
+
         if (allyColor == PlayerColor.blue)
         {
             allyAttack.transform.localPosition = new Vector3(0.002214001f, 0.003497f, 0f);
@@ -107,13 +147,15 @@ public class SelfPlayAgent : Agent
 
         // reset ball to random position between midfield rods and apply small autokick
         ball.Reset(Random.Range(-0.000486f, 0.000486f), Random.Range(-0.002689f, 0.002689f));
-        initialKick.z = Random.Range(-125f, 125f);
-        initialKick.x = Random.Range(-125f, 125f);
+        initialKick.z = Random.Range(-50f, 50f);
+        initialKick.x = Random.Range(-50f, 50f);
         ball.rBody.AddForce(initialKick);
 
         // reset utility variables
         counter = 0;
         autoKick = Vector3.zero;
+        idleTimer = 0;
+        episodeSumReward = 0;
     }
 
     // Obtain observations for neural network:
@@ -156,6 +198,8 @@ public class SelfPlayAgent : Agent
     //      handles rewards
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        print("=========" + allyColor + " STEP START=========");
+        float stepSumReward = 0f;
         // action control:
         // set control forces and torques to zero
         Vector3 controlAttackForce = Vector3.zero;
@@ -192,47 +236,182 @@ public class SelfPlayAgent : Agent
         // reward scoring
         if (ball.inGoalColor != allyColor && ball.inGoalColor != PlayerColor.none)
         {
-            AddReward(1f);
+            episodeSumReward += 2f;
+            AddReward(2f);
+            print(allyColor + ": Episode Reward: " + episodeSumReward);
             EndEpisode();
         }
         // penalize being scored on
         else if (ball.inGoalColor == allyColor)
         {
-            SetReward(-1f);
+            episodeSumReward = -2f;
+            print(allyColor + ": Episode Reward: " + episodeSumReward);
+            SetReward(-2f);
             EndEpisode();
         }
-        // score based on time in forward zone
+        
+        // Reward based on time in forward zone, punish based on time in defense zone
         if (allyColor == PlayerColor.blue)
         {
+        /*     //Reward for Blue Offense
             if (ball.transform.localPosition.x > allyAttack.transform.localPosition.x)
             {
-                AddReward(.0001f);
+                print("Reward: In Offense, Blue");
+                AddReward(.001f);
+                
+                //Bonus for getting it past the goalkeeper
+                if (ball.transform.localPosition.x > enemyGoalkeeper.transform.localPosition.x)
+                {
+                    print("Bonus Reward: In Offense, Blue");
+                    AddReward(.001f);
+                }
             }
+            
+             if (ball.transform.localPosition.x < enemyAttack.transform.localPosition.x)
+            {
+                print("Punishment: In Defense, Blue");
+                AddReward(-.001f);
+                
+                /* if (ball.transform.localPosition.x < allyGoalkeeper.transform.localPosition.x)
+                {
+                    print("Bonus Punishment: In Defense, Blue");
+                    AddReward(-.001f);
+                } */
+           // } 
+                   //Forward movement Reward
+/*             if (ball.rBody.velocity.x > 0)
+            {
+                print("Blue X Velocity Reward: 0.0001");
+                print(ball.rBody.velocity.x);
+                AddReward(.0001f);
+                stepSumReward += .0001f;
+            } */
         }
+
+        //TODO: Continuous Reward for moving the ball forward/punish for moving it back
+
         if (allyColor == PlayerColor.red)
         {
-            if (ball.transform.localPosition.x < allyAttack.transform.localPosition.x)
+            /* if (ball.transform.localPosition.x < allyAttack.transform.localPosition.x)
             {
-                AddReward(.0001f);
+                print("Reward: In Offense, Red");
+                AddReward(.001f);
+
+                if (ball.transform.localPosition.x < enemyGoalkeeper.transform.localPosition.x)
+                {
+                    print("Bonus Reward: In Offense, Red");
+                    AddReward(.001f);
+                }
             }
+            
+            if (ball.transform.localPosition.x > enemyAttack.transform.localPosition.x)
+            {
+                print("Punishment: In Defense, Red");
+                AddReward(-.001f);
+
+                /* if (ball.transform.localPosition.x > allyGoalkeeper.transform.localPosition.x)
+                {
+                    print("Bonus Punishment: In Defense, Red");
+                    AddReward(-.001f);
+                } */
+           // }  */
+
+
+            /* if (ball.rBody.velocity.x < 0)
+            {
+                print("Red X Velocity Reward: 0.0001");
+                print(ball.rBody.velocity.x);
+                AddReward(.0001f);
+                stepSumReward+= .0001f;
+            } */
         }
+
+        //punish sitting there
+        //AddReward(-0.0001f);
+
+
+
+        if (ball.GetComponent<Rigidbody>().velocity == Vector3.zero)
+        {
+            if (idleTimer >= maxIdleTime)
+            {
+                ball.rBody.AddForce(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
+                //SetReward(0f);
+                idleTimer = 0;
+                //EndEpisode();
+                
+            }
+            idleTimer++;
+        }
+
+/*         if (ball.isKick == TrackKicks.yesKick)
+        {
+            Debug.Log("KICK");
+            // orig 0.005f
+            AddReward(0.005f);
+            ball.isKick = TrackKicks.noKick;
+        } */
+
+        float spinSum = 0;
+        
+        spinSum += Mathf.Abs(allyAttackRod.angularVelocity.z);
+        spinSum += Mathf.Abs(allyDefenceRod.angularVelocity.z);
+        spinSum += Mathf.Abs(allyMidfieldRod.angularVelocity.z);
+        spinSum += Mathf.Abs(allyGoalkeeperRod.angularVelocity.z);
+
+        if (useSpinPenalty)
+        {
+            float spinPenalty = SpinPenalty(spinSum);
+            AddReward(spinPenalty);
+            stepSumReward += spinPenalty;
+            //print("SpinSum" + spinSum);
+        }
+        
+        if (useShotReward)
+        {
+            float shotReward = ShotReward();
+            stepSumReward += shotReward;
+
+            AddReward(shotReward);
+        }
+
 
 
         // end episode after set period
         counter++;
+        episodeSumReward += stepSumReward;
+        print("Step Reward: " + stepSumReward);
+        print("=========" + allyColor + " STEP END=========");
         if (counter >= endStep)
         {
             /*            autoKick.x = Random.Range(-125f, 125f);
                         autoKick.z = Random.Range(-125f, 125f);
                         ball.rBody.AddForce(autoKick);*/
             counter = 0;
+            print("Episode Reward: " + episodeSumReward);
             EndEpisode();
         }
 
-
     }
 
+    float SpinPenalty(float spinSum)
+    {
+        float penalty = maxSpinPenalty * spinSum * -0.25f;
+        print(allyColor + " - Spin Penalty:" + penalty);
+        return penalty;
+    }
+
+    float ShotReward()
+    {
+        Vector3 delta = enemyGoal.transform.position - ball.transform.position;
+        float reward = shotRewardMultiplier * Vector3.Dot(delta.normalized, ball.rBody.velocity);
+        print(allyColor + "- Shot Reward: " + reward);
+        return reward;
+    }
+
+
     // Manual driver function for testing:
+    
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var continuousActionsOut = actionsOut.ContinuousActions;
