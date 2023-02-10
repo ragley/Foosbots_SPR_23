@@ -6,6 +6,7 @@ public class GoalScored : MonoBehaviour
 {
     public PlayerColor GoalColor;
     public GameObject collisionTarget;
+    public AudioSource audioSource;
 
     Rigidbody objectBody;
 
@@ -21,6 +22,10 @@ public class GoalScored : MonoBehaviour
         {
             objectBody.velocity = new Vector3(0f, 0f, 0f);
             objectBody.angularVelocity = new Vector3(0f, 0f, 0f);
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
             collisionData.gameObject.GetComponent<Ball>().inGoalColor = GoalColor;
         }
 

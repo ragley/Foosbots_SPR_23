@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public PlayerColor inGoalColor;
+    public PlayerColor lastKickedColor;
     public TrackKicks isKick;
     Vector3 ballReset;
     public Rigidbody rBody;
@@ -24,10 +25,33 @@ public class Ball : MonoBehaviour
         rBody.angularVelocity = new Vector3(0f, 0f, 0f);
 
         inGoalColor = PlayerColor.none;
+        lastKickedColor = PlayerColor.none;
+
 
         ballReset = new Vector3(resetX, 0.0029778f, resetZ);
         gameObject.transform.localPosition = ballReset;
     }
+
+    public void OnCollisionEnter(Collision collisionData)
+    {
+
+        string ballLastHit = collisionData.gameObject.tag;
+        if (ballLastHit == "BluePlayer")
+        { 
+            print("=========KICKED=========== you whore: " + ballLastHit);
+            lastKickedColor = PlayerColor.blue;
+        }
+        else if (ballLastHit == "RedPlayer")
+        {
+            print("=========KICKED=========== you whore: " + ballLastHit);
+            lastKickedColor = PlayerColor.red;
+        }
+        else
+        {
+            print("=========Hit wall======== ur bad");
+        }
+   }
+
 
     public void AutoKick(float xInput, float zInput)
     {

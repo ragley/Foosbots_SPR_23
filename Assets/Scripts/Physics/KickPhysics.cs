@@ -29,10 +29,10 @@ public class KickPhysics : MonoBehaviour
         {
             kick(collisionData.contacts[0].normal);
 /*            collisionData.gameObject.GetComponent<Ball>().isKick = yes;*/
-
         }
 
     }
+
 
     void kick(Vector3 inputVector)
     {

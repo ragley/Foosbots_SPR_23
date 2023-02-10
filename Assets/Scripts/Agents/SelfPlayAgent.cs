@@ -22,11 +22,9 @@ public class SelfPlayAgent : Agent
     
     private float episodeSumReward;
 
-    [Tooltip("Maximum per step penalty for spinning player rods, 0 -> disabled")]
-    [SerializeField]
-    [Range(0f, 0.1f)]
-    float maxSpinPenalty = 0.01f;
-    float shotRewardMultiplier = 0.1f;
+
+    float spinPenaltyMult= 0.02f;
+    float shotRewardMultiplier = 0.35f;
     bool useSpinPenalty;
     bool useShotReward;
 
@@ -85,7 +83,7 @@ public class SelfPlayAgent : Agent
         useSpinPenalty = true;
         useShotReward = true;
         counter = 0;
-        maxIdleTime = 40;
+        maxIdleTime = 35;
         endStep = 2500;
     }
 
@@ -236,17 +234,17 @@ public class SelfPlayAgent : Agent
         // reward scoring
         if (ball.inGoalColor != allyColor && ball.inGoalColor != PlayerColor.none)
         {
-            episodeSumReward += 2f;
-            AddReward(2f);
+            episodeSumReward += 4f;
+            AddReward(4f);
             print(allyColor + ": Episode Reward: " + episodeSumReward);
             EndEpisode();
         }
         // penalize being scored on
         else if (ball.inGoalColor == allyColor)
         {
-            episodeSumReward = -2f;
+            episodeSumReward = -4f;
             print(allyColor + ": Episode Reward: " + episodeSumReward);
-            SetReward(-2f);
+            SetReward(-4f);
             EndEpisode();
         }
         
@@ -331,11 +329,11 @@ public class SelfPlayAgent : Agent
 
 
 
-        if (ball.GetComponent<Rigidbody>().velocity == Vector3.zero)
+        if (ballBody.velocity == Vector3.zero)
         {
             if (idleTimer >= maxIdleTime)
             {
-                ball.rBody.AddForce(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
+                ballBody.AddForce(Random.Range(-40f, 40f), 0, Random.Range(-40f, 40f));
                 //SetReward(0f);
                 idleTimer = 0;
                 //EndEpisode();
@@ -344,13 +342,7 @@ public class SelfPlayAgent : Agent
             idleTimer++;
         }
 
-/*         if (ball.isKick == TrackKicks.yesKick)
-        {
-            Debug.Log("KICK");
-            // orig 0.005f
-            AddReward(0.005f);
-            ball.isKick = TrackKicks.noKick;
-        } */
+
 
         float spinSum = 0;
         
@@ -369,10 +361,13 @@ public class SelfPlayAgent : Agent
         
         if (useShotReward)
         {
-            float shotReward = ShotReward();
-            stepSumReward += shotReward;
-
-            AddReward(shotReward);
+            if (ball.lastKickedColor == allyColor)
+            {
+                float shotReward = ShotReward();
+                stepSumReward += shotReward;
+                AddReward(shotReward);
+            }
+            
         }
 
 
@@ -388,27 +383,39 @@ public class SelfPlayAgent : Agent
                         autoKick.z = Random.Range(-125f, 125f);
                         ball.rBody.AddForce(autoKick);*/
             counter = 0;
+            episodeSumReward = 0;
+            SetReward(episodeSumReward);
             print("Episode Reward: " + episodeSumReward);
             EndEpisode();
         }
 
     }
 
+
+    //TODO: Last Kicked player color Collision with rod rigidbodies
+
     float SpinPenalty(float spinSum)
     {
-        float penalty = maxSpinPenalty * spinSum * -0.25f;
+        float penalty = spinPenaltyMult * spinSum * -0.25f;
         print(allyColor + " - Spin Penalty:" + penalty);
         return penalty;
     }
+
 
     float ShotReward()
     {
         Vector3 delta = enemyGoal.transform.position - ball.transform.position;
         float reward = shotRewardMultiplier * Vector3.Dot(delta.normalized, ball.rBody.velocity);
+        if (reward < 0)
+        {
+            reward = reward * 0.2f;
+        }
         print(allyColor + "- Shot Reward: " + reward);
         return reward;
     }
 
+
+    
 
     // Manual driver function for testing:
     
