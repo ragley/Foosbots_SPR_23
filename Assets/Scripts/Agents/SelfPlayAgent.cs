@@ -15,6 +15,9 @@ public class SelfPlayAgent : Agent
 {
     // Utility variables:
     public Ball ball;
+
+    public Agent opAgent;
+
     private int counter;
     private int endStep;
     private int idleTimer;
@@ -23,8 +26,8 @@ public class SelfPlayAgent : Agent
     private float episodeSumReward;
 
 
-    float spinPenaltyMult= 0.02f;
-    float shotRewardMultiplier = 0.35f;
+    float spinPenaltyMult = 0.1f;
+    float shotRewardMultiplier = 0.05f;
     bool useSpinPenalty;
     bool useShotReward;
 
@@ -34,10 +37,29 @@ public class SelfPlayAgent : Agent
 
     // Ally variables:
     public PlayerColor allyColor;
+    
     public GameObject allyAttack;
+    public GameObject allyAttack0;
+    public GameObject allyAttack1;
+    public GameObject allyAttack2;
+
+
     public GameObject allyDefence;
+    public GameObject allyDefence0;
+    public GameObject allyDefence1;
+
     public GameObject allyGoalkeeper;
+    public GameObject allyGoalkeeper0;
+    public GameObject allyGoalkeeper1;
+    public GameObject allyGoalkeeper2;
+
     public GameObject allyMidfield;
+    public GameObject allyMidfield0;
+    public GameObject allyMidfield1;
+    public GameObject allyMidfield2;
+    public GameObject allyMidfield3;
+    public GameObject allyMidfield4;
+
     public GameObject allyGoal;
     
     Rigidbody allyAttackRod;
@@ -48,13 +70,35 @@ public class SelfPlayAgent : Agent
   
 
     // Enemy variables:
+
+    public PlayerColor enemyColor;
+
     public GameObject enemyAttack;
+    public GameObject enemyAttack0;
+    public GameObject enemyAttack1;
+    public GameObject enemyAttack2;
+    
     public GameObject enemyDefence;
+    public GameObject enemyDefence0;
+    public GameObject enemyDefence1;
+
     public GameObject enemyGoalkeeper;
+    public GameObject enemyGoalkeeper0;
+    public GameObject enemyGoalkeeper1;
+    public GameObject enemyGoalkeeper2;
+
+
     public GameObject enemyMidfield;
+    public GameObject enemyMidfield0;
+    public GameObject enemyMidfield1;
+    public GameObject enemyMidfield2;
+    public GameObject enemyMidfield3;
+    public GameObject enemyMidfield4;
+    
     public GameObject enemyGoal;
     
     Rigidbody enemyAttackRod;
+
     Rigidbody enemyDefenceRod;
     Rigidbody enemyGoalkeeperRod;
     Rigidbody enemyMidfieldRod;
@@ -80,8 +124,8 @@ public class SelfPlayAgent : Agent
         // Initialize utility variables
         initialKick = Vector3.zero;
         autoKick = Vector3.zero;
-        useSpinPenalty = true;
-        useShotReward = true;
+        useSpinPenalty = false;
+        useShotReward = false;
         counter = 0;
         maxIdleTime = 35;
         endStep = 2500;
@@ -90,7 +134,7 @@ public class SelfPlayAgent : Agent
     // Episode initialization:
     public override void OnEpisodeBegin()
     {
-        Debug.Log("Start New Episode - Self-Play Agent: " + allyColor);
+        //Debug.Log("Start New Episode - Self-Play Agent: " + allyColor);
 
         // domain randomization
         ballBody.mass = Random.Range(.995f, 1f);
@@ -145,8 +189,8 @@ public class SelfPlayAgent : Agent
 
         // reset ball to random position between midfield rods and apply small autokick
         ball.Reset(Random.Range(-0.000486f, 0.000486f), Random.Range(-0.002689f, 0.002689f));
-        initialKick.z = Random.Range(-50f, 50f);
-        initialKick.x = Random.Range(-50f, 50f);
+        initialKick.z = Random.Range(-125f, 125f);
+        initialKick.x = Random.Range(-125f, 125f);
         ball.rBody.AddForce(initialKick);
 
         // reset utility variables
@@ -157,7 +201,7 @@ public class SelfPlayAgent : Agent
     }
 
     // Obtain observations for neural network:
-    //      20 observations
+    //      89 observations
     public override void CollectObservations(VectorSensor sensor)
     {
         // ball observations
@@ -166,29 +210,123 @@ public class SelfPlayAgent : Agent
         sensor.AddObservation(ball.rBody.velocity.x);
         sensor.AddObservation(ball.rBody.velocity.z);
 
-        // rod observations
+        // Ally Rod Observations
+        // Attack Rod
         sensor.AddObservation(allyAttack.transform.position.x);
         sensor.AddObservation(allyAttack.transform.position.z);
         sensor.AddObservation(allyAttack.transform.localRotation.z);
+        // Attack Rod Players (L -> R from ALLY goal perspective)
+        sensor.AddObservation(allyAttack0.transform.position.z);
+        sensor.AddObservation(allyAttack0.transform.position.x);
+        sensor.AddObservation(allyAttack0.transform.localRotation.z);
+        sensor.AddObservation(allyAttack1.transform.position.z);
+        sensor.AddObservation(allyAttack1.transform.position.x);
+        sensor.AddObservation(allyAttack1.transform.localRotation.z);
+        sensor.AddObservation(allyAttack2.transform.position.z);
+        sensor.AddObservation(allyAttack2.transform.position.x);
+        sensor.AddObservation(allyAttack2.transform.localRotation.z);
 
+        // Defence Rod
         sensor.AddObservation(allyDefence.transform.position.x);
         sensor.AddObservation(allyDefence.transform.position.z);
         sensor.AddObservation(allyDefence.transform.localRotation.z);
+        // Defence Rod Players
+        sensor.AddObservation(allyDefence0.transform.position.z);
+        sensor.AddObservation(allyDefence0.transform.position.x);
+        sensor.AddObservation(allyDefence0.transform.localRotation.z);
+        sensor.AddObservation(allyDefence1.transform.position.z);
+        sensor.AddObservation(allyDefence1.transform.position.x);
+        sensor.AddObservation(allyDefence1.transform.localRotation.z);
 
+        // Goalkeeper Rod
         sensor.AddObservation(allyGoalkeeper.transform.position.x);
         sensor.AddObservation(allyGoalkeeper.transform.position.z);
         sensor.AddObservation(allyGoalkeeper.transform.localRotation.z);
+        // GoalKeeper Rod Players 
+        sensor.AddObservation(allyGoalkeeper0.transform.position.x);
+        sensor.AddObservation(allyGoalkeeper0.transform.position.z);
+        sensor.AddObservation(allyGoalkeeper0.transform.localRotation.z);
+        sensor.AddObservation(allyGoalkeeper1.transform.position.x);
+        sensor.AddObservation(allyGoalkeeper1.transform.position.z);
+        sensor.AddObservation(allyGoalkeeper1.transform.localRotation.z);
+        sensor.AddObservation(allyGoalkeeper2.transform.position.x);
+        sensor.AddObservation(allyGoalkeeper2.transform.position.z);
+        sensor.AddObservation(allyGoalkeeper2.transform.localRotation.z);
 
+        // Midfield Rod
         sensor.AddObservation(allyMidfield.transform.position.x);
         sensor.AddObservation(allyMidfield.transform.position.z);
         sensor.AddObservation(allyMidfield.transform.localRotation.z);
+        // Midfield Rod Players
+        sensor.AddObservation(allyMidfield0.transform.position.x);
+        sensor.AddObservation(allyMidfield0.transform.position.z);
+        sensor.AddObservation(allyMidfield0.transform.localRotation.z);
+        sensor.AddObservation(allyMidfield1.transform.position.x);
+        sensor.AddObservation(allyMidfield1.transform.position.z);
+        sensor.AddObservation(allyMidfield1.transform.localRotation.z);
+        sensor.AddObservation(allyMidfield2.transform.position.x);
+        sensor.AddObservation(allyMidfield2.transform.position.z);
+        sensor.AddObservation(allyMidfield2.transform.localRotation.z);
+        sensor.AddObservation(allyMidfield3.transform.position.x);
+        sensor.AddObservation(allyMidfield3.transform.position.z);
+        sensor.AddObservation(allyMidfield3.transform.localRotation.z);
+        sensor.AddObservation(allyMidfield4.transform.position.x);
+        sensor.AddObservation(allyMidfield4.transform.position.z);
+        sensor.AddObservation(allyMidfield4.transform.localRotation.z);
+ 
 
+        // Enemy Rod Observations
+        // Attack Rod
+        sensor.AddObservation(enemyAttack.transform.position.x);
+        // Attack Rod Players (L -> R from ALLY goal perspective)
+        sensor.AddObservation(enemyAttack0.transform.position.z);
+        sensor.AddObservation(enemyAttack0.transform.position.x);
+        sensor.AddObservation(enemyAttack1.transform.position.z);
+        sensor.AddObservation(enemyAttack1.transform.position.x);
+        sensor.AddObservation(enemyAttack2.transform.position.z);
+        sensor.AddObservation(enemyAttack2.transform.position.x);
+
+        // Defence Rod
+        sensor.AddObservation(enemyDefence.transform.position.x);
+        // Defence Rod Players
+        sensor.AddObservation(enemyDefence0.transform.position.z);
+        sensor.AddObservation(enemyDefence0.transform.position.x);
+        sensor.AddObservation(enemyDefence1.transform.position.z);
+        sensor.AddObservation(enemyDefence1.transform.position.x);
+
+        // Goalkeeper Rod
+        sensor.AddObservation(enemyGoalkeeper.transform.position.x);
+        // GoalKeeper Rod Players 
+        sensor.AddObservation(enemyGoalkeeper0.transform.position.x);
+        sensor.AddObservation(enemyGoalkeeper0.transform.position.z);
+        sensor.AddObservation(enemyGoalkeeper1.transform.position.x);
+        sensor.AddObservation(enemyGoalkeeper1.transform.position.z);
+        sensor.AddObservation(enemyGoalkeeper2.transform.position.x);
+        sensor.AddObservation(enemyGoalkeeper2.transform.position.z);
+
+        // Midfield Rod
+        sensor.AddObservation(enemyMidfield.transform.position.x);
+
+        // Midfield Rod Players
+        sensor.AddObservation(enemyMidfield0.transform.position.x);
+        sensor.AddObservation(enemyMidfield0.transform.position.z);
+        sensor.AddObservation(enemyMidfield1.transform.position.x);
+        sensor.AddObservation(enemyMidfield1.transform.position.z);
+        sensor.AddObservation(enemyMidfield2.transform.position.x);
+        sensor.AddObservation(enemyMidfield2.transform.position.z);
+        sensor.AddObservation(enemyMidfield3.transform.position.x);
+        sensor.AddObservation(enemyMidfield3.transform.position.z);
+        sensor.AddObservation(enemyMidfield4.transform.position.x);
+        sensor.AddObservation(enemyMidfield4.transform.position.z);
+        
+        
         // goal observations
         sensor.AddObservation(allyGoal.transform.position.x);
         sensor.AddObservation(allyGoal.transform.position.z);
 
         sensor.AddObservation(enemyGoal.transform.position.x);
         sensor.AddObservation(enemyGoal.transform.position.z);
+    
     }
 
     // Main driver function of neural network:
@@ -196,7 +334,7 @@ public class SelfPlayAgent : Agent
     //      handles rewards
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        print("=========" + allyColor + " STEP START=========");
+        //print("=========" + allyColor + " STEP START=========");
         float stepSumReward = 0f;
         // action control:
         // set control forces and torques to zero
@@ -232,138 +370,94 @@ public class SelfPlayAgent : Agent
         // rewards:
         //      for self play, one side should always receive negative reward while other receives positive or both get 0
         // reward scoring
-        if (ball.inGoalColor != allyColor && ball.inGoalColor != PlayerColor.none)
+
+        print(allyColor + " Ball in Goal:" + ball.inGoalColor);
+        if (ball.inGoalColor == enemyColor)
         {
-            episodeSumReward += 4f;
-            AddReward(4f);
-            print(allyColor + ": Episode Reward: " + episodeSumReward);
+            episodeSumReward += 5f;
+            AddReward(5f);
+            print(allyColor + " scored, Episode Reward: " + episodeSumReward);
+            opAgent.EndEpisode();
             EndEpisode();
         }
         // penalize being scored on
-        else if (ball.inGoalColor == allyColor)
+        if (ball.inGoalColor == allyColor)
         {
-            episodeSumReward = -4f;
-            print(allyColor + ": Episode Reward: " + episodeSumReward);
-            SetReward(-4f);
+            episodeSumReward = -5f;
+            print(allyColor + " was scored on, Episode Reward: " + episodeSumReward);
+            SetReward(-5f);
+            opAgent.EndEpisode();
             EndEpisode();
         }
         
-        // Reward based on time in forward zone, punish based on time in defense zone
+
         if (allyColor == PlayerColor.blue)
         {
-        /*     //Reward for Blue Offense
-            if (ball.transform.localPosition.x > allyAttack.transform.localPosition.x)
-            {
-                print("Reward: In Offense, Blue");
-                AddReward(.001f);
-                
-                //Bonus for getting it past the goalkeeper
-                if (ball.transform.localPosition.x > enemyGoalkeeper.transform.localPosition.x)
-                {
-                    print("Bonus Reward: In Offense, Blue");
-                    AddReward(.001f);
-                }
-            }
-            
-             if (ball.transform.localPosition.x < enemyAttack.transform.localPosition.x)
-            {
-                print("Punishment: In Defense, Blue");
-                AddReward(-.001f);
-                
-                /* if (ball.transform.localPosition.x < allyGoalkeeper.transform.localPosition.x)
-                {
-                    print("Bonus Punishment: In Defense, Blue");
-                    AddReward(-.001f);
-                } */
-           // } 
-                   //Forward movement Reward
-/*             if (ball.rBody.velocity.x > 0)
-            {
-                print("Blue X Velocity Reward: 0.0001");
-                print(ball.rBody.velocity.x);
-                AddReward(.0001f);
-                stepSumReward += .0001f;
-            } */
-        }
 
-        //TODO: Continuous Reward for moving the ball forward/punish for moving it back
+        }
 
         if (allyColor == PlayerColor.red)
         {
-            /* if (ball.transform.localPosition.x < allyAttack.transform.localPosition.x)
-            {
-                print("Reward: In Offense, Red");
-                AddReward(.001f);
-
-                if (ball.transform.localPosition.x < enemyGoalkeeper.transform.localPosition.x)
-                {
-                    print("Bonus Reward: In Offense, Red");
-                    AddReward(.001f);
-                }
-            }
             
-            if (ball.transform.localPosition.x > enemyAttack.transform.localPosition.x)
-            {
-                print("Punishment: In Defense, Red");
-                AddReward(-.001f);
-
-                /* if (ball.transform.localPosition.x > allyGoalkeeper.transform.localPosition.x)
-                {
-                    print("Bonus Punishment: In Defense, Red");
-                    AddReward(-.001f);
-                } */
-           // }  */
-
-
-            /* if (ball.rBody.velocity.x < 0)
-            {
-                print("Red X Velocity Reward: 0.0001");
-                print(ball.rBody.velocity.x);
-                AddReward(.0001f);
-                stepSumReward+= .0001f;
-            } */
         }
 
         //punish sitting there
         //AddReward(-0.0001f);
-
-
+        AddReward(-1f * (1 / endStep));
 
         if (ballBody.velocity == Vector3.zero)
         {
+            idleTimer++;
             if (idleTimer >= maxIdleTime)
             {
-                ballBody.AddForce(Random.Range(-40f, 40f), 0, Random.Range(-40f, 40f));
+                ball.lastKickedColor = PlayerColor.none;
+                ballBody.AddForce(Random.Range(-50f, 50f), 0, Random.Range(-50f, 50f));
                 //SetReward(0f);
                 idleTimer = 0;
                 //EndEpisode();
-                
             }
-            idleTimer++;
+        } 
+        else
+        {
+            idleTimer = 0;
         }
 
 
 
-        float spinSum = 0;
-        
-        spinSum += Mathf.Abs(allyAttackRod.angularVelocity.z);
-        spinSum += Mathf.Abs(allyDefenceRod.angularVelocity.z);
-        spinSum += Mathf.Abs(allyMidfieldRod.angularVelocity.z);
-        spinSum += Mathf.Abs(allyGoalkeeperRod.angularVelocity.z);
+        float spin = 0f;
+        spin += Mathf.Abs(allyAttackRod.angularVelocity.z);
+        spin += Mathf.Abs(allyDefenceRod.angularVelocity.z);
+        spin += Mathf.Abs(allyMidfieldRod.angularVelocity.z);
+        spin += Mathf.Abs(allyGoalkeeperRod.angularVelocity.z);
 
         if (useSpinPenalty)
         {
-            float spinPenalty = SpinPenalty(spinSum);
+            float spinPenalty = SpinPenalty(spin);
+            //print(spinPenalty);
             AddReward(spinPenalty);
             stepSumReward += spinPenalty;
-            //print("SpinSum" + spinSum);
         }
         
+        if (ball.lastKickedColor == allyColor)
+        {
+            if (ball.kicked == true)
+            {
+                AddReward(0.05f);
+                print("KICKED by " + allyColor);
+                ball.kicked = false;
+            }
+            else 
+            {
+                ball.kicked = false;
+            }
+        }
+
         if (useShotReward)
         {
             if (ball.lastKickedColor == allyColor)
             {
                 float shotReward = ShotReward();
+                print(allyColor + " - Shot Reward: " + shotReward);
                 stepSumReward += shotReward;
                 AddReward(shotReward);
             }
@@ -375,8 +469,8 @@ public class SelfPlayAgent : Agent
         // end episode after set period
         counter++;
         episodeSumReward += stepSumReward;
-        print("Step Reward: " + stepSumReward);
-        print("=========" + allyColor + " STEP END=========");
+        //print("Step Reward: " + stepSumReward);
+        //print("=========" + allyColor + " STEP END=========");
         if (counter >= endStep)
         {
             /*            autoKick.x = Random.Range(-125f, 125f);
@@ -385,7 +479,7 @@ public class SelfPlayAgent : Agent
             counter = 0;
             episodeSumReward = 0;
             SetReward(episodeSumReward);
-            print("Episode Reward: " + episodeSumReward);
+            print(allyColor + ": Episode Reward: " + episodeSumReward);
             EndEpisode();
         }
 
@@ -394,28 +488,30 @@ public class SelfPlayAgent : Agent
 
     //TODO: Last Kicked player color Collision with rod rigidbodies
 
-    float SpinPenalty(float spinSum)
+    float SpinPenalty(float spin)
     {
-        float penalty = spinPenaltyMult * spinSum * -0.25f;
-        print(allyColor + " - Spin Penalty:" + penalty);
+        float penalty = -1f * spinPenaltyMult * spin;
+        //print(allyColor + " - Spin Penalty:" + penalty);
         return penalty;
     }
 
 
     float ShotReward()
     {
-        Vector3 delta = enemyGoal.transform.position - ball.transform.position;
-        float reward = shotRewardMultiplier * Vector3.Dot(delta.normalized, ball.rBody.velocity);
-        if (reward < 0)
+        Vector3 deltaEnemyGoal = enemyGoal.transform.position - ball.transform.position;
+        Vector3 deltaAllyGoal = allyGoal.transform.position - ball.transform.position;
+        float shotValue = Vector3.Dot(deltaEnemyGoal.normalized, ball.rBody.velocity);
+        if (shotValue < 0)
         {
-            reward = reward * 0.2f;
+            shotValue = -1f * Vector3.Dot(deltaAllyGoal.normalized, ball.rBody.velocity);
         }
-        print(allyColor + "- Shot Reward: " + reward);
+
+        float reward = shotRewardMultiplier * shotValue;
+
+       // print(allyColor + "- Shot Reward: " + reward);
         return reward;
     }
 
-
-    
 
     // Manual driver function for testing:
     
