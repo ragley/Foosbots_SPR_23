@@ -20,13 +20,14 @@ public class GoalScored : MonoBehaviour
 
         if (collisionData.gameObject.tag == "Ball")
         {
+            collisionData.gameObject.GetComponent<Ball>().inGoalColor = GoalColor;
+            //print("GoalScored ball.inGoalColor: " + collisionData.gameObject.GetComponent<Ball>().inGoalColor); 
             objectBody.velocity = new Vector3(0f, 0f, 0f);
             objectBody.angularVelocity = new Vector3(0f, 0f, 0f);
             if (audioSource != null)
             {
                 audioSource.Play();
             }
-            collisionData.gameObject.GetComponent<Ball>().inGoalColor = GoalColor;
         }
 
     }

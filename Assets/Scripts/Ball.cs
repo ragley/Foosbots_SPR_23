@@ -22,10 +22,12 @@ public class Ball : MonoBehaviour
 
     public void Reset(float resetX, float resetZ)
     {
+        
+        //print("Ball Reset");        
         rBody.velocity = new Vector3(0f, 0f, 0f);
         rBody.angularVelocity = new Vector3(0f, 0f, 0f);
-
         inGoalColor = PlayerColor.none;
+
         lastKickedColor = PlayerColor.none;
         kicked = false;
 
@@ -61,7 +63,6 @@ public class Ball : MonoBehaviour
    {
 
    }
-
 
     public void AutoKick(float xInput, float zInput)
     {
