@@ -5,8 +5,8 @@ behaviors:
       batch_size: 5192
       buffer_size: 51920
       learning_rate: 0.0002       #0.0002
-      beta: 0.003                 #0.003
-      epsilon: 0.15              #0.15
+      beta: 0.002                 #0.003
+      epsilon: 0.125              #0.15
       lambd: 0.95
       num_epoch: 5
       learning_rate_schedule: linear
@@ -20,7 +20,7 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-    max_steps: 120000000
+    max_steps: 80000000
     time_horizon: 1000
     summary_freq: 10000
     #self_play:

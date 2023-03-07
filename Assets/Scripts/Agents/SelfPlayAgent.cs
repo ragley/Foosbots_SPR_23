@@ -3,6 +3,7 @@
 // Last Modified:   11-25-2022
 // Description:     script to create neural network for ai foosball table
 
+// Add: It seems that ml-agents depends on the old importlib-metadata library. I solved this issue by  pip install importlib-metadata==4.4 to readme
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +41,7 @@ public class SelfPlayAgent : Agent
 
     public int maxIdleTime;
     public int decisionInterval;
-    public int idleSpeedThreshold;
+    public float idleSpeedThreshold;
 
     public bool useSpinPenalty;
     public bool useSingleShotReward;
@@ -152,7 +153,7 @@ public class SelfPlayAgent : Agent
         autoKick = Vector3.zero;
         counter = 0;
         maxIdleTime = 60;
-        endStep = 2500;
+        endStep = 500;
     }
 
     // Episode initialization:
@@ -647,8 +648,8 @@ public class SelfPlayAgent : Agent
         // If it's negative apply penalty based on vector towards ally goal ("don't hit it towards your own goal")
         if (shotValue < 0)
         {
-            shotValue = 0;
-            //shotValue = -1f * Mathf.Abs(Vector3.Dot(deltaAllyGoal.normalized, ball.rBody.velocity));
+            //shotValue = 0;
+            shotValue = -1f * Mathf.Abs(Vector3.Dot(deltaAllyGoal.normalized, ball.rBody.velocity));
         }
         
         float reward = shotRewardMultiplier * shotValue;

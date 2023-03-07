@@ -34,6 +34,17 @@ public class cameraController : MonoBehaviour
                 cam2enabled = false;
             }
         }
+        
+        if(Input.GetKeyDown(KeyCode.E)) {
+            cam1.transform.position += new Vector3((140f/256f), 0f, 0f);
+            cam2.transform.position += new Vector3((140f/256f), 0f, 0f);
+        }
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            cam1.transform.position += new Vector3(-(140f/256f), 0f, 0f);
+            cam2.transform.position += new Vector3(-(140f/256f), 0f, 0f);
+        }
+
+
             
     }
 }
