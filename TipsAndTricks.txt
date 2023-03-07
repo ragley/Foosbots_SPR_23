@@ -1,0 +1,4 @@
+Can use:
+--initialize-from=<prev_run_id>
+to start training from step 0 but from the checkpoint of the specified run id.
+Allows for continually training the same model incrementally.
