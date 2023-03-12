@@ -127,6 +127,9 @@ public class SelfPlayAgent : Agent
     Rigidbody enemyGoalkeeperRod;
     Rigidbody enemyMidfieldRod;
 
+    public Vector3 posTest;
+    public float ballVZ;
+    public float ballVX;
     
 
     // Start up procedures:  
@@ -215,9 +218,9 @@ public class SelfPlayAgent : Agent
         // reset ball to random position between midfield rods and apply small autokick
         goalOccur = false;
         ball.Reset(Random.Range(-0.000486f, 0.000486f), Random.Range(-0.002689f, 0.002689f));
-        initialKick.z = Random.Range(-125f, 125f);
-        initialKick.x = Random.Range(-125f, 125f);
-        ball.rBody.AddForce(initialKick);
+        initialKick.z = Random.Range(-2f, 2f);
+        initialKick.x = Random.Range(-2f, 2f);
+        ball.rBody.AddForce(initialKick, ForceMode.VelocityChange);
 
         // reset utility variables
 
@@ -234,119 +237,240 @@ public class SelfPlayAgent : Agent
     }
 
     // Obtain observations for neural network:
-    //      89 observations
+    //      76 observations
+    
+
     public override void CollectObservations(VectorSensor sensor)
     {
-        // ball observations
-        sensor.AddObservation(ball.transform.position.x);
-        sensor.AddObservation(ball.transform.position.z);
-        sensor.AddObservation(ball.rBody.velocity.x);
-        sensor.AddObservation(ball.rBody.velocity.z);
+        // Observations For Blue Team
+        // Observations are relative to ally team's goal, this way they can be symmetric regardless of 
+        if (allyColor == PlayerColor.blue)
+        {
+            // ball observations
+            sensor.AddObservation(getGoalRelPos(ball.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(ball.transform.position).z);
+            sensor.AddObservation(ball.rBody.velocity.x);
+            sensor.AddObservation(ball.rBody.velocity.z);
 
-        // Ally Rod Observations
-        // Attack Rod
-        sensor.AddObservation(allyAttack.transform.position.x);
-        sensor.AddObservation(allyAttack.transform.position.z);
-        sensor.AddObservation(allyAttack.transform.localRotation.z);
-        // Attack Rod Players (L -> R from ALLY goal perspective)
-        sensor.AddObservation(allyAttack0.transform.position.z);
-        sensor.AddObservation(allyAttack0.transform.position.x);
-        sensor.AddObservation(allyAttack1.transform.position.z);
-        sensor.AddObservation(allyAttack1.transform.position.x);
-        sensor.AddObservation(allyAttack2.transform.position.z);
-        sensor.AddObservation(allyAttack2.transform.position.x);
+            // Ally Rod Observations
+            // Attack Rod
+            sensor.AddObservation(getGoalRelPos(allyAttack.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyAttack.transform.position).z);
+            sensor.AddObservation(allyAttack.transform.localRotation.z);
+            // Attack Rod Players (L -> R from ALLY goal perspective)
+            sensor.AddObservation(getGoalRelPos(allyAttack0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyAttack0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyAttack1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyAttack1.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyAttack2.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyAttack2.transform.position).x);
 
-        // Midfield Rod
-        sensor.AddObservation(allyMidfield.transform.position.x);
-        sensor.AddObservation(allyMidfield.transform.position.z);
-        sensor.AddObservation(allyMidfield.transform.localRotation.z);
-        // Midfield Rod Players
-        sensor.AddObservation(allyMidfield0.transform.position.x);
-        sensor.AddObservation(allyMidfield0.transform.position.z);
-        sensor.AddObservation(allyMidfield1.transform.position.x);
-        sensor.AddObservation(allyMidfield1.transform.position.z);
-        sensor.AddObservation(allyMidfield2.transform.position.x);
-        sensor.AddObservation(allyMidfield2.transform.position.z);
-        sensor.AddObservation(allyMidfield3.transform.position.x);
-        sensor.AddObservation(allyMidfield3.transform.position.z);
-        sensor.AddObservation(allyMidfield4.transform.position.x);
-        sensor.AddObservation(allyMidfield4.transform.position.z);
- 
-        // Defence Rod
-        sensor.AddObservation(allyDefence.transform.position.x);
-        sensor.AddObservation(allyDefence.transform.position.z);
-        sensor.AddObservation(allyDefence.transform.localRotation.z);
-        // Defence Rod Players
-        sensor.AddObservation(allyDefence0.transform.position.z);
-        sensor.AddObservation(allyDefence0.transform.position.x);
-        sensor.AddObservation(allyDefence1.transform.position.z);
-        sensor.AddObservation(allyDefence1.transform.position.x);
-
-        // Goalkeeper Rod
-        sensor.AddObservation(allyGoalkeeper.transform.position.x);
-        sensor.AddObservation(allyGoalkeeper.transform.position.z);
-        sensor.AddObservation(allyGoalkeeper.transform.localRotation.z);
-        // GoalKeeper Rod Players 
-        sensor.AddObservation(allyGoalkeeper0.transform.position.x);
-        sensor.AddObservation(allyGoalkeeper0.transform.position.z);
-        sensor.AddObservation(allyGoalkeeper1.transform.position.x);
-        sensor.AddObservation(allyGoalkeeper1.transform.position.z);
-        sensor.AddObservation(allyGoalkeeper2.transform.position.x);
-        sensor.AddObservation(allyGoalkeeper2.transform.position.z);
-        
-        
-        // Enemy Rod Observations
-        // Attack Rod
-        sensor.AddObservation(enemyAttack.transform.position.x);
-        // Attack Rod Players (L -> R from ALLY goal perspective)
-        sensor.AddObservation(enemyAttack0.transform.position.z);
-        sensor.AddObservation(enemyAttack0.transform.position.x);
-        sensor.AddObservation(enemyAttack1.transform.position.z);
-        sensor.AddObservation(enemyAttack1.transform.position.x);
-        sensor.AddObservation(enemyAttack2.transform.position.z);
-        sensor.AddObservation(enemyAttack2.transform.position.x);
-
-        // Midfield Rod
-        sensor.AddObservation(enemyMidfield.transform.position.x);
-
-        // Midfield Rod Players
-        sensor.AddObservation(enemyMidfield0.transform.position.x);
-        sensor.AddObservation(enemyMidfield0.transform.position.z);
-        sensor.AddObservation(enemyMidfield1.transform.position.x);
-        sensor.AddObservation(enemyMidfield1.transform.position.z);
-        sensor.AddObservation(enemyMidfield2.transform.position.x);
-        sensor.AddObservation(enemyMidfield2.transform.position.z);
-        sensor.AddObservation(enemyMidfield3.transform.position.x);
-        sensor.AddObservation(enemyMidfield3.transform.position.z);
-        sensor.AddObservation(enemyMidfield4.transform.position.x);
-        sensor.AddObservation(enemyMidfield4.transform.position.z);
-
-        // Defence Rod
-        sensor.AddObservation(enemyDefence.transform.position.x);
-        // Defence Rod Players
-        sensor.AddObservation(enemyDefence0.transform.position.z);
-        sensor.AddObservation(enemyDefence0.transform.position.x);
-        sensor.AddObservation(enemyDefence1.transform.position.z);
-        sensor.AddObservation(enemyDefence1.transform.position.x);
-
-        // Goalkeeper Rod
-        sensor.AddObservation(enemyGoalkeeper.transform.position.x);
-        // GoalKeeper Rod Players 
-        sensor.AddObservation(enemyGoalkeeper0.transform.position.x);
-        sensor.AddObservation(enemyGoalkeeper0.transform.position.z);
-        sensor.AddObservation(enemyGoalkeeper1.transform.position.x);
-        sensor.AddObservation(enemyGoalkeeper1.transform.position.z);
-        sensor.AddObservation(enemyGoalkeeper2.transform.position.x);
-        sensor.AddObservation(enemyGoalkeeper2.transform.position.z);
-
-        
-        // goal observations
-        sensor.AddObservation(allyGoal.transform.position.x);
-        sensor.AddObservation(allyGoal.transform.position.z);
-
-        sensor.AddObservation(enemyGoal.transform.position.x);
-        sensor.AddObservation(enemyGoal.transform.position.z);
+            // Midfield Rod
+            sensor.AddObservation(getGoalRelPos(allyMidfield.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyMidfield.transform.position).z);
+            sensor.AddObservation(allyMidfield.transform.localRotation.z);
+            // Midfield Rod Players
+            sensor.AddObservation(getGoalRelPos(allyMidfield0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyMidfield0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyMidfield1.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyMidfield1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyMidfield2.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyMidfield2.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyMidfield3.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyMidfield3.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyMidfield4.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyMidfield4.transform.position).z);
     
+            // Defence Rod
+            sensor.AddObservation(getGoalRelPos(allyDefence.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyDefence.transform.position).z);
+            sensor.AddObservation(allyDefence.transform.localRotation.z);
+            // Defence Rod Players
+            sensor.AddObservation(getGoalRelPos(allyDefence0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyDefence0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyDefence1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyDefence1.transform.position).x);
+
+            // Goalkeeper Rod
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper.transform.position).z);
+            sensor.AddObservation(allyGoalkeeper.transform.localRotation.z);
+            // GoalKeeper Rod Players 
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper1.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper2.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyGoalkeeper2.transform.position).z);
+            
+            
+            // Enemy Rod Observations
+            // Attack Rod
+            sensor.AddObservation(getGoalRelPos(enemyAttack.transform.position).x);
+            // Attack Rod Players (L -> R from ALLY goal perspective)
+            sensor.AddObservation(getGoalRelPos(enemyAttack0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyAttack0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyAttack1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyAttack1.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyAttack2.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyAttack2.transform.position).x);
+
+            // Midfield Rod
+            sensor.AddObservation(getGoalRelPos(enemyMidfield.transform.position).x);
+
+            // Midfield Rod Players
+            sensor.AddObservation(getGoalRelPos(enemyMidfield0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield1.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield2.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield2.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield3.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield3.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield4.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyMidfield4.transform.position).z);
+
+            // Defence Rod
+            sensor.AddObservation(getGoalRelPos(enemyDefence.transform.position).x);
+            // Defence Rod Players
+            sensor.AddObservation(getGoalRelPos(enemyDefence0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyDefence0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyDefence1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyDefence1.transform.position).x);
+
+            // Goalkeeper Rod
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper.transform.position).x);
+            // GoalKeeper Rod Players 
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper0.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper0.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper1.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper1.transform.position).z);
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper2.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyGoalkeeper2.transform.position).z);
+
+            
+            // goal observations
+            sensor.AddObservation(getGoalRelPos(allyGoal.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(allyGoal.transform.position).z);
+
+            sensor.AddObservation(getGoalRelPos(enemyGoal.transform.position).x);
+            sensor.AddObservation(getGoalRelPos(enemyGoal.transform.position).z);
+        }
+        
+        // Observations for Red Team
+        else
+        {             
+            // ball observations
+            sensor.AddObservation(-1f * getGoalRelPos(ball.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(ball.transform.position).z);
+            sensor.AddObservation(-1f * ball.rBody.velocity.x);
+            sensor.AddObservation(-1f * ball.rBody.velocity.z);
+
+            // Ally Rod Observations
+            // Attack Rod
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack.transform.position).z);
+            sensor.AddObservation(-1f * allyAttack.transform.localRotation.z);
+            // Attack Rod Players (L -> R from ALLY goal perspective)
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack1.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack2.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyAttack2.transform.position).x);
+
+            // Midfield Rod
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield.transform.position).z);
+            sensor.AddObservation(-1f * allyMidfield.transform.localRotation.z);
+            // Midfield Rod Players
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield1.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield2.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield2.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield3.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield3.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield4.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyMidfield4.transform.position).z);
+    
+            // Defence Rod
+            sensor.AddObservation(-1f * getGoalRelPos(allyDefence.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyDefence.transform.position).z);
+            sensor.AddObservation(-1f * allyDefence.transform.localRotation.z);
+            // Defence Rod Players
+            sensor.AddObservation(-1f * getGoalRelPos(allyDefence0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyDefence0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyDefence1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyDefence1.transform.position).x);
+
+            // Goalkeeper Rod
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper.transform.position).z);
+            sensor.AddObservation(-1f * allyGoalkeeper.transform.localRotation.z);
+            // GoalKeeper Rod Players 
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper1.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper2.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoalkeeper2.transform.position).z);
+            
+            
+            // Enemy Rod Observations
+            // Attack Rod
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack.transform.position).x);
+            // Attack Rod Players (L -> R from ALLY goal perspective)
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack1.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack2.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyAttack2.transform.position).x);
+
+            // Midfield Rod
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield.transform.position).x);
+
+            // Midfield Rod Players
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield1.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield2.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield2.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield3.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield3.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield4.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyMidfield4.transform.position).z);
+
+            // Defence Rod
+            sensor.AddObservation(-1f * getGoalRelPos(enemyDefence.transform.position).x);
+            // Defence Rod Players
+            sensor.AddObservation(-1f * getGoalRelPos(enemyDefence0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyDefence0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyDefence1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyDefence1.transform.position).x);
+
+            // Goalkeeper Rod
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper.transform.position).x);
+            // GoalKeeper Rod Players 
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper0.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper0.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper1.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper1.transform.position).z);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper2.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoalkeeper2.transform.position).z);
+
+            
+            // goal observations
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoal.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(allyGoal.transform.position).z);
+
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoal.transform.position).x);
+            sensor.AddObservation(-1f * getGoalRelPos(enemyGoal.transform.position).z);
+
+        }   
     }
 
     // Main driver function of neural network:
@@ -354,6 +478,16 @@ public class SelfPlayAgent : Agent
     //      handles rewards
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        
+        if (allyColor == PlayerColor.red){
+        ballVZ = (-1f * ball.rBody.velocity.z);
+        ballVX = (-1f * ball.rBody.velocity.x);
+        } else {
+        ballVZ = (ball.rBody.velocity.z);
+        ballVX = (ball.rBody.velocity.x);
+        }
+
+        posTest = getGoalRelPos(allyAttack1.transform.position);
 
         //print("=========" + allyColor + " STEP START=========");
         float stepSumReward = 0f;
@@ -380,52 +514,73 @@ public class SelfPlayAgent : Agent
         controlGoalkeeperForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[6], -1f, 1f);
         controlGoalkeeperTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[7], -1f, 1f);
 
-
-        // Different output methods from network, testing for methods of physical motor function
-        if (inputPosition)
+        if (allyColor == PlayerColor.red)
         {
-            //apply control velocities
-            allyAttackRod.velocity = getRodVelLinear(0, allyAttackRod.transform.position.z, controlAttackForce.z);
-            allyAttackRod.angularVelocity = getRodVelRot(allyAttackRod.transform.localRotation.z, controlAttackTorque.z);
-            allyMidfieldRod.velocity = getRodVelLinear(1, allyMidfieldRod.transform.position.z, controlMidfieldForce.z);
-            allyMidfieldRod.angularVelocity = getRodVelRot(allyMidfieldRod.transform.localRotation.z, controlMidfieldTorque.z);            
-            allyDefenceRod.velocity = getRodVelLinear(2, allyDefenceRod.transform.position.z, controlDefenceForce.z);
-            allyDefenceRod.angularVelocity = getRodVelRot(allyDefenceRod.transform.localRotation.z, controlDefenceTorque.z);
-            allyGoalkeeperRod.velocity = getRodVelLinear(0, allyGoalkeeperRod.transform.position.z, controlGoalkeeperForce.z);
-            allyGoalkeeperRod.angularVelocity = getRodVelRot(allyGoalkeeperRod.transform.localRotation.z, controlGoalkeeperTorque.z);
-
-
-        } else
-        {
-            //apply control forces and torques
-            allyAttackRod.AddForce(controlAttackForce);
-            allyAttackRod.AddTorque(controlAttackTorque);
-            allyMidfieldRod.AddForce(controlMidfieldForce);
-            allyMidfieldRod.AddTorque(controlMidfieldTorque);            
-            allyDefenceRod.AddForce(controlDefenceForce);
-            allyDefenceRod.AddTorque(controlDefenceTorque);
-            allyGoalkeeperRod.AddForce(controlGoalkeeperForce);
-            allyGoalkeeperRod.AddTorque(controlGoalkeeperTorque);
-
+            controlAttackForce.z *= -1;
+            controlAttackTorque.z *= -1;
+            controlMidfieldForce.z *= -1;
+            controlMidfieldTorque.z *= -1;        
+            controlDefenceForce.z *= -1;
+            controlDefenceTorque.z *= -1;
+            controlGoalkeeperForce.z *= -1;
+            controlGoalkeeperTorque.z *= -1;
         }
-        
 
         
-
-        // rewards:
-        //      for self play, one side should always receive negative reward while other receives positive or both get 0
-        // reward scoring
-
-        //print(allyColor + " Ball in Goal:" + ball.inGoalColor);
-        
-
-        // Set reward to 1 if negative overall because it still scored
-        // With self play one side must be positive and the other negative, so cannot have negative reward if it "Wins"
-        // Note: Not reslly sure how exactly self play reward signaling works, need more tuning and research, conflicting arguments in docu. 
 
         // isPlaying function that can easily disable one player for curriculum training instead of self play
         if (isPlaying)
         {
+            // obtain control forces and torques from network
+            controlAttackForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[0], -1f, 1f);
+            controlAttackTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[1], -1f, 1f);
+            controlMidfieldForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[2], -1f, 1f);
+            controlMidfieldTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[3], -1f, 1f);        
+            controlDefenceForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[4], -1f, 1f);
+            controlDefenceTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[5], -1f, 1f);
+            controlGoalkeeperForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[6], -1f, 1f);
+            controlGoalkeeperTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[7], -1f, 1f);
+            
+            // TODO: Check local/global position
+            // Different output methods from network, testing for methods of physical motor function
+            if (inputPosition)
+            {
+                //apply control velocities
+                allyAttackRod.velocity = getRodVelLinear(0, allyAttackRod.transform.position.z, controlAttackForce.z);
+                allyAttackRod.angularVelocity = getRodVelRot(allyAttackRod.transform.localRotation.z, controlAttackTorque.z);
+                allyMidfieldRod.velocity = getRodVelLinear(1, allyMidfieldRod.transform.position.z, controlMidfieldForce.z);
+                allyMidfieldRod.angularVelocity = getRodVelRot(allyMidfieldRod.transform.localRotation.z, controlMidfieldTorque.z);            
+                allyDefenceRod.velocity = getRodVelLinear(2, allyDefenceRod.transform.position.z, controlDefenceForce.z);
+                allyDefenceRod.angularVelocity = getRodVelRot(allyDefenceRod.transform.localRotation.z, controlDefenceTorque.z);
+                allyGoalkeeperRod.velocity = getRodVelLinear(0, allyGoalkeeperRod.transform.position.z, controlGoalkeeperForce.z);
+                allyGoalkeeperRod.angularVelocity = getRodVelRot(allyGoalkeeperRod.transform.localRotation.z, controlGoalkeeperTorque.z);
+
+
+            } else
+            {
+                //apply control forces and torques
+                allyAttackRod.AddForce(getRodVelLinear(0, allyAttackRod.transform.position.z, controlAttackForce.z), ForceMode.VelocityChange);
+                allyAttackRod.AddTorque(getRodVelRot(allyAttackRod.transform.localRotation.z, controlAttackTorque.z), ForceMode.VelocityChange);
+                allyMidfieldRod.AddForce(getRodVelLinear(1, allyMidfieldRod.transform.position.z, controlMidfieldForce.z), ForceMode.VelocityChange);
+                allyMidfieldRod.AddTorque(getRodVelRot(allyMidfieldRod.transform.localRotation.z, controlMidfieldTorque.z), ForceMode.VelocityChange);            
+                allyDefenceRod.AddForce(getRodVelLinear(2, allyDefenceRod.transform.position.z, controlDefenceForce.z), ForceMode.VelocityChange);
+                allyDefenceRod.AddTorque(getRodVelRot(allyDefenceRod.transform.localRotation.z, controlDefenceTorque.z), ForceMode.VelocityChange);
+                allyGoalkeeperRod.AddForce(getRodVelLinear(0, allyGoalkeeperRod.transform.position.z, controlGoalkeeperForce.z), ForceMode.VelocityChange);
+                allyGoalkeeperRod.AddTorque(getRodVelRot(allyGoalkeeperRod.transform.localRotation.z, controlGoalkeeperTorque.z), ForceMode.VelocityChange);
+
+            }
+            
+            // rewards:
+            //      for self play, one side should always receive negative reward while other receives positive or both get 0
+            // reward scoring
+
+            //print(allyColor + " Ball in Goal:" + ball.inGoalColor);
+            
+
+            // Set reward to 1 if negative overall because it still scored
+            // With self play one side must be positive and the other negative, so cannot have negative reward if it "Wins"
+            // Note: Not reslly sure how exactly self play reward signaling works, need more tuning and research, conflicting arguments in docu. 
+            
             // Check if agent is registering goals
             // Note: should always have one agent who is registering goals
             if (regGoals == true){    
@@ -434,7 +589,7 @@ public class SelfPlayAgent : Agent
                 if (ball.inGoalColor == enemyColor)
                 {                    
                     endReward = goalRewardValue;     
-                    endType = "Goal by " + allyColor + "Recorded. Ending current Episode. ";               
+                    endType = "Goal by " + allyColor + " Recorded. Ending current Episode. ";               
                     
                     // If the autokick goes in the enemy goal, don't give the team points for that, but note if it goes in the ally
                     // goal, it still counts as a score because we want it to not let itself be scored on                    
@@ -452,7 +607,7 @@ public class SelfPlayAgent : Agent
                 {
                     endReward = -1f * goalRewardValue;
                     goalOccur = true;
-                    print(allyColor + " was scored on");
+                    endType = allyColor + " was scored on. Ending current Episode. ";               
                 }
                 
                 // For single rod play (early curriculum training) override the goal occur variable 
@@ -617,7 +772,7 @@ public class SelfPlayAgent : Agent
     {
         ball.lastKickedColor = PlayerColor.none;
         print("Ball Auto Kick - Player color set to: " + ball.lastKickedColor);
-        ballBody.AddForce(Random.Range(-125f, 125f), 0, Random.Range(-125f, 125f));
+        ballBody.AddForce(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f), ForceMode.VelocityChange);
         //SetReward(0f);
         idleTimer = 0;
         //EndEpisode();
@@ -757,6 +912,13 @@ public class SelfPlayAgent : Agent
         
         velV.z = vel;
         return velV;
+    }
+
+    public Vector3 getGoalRelPos(Vector3 obj)
+    {
+        // Get position of the object relative to the ally goal
+        Vector3 pos = allyGoal.transform.InverseTransformPoint(obj);
+        return pos;
     }
 
     // Manual driver function for testing:

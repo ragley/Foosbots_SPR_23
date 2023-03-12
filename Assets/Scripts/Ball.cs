@@ -12,12 +12,14 @@ public class Ball : MonoBehaviour
     public Rigidbody rBody;
     private float kickForce;
     Vector3 kickVector;
+    public float maxAngularVelocity;
 
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
         kickForce = 200f;
         kickVector = new Vector3(0f, 0f, 0f);
+        rBody.maxAngularVelocity = maxAngularVelocity;
     }
 
     public void Reset(float resetX, float resetZ)
