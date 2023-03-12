@@ -1,0 +1,31 @@
+behaviors:
+  Foosbots_MultiRod_5:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 5192
+      buffer_size: 51920
+      learning_rate: 0.0002       #0.0002
+      beta: 0.002                 #0.003
+      epsilon: 0.125              #0.15
+      lambd: 0.95
+      num_epoch: 5
+      learning_rate_schedule: linear
+      beta_schedule: linear
+      epsilon_schedule: linear
+    network_settings:
+      normalize: true
+      hidden_units: 512
+      num_layers: 2  #increase?
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+    max_steps: 10000000000
+    time_horizon: 1000
+    summary_freq: 10000
+    self_play:
+      window: 10
+      play_against_latest_model_ratio: 0.5
+      save_steps: 50000
+      swap_steps: 50000
+      team_change: 100000
