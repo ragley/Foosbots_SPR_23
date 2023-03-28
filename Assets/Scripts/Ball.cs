@@ -7,35 +7,45 @@ public class Ball : MonoBehaviour
     public PlayerColor inGoalColor;
     public PlayerColor lastKickedColor;
     public TrackKicks isKick;
-    public bool kicked = false;
-    Vector3 ballReset;
-    public Rigidbody rBody;
-    private float kickForce;
-    Vector3 kickVector;
+    public Rigidbody ballRB;
+    public float autoKickStrength;
     public float maxAngularVelocity;
+    public bool kicked = false;
+    Vector3 kickVector;
+    Vector3 ballResetPos;
 
     void Start()
     {
-        rBody = GetComponent<Rigidbody>();
-        kickForce = 200f;
-        kickVector = new Vector3(0f, 0f, 0f);
-        rBody.maxAngularVelocity = maxAngularVelocity;
+        ballRB = GetComponent<Rigidbody>();
+        ballRB.maxAngularVelocity = maxAngularVelocity;
     }
 
-    public void Reset(float resetX, float resetZ)
+    public void Reset(bool randomPos = true)
     {
+        float xPos = 0f;
+        float zPos = 0f;
         
-        //print("Ball Reset");        
-        rBody.velocity = new Vector3(0f, 0f, 0f);
-        rBody.angularVelocity = new Vector3(0f, 0f, 0f);
-        inGoalColor = PlayerColor.none;
 
+        if (randomPos) {
+            // Random Position across the width of the field
+            zPos = Random.Range(-0.00298f, 0.00298f);
+        }
+
+        ballResetPos = new Vector3(xPos, 0.0029778f, zPos);
+
+        // Set Velocities to 0
+        ballRB.velocity = new Vector3(0f, 0f, 0f);
+        ballRB.angularVelocity = new Vector3(0f, 0f, 0f);
+        
+        // Set goal and last kicked Color to none
+        inGoalColor = PlayerColor.none;
         lastKickedColor = PlayerColor.none;
         kicked = false;
-
-
-        ballReset = new Vector3(resetX, 0.0029778f, resetZ);
-        gameObject.transform.localPosition = ballReset;
+        
+        // Reset the position
+        gameObject.transform.localPosition = ballResetPos;
+        
+        //print("Ball Reset");     
     }
 
     public void OnCollisionEnter(Collision collisionData)
@@ -66,13 +76,15 @@ public class Ball : MonoBehaviour
 
    }
 
-    public void AutoKick(float xInput, float zInput)
-    {
-        kickVector.x = xInput;
-        kickVector.z = zInput;
-        kickVector *= kickForce;
-        rBody.AddForce(kickVector);
-        Debug.Log(kickVector);
+    public void AutoKick()
+    {   
+        kickVector = new Vector3(Random.Range(-1f,1f), 0f, Random.Range(-1f,1f));
+        kickVector *= autoKickStrength;
+
+        ballRB.AddForce(kickVector, ForceMode.VelocityChange);
+        lastKickedColor = PlayerColor.none;
+        //Debug.Log(kickVector);
     }
+    
 
 }
