@@ -17,6 +17,10 @@ Once your virtual environment is activated follow these steps to install all nec
   3.) Install ML Agents' Python package by running the following command from the command line:
   
       python -m pip install mlagents==0.28.0
+  4.) Install imutils PythonPackage
+      
+      pip install "need command"
+  5.) Download the Unity Assets Hosted in the MS Teams files. They are too large to be hosted here unfortunately, and git LFS does not function for public repositories.
       
   
 ## Training the Network
@@ -85,3 +89,12 @@ This measures the mean estimated value for all states visited by the agent and s
 Note: "test_documentation.txt" contains the various hyperparameters used on each of the included training runs
 
 More information about the use of tensorboard and evaluation of these statisitics can be found at the following link: <https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Using-Tensorboard.md>
+
+## Helpful Links
+
+- [Tips on Training with PPO Specifically](https://github.com/yosider/ml-agents-1/blob/master/docs/Training-PPO.md)
+- [Tips on Training with SAC Specifically](https://github.com/yosider/ml-agents-1/blob/master/docs/Training-SAC.md)
+- [Overview on ML-Agents with some example scenarios](https://github.com/Unity-Technologies/ml-agents/blob/develop/docs/ML-Agents-Overview.md)
+- [Another implementation of Foosball using ML-Agents.](https://github.com/mbaske/ml-table-football)
+  - Be cautious if trying to adapt things from this, as it is on different versions of packages, and was also not designed with the intent of being used to actuate motors
+- [Example of adversarial self play in a volleyball environment using ML-Agents](https://github.com/CoderOneHQ/ultimate-volleyball/)
