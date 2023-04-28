@@ -13,6 +13,31 @@ using Unity.MLAgents.Actuators;
 
 public class SelfPlayAgentInfTest : Agent
 {
+
+
+int MIN_PLAYER_OFFSET = 40;
+int MAX_PLAYER_OFFSET = 640;
+
+
+// Unity
+float U_TABLE_LENGTH_MAX = 76f;
+float U_TABLE_LENGTH_MIN = 0f;
+float U_TABLE_WIDTH_MAX = 1.5f;
+float U_TABLE_WIDTH_MIN = -1.5f;
+
+// Dimensions of the Table balltracking (these are VERY important) (mm)
+float TABLE_LENGTH = 1193.8f;
+float TABLE_WIDTH = 694.2f;
+
+// PHYSICAL DIMENSIONS
+Dictionary<string, int> GOAL_ROD = new Dictionary<string, int>(){{"maxActuation", 228} , {"playerSpacing", 182}, {"rodX",1125}, {"numPlayers",3}};
+Dictionary<string, int> TWO_ROD = new Dictionary<string, int>(){{"maxActuation",356}, {"playerSpacing",237}, {"rodX",975}, {"numPlayers",2}};
+Dictionary<string, int> FIVE_ROD = new Dictionary<string, int>(){{"maxActuation",115}, {"playerSpacing",120}, {"rodX",675}, {"numPlayers",5}};
+Dictionary<string, int> THREE_ROD = new Dictionary<string, int>(){{"maxActuation",181}, {"playerSpacing",207}, {"rodX",375}, {"numPlayers",3}};
+Dictionary<string, int> TABLE = new Dictionary<string, int>(){{"robot_goalX",1200},{"robot_goalY",350}, {"player_goalX",0}, {"player_goalY",350}, {"goalWidth",200}, {"width",685}, {"length",1200}};
+
+
+
     // Utility variables:
     public Ball ball;
 
@@ -53,6 +78,7 @@ public class SelfPlayAgentInfTest : Agent
     public bool regGoals;
     public bool inputPosition;
     public bool isPlaying;
+    public bool useNegShotPenalty;
 
     //public bool episodeEndSignal;
 
@@ -94,6 +120,7 @@ public class SelfPlayAgentInfTest : Agent
     Rigidbody allyDefenceRod;
     Rigidbody allyGoalkeeperRod;
     Rigidbody allyMidfieldRod;
+    public int onactcalls;
 
   
 
@@ -124,7 +151,7 @@ public class SelfPlayAgentInfTest : Agent
     // public GameObject enemyMidfield4;
     
     public GameObject enemyGoal;
-    float endReward = 0f;
+    float endReward;
     
     Rigidbody enemyAttackRod;
     Rigidbody enemyDefenceRod;
@@ -137,10 +164,10 @@ public class SelfPlayAgentInfTest : Agent
     public Vector3 ballV;
     public Vector3 ballPos;
     public float enemyGoalPosX;
+    public int maxAngularVelocity;
     
     public float cumReward;
     public UIManager ui;                                                 
-
 
     // Start up procedures:  
     void Start()
@@ -159,6 +186,13 @@ public class SelfPlayAgentInfTest : Agent
         
         ballBody = ball.GetComponent<Rigidbody>();
 
+        allyAttackRod.maxAngularVelocity = maxAngularVelocity;
+        allyDefenceRod.maxAngularVelocity = maxAngularVelocity;
+        allyMidfieldRod.maxAngularVelocity = maxAngularVelocity;
+        allyGoalkeeperRod.maxAngularVelocity = maxAngularVelocity;
+
+
+
         ui = GameObject.Find("UIManager").GetComponent<UIManager>(); 
 
     }
@@ -166,7 +200,7 @@ public class SelfPlayAgentInfTest : Agent
     // Episode initialization:
     public override void OnEpisodeBegin()
     {
-
+        onactcalls = 0;
     }
 
     // Obtain observations for neural network:
@@ -294,17 +328,15 @@ public class SelfPlayAgentInfTest : Agent
     // Main driver function of neural network:
     //      takes actions
     //      handles rewards
+    // called 1 time per decision step (set in decision requester)
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         
-        // allyAttackRod.velocity = 0f;
-        // allyAttackRod.angularVelocity = 0f;
-        // allyMidfieldRod.velocity = 0f;
-        // allyMidfieldRod.angularVelocity =0f;            
-        // allyDefenceRod.velocity = 0f;
-        // allyDefenceRod.angularVelocity = 0f;
-        // allyGoalkeeperRod.velocity = 0f;
-        // allyGoalkeeperRod.angularVelocity = 0f;
+        onactcalls += 1;
+        haltVelocity();
+        //allyAttackRod.constraints = RigidbodyConstraints.FreezeRotationZ;
+        //allyAttackRod.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
+
 
         // Debug for ball observations
         // ballPos = getGoalRelPos(ball.transform.position);
@@ -400,7 +432,8 @@ public class SelfPlayAgentInfTest : Agent
                 if (ball.inGoalColor == enemyColor)
                 {                    
                     endReward = goalRewardValue;     
-                    // endType = "Goal by " + allyColor + " Recorded. Ending current Episode. "; 
+                    // endType = "Goal by " + allyColor + " Recorded. Ending current Episode. ";
+                    // elapsedTime = Time.realtimeSinceStartup;  
 
                     // if(ball.inGoalColor == PlayerColor.red)     { ui.scoreBlue();}  // Add to Blue's score on the UI panel
                     // if(ball.inGoalColor == PlayerColor.blue)    { ui.scoreRed();}   // Add to Red's score on the UI panel        
@@ -448,16 +481,19 @@ public class SelfPlayAgentInfTest : Agent
 
             // Spin Penalty
             // Sum of angular velocities of rods
-            float spin = 0f;
-            spin += Mathf.Abs(allyAttackRod.angularVelocity.z);
-            spin += Mathf.Abs(allyDefenceRod.angularVelocity.z);
-            spin += Mathf.Abs(allyMidfieldRod.angularVelocity.z);
-            spin += Mathf.Abs(allyGoalkeeperRod.angularVelocity.z);
+            // float spin = 0f;
+
+
+
+            // spin += Mathf.Abs(allyAttackRod.angularVelocity.z);
+            // spin += Mathf.Abs(allyDefenceRod.angularVelocity.z);
+            // spin += Mathf.Abs(allyMidfieldRod.angularVelocity.z);
+            // spin += Mathf.Abs(allyGoalkeeperRod.angularVelocity.z);
 
             // Penalty based on the angular velocity sum (higher is worse)
             if (useSpinPenalty == true)
             {
-                float spinPenalty = SpinPenalty(spin);
+                float spinPenalty = SpinPenalty();
                 //print(spinPenalty);
                 episodeSpinPenalties += spinPenalty;
                 stepSumReward += spinPenalty;
@@ -583,6 +619,8 @@ public class SelfPlayAgentInfTest : Agent
         // }
 
         cumReward = GetCumulativeReward();
+
+        
     }
         // Idle Kick
         // TODO: Possibly make function of speed with threshold instead of fixed zero
@@ -610,8 +648,22 @@ public class SelfPlayAgentInfTest : Agent
     //     //EndEpisode();
     // }
 
-    float SpinPenalty(float spin)
+    float SpinPenalty()
     {
+                    // Sum of angular velocities of rods
+            float spin = 0f;
+            
+            Vector3 locAttackAngularVel = allyAttack.transform.InverseTransformVector(allyAttackRod.angularVelocity);
+            Vector3 locDefenceAngularVel = allyDefence.transform.InverseTransformVector(allyDefenceRod.angularVelocity);
+            Vector3 locMidfieldAngularVel = allyMidfield.transform.InverseTransformVector(allyMidfieldRod.angularVelocity);
+            Vector3 locGoalkeeperAngularVel = allyGoalkeeper.transform.InverseTransformVector(allyGoalkeeperRod.angularVelocity);
+
+
+            spin += Mathf.Abs(locAttackAngularVel.z);
+            spin += Mathf.Abs(locDefenceAngularVel.z);
+            spin += Mathf.Abs(locMidfieldAngularVel.z);
+            spin += Mathf.Abs(locGoalkeeperAngularVel.z);
+
         float penalty = -1f * spinPenaltyMult * spin;
         //print(allyColor + " - Spin Penalty:" + penalty);
         return penalty;
@@ -636,15 +688,27 @@ public class SelfPlayAgentInfTest : Agent
         float shotOnEnemyValue = Vector3.Dot(deltaEnemyGoal.normalized, getGoalRelDir(ball.ballRB.velocity));
         float shotOnAllyValue = Vector3.Dot(deltaAllyGoal.normalized, getGoalRelDir(ball.ballRB.velocity));
         // If it's negative apply penalty based on vector towards ally goal ("don't hit it towards your own goal")
-        if (shotOnAllyValue > shotOnEnemyValue)
-        {
-            shotValue = -1f * shotOnAllyValue;
+        if (useNegShotPenalty == true)
+        {    
+            if (shotOnAllyValue > shotOnEnemyValue)
+            {
+                shotValue = -1f * shotOnAllyValue;
 
-        } else if (shotOnEnemyValue >= shotOnAllyValue)
+            } else if (shotOnEnemyValue >= shotOnAllyValue)
+            {
+                shotValue = shotOnEnemyValue;
+            }
+        } else 
         {
-            shotValue = shotOnEnemyValue;
+            if (shotOnEnemyValue >= 0)
+            {
+                shotValue = shotOnEnemyValue;
+            } else
+            {
+                shotValue = 0;
+            }
         }
-        
+
         float reward = shotRewardMultiplier * shotValue;
 
        // print(allyColor + "- Shot Reward: " + reward);
@@ -744,14 +808,25 @@ public class SelfPlayAgentInfTest : Agent
         
         vel = (dX * toRad) / (1 * timeStep);
         
-        if (Mathf.Abs(vel) > 250f)
+        if (Mathf.Abs(vel) > 125f)
         {
-            vel = (vel / Mathf.Abs(vel)) * 250f;
+            vel = (vel / Mathf.Abs(vel)) * 125f;
         }
         
         velV.z = vel;
         return velV;
     }
+
+    // public int getTableLinPosition(string Rod, float nn_Lin){
+    //     // NN Output -> Phys Table Values -> Unity Value Output
+    //     // NN Output [-1,1]
+        
+    //     int maxActuation = Rod["maxActuation"];
+    //     int irl_lin = ((nn_Lin - (-1)) / (1 - 1 (-1))) * maxActuation;
+
+         
+
+    // }
 
     public Vector3 getGoalRelPos(Vector3 obj)
     {
@@ -804,6 +879,36 @@ public class SelfPlayAgentInfTest : Agent
         episodeTimePenalties = 0f;
         episodeKickRewards = 0f;
     
+    }
+
+    public void haltVelocity()
+    {
+        // allyAttackRod.drag = 1e9f;
+        // allyAttackRod.angularDrag = 1e9f;
+        // allyMidfieldRod.drag = 1e9f;
+        // allyMidfieldRod.angularDrag = 1e9f;
+        // allyDefenceRod.drag = 1e9f;
+        // allyDefenceRod.angularDrag = 1e9f;
+        // allyGoalkeeperRod.drag = 1e9f;
+        // allyGoalkeeperRod.angularDrag = 1e9f;
+
+        // allyAttackRod.AddForce((-1f * allyAttackRod.velocity), ForceMode.VelocityChange);
+        // allyAttackRod.AddTorque((-1f * allyAttackRod.angularVelocity), ForceMode.VelocityChange);
+        // allyMidfieldRod.AddForce((-1f * allyMidfieldRod.velocity), ForceMode.VelocityChange);
+        // allyMidfieldRod.AddTorque((-1f * allyMidfieldRod.angularVelocity), ForceMode.VelocityChange);
+        // allyDefenceRod.AddForce((-1f * allyDefenceRod.velocity), ForceMode.VelocityChange);
+        // allyDefenceRod.AddTorque((-1f * allyDefenceRod.angularVelocity), ForceMode.VelocityChange);
+        // allyGoalkeeperRod.AddForce((-1f * allyGoalkeeperRod.velocity), ForceMode.VelocityChange);
+        // allyGoalkeeperRod.AddTorque((-1f * allyGoalkeeperRod.angularVelocity), ForceMode.VelocityChange);
+
+        // allyAttackRod.drag = 0;
+        // allyAttackRod.angularDrag = 0;
+        // allyMidfieldRod.drag = 0;
+        // allyMidfieldRod.angularDrag = 0;
+        // allyDefenceRod.drag = 0;
+        // allyDefenceRod.angularDrag = 0;
+        // allyGoalkeeperRod.drag = 0;
+        // allyGoalkeeperRod.angularDrag = 0;
     }
     
     // Manual driver function for testing:

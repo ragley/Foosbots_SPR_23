@@ -8,6 +8,10 @@ TagManager:
   - BluePlayer
   - RedPlayer
   - uiPanel
+  - AttackRod
+  - DefenceRod
+  - MidfieldRod
+  - GoalkeeperRod
   layers:
   - Default
   - TransparentFX

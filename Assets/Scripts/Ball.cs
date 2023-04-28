@@ -11,8 +11,12 @@ public class Ball : MonoBehaviour
     public float autoKickStrength;
     public float maxAngularVelocity;
     public bool kicked = false;
+    public float hitAngularVelocity;
     Vector3 kickVector;
     Vector3 ballResetPos;
+
+    public enum CollisionRod {Attack, Midfield, Defence, Goalkeeper, none};
+    public CollisionRod collision_rod;
 
     void Start()
     {
@@ -40,12 +44,35 @@ public class Ball : MonoBehaviour
         // Set goal and last kicked Color to none
         inGoalColor = PlayerColor.none;
         lastKickedColor = PlayerColor.none;
+        collision_rod = CollisionRod.none;
+        hitAngularVelocity = 0f;
         kicked = false;
         
         // Reset the position
         gameObject.transform.localPosition = ballResetPos;
         
         //print("Ball Reset");     
+        AutoKick();
+    }
+    public void ResetFull(float xPos, float zPos)
+    {
+        ballResetPos = new Vector3(xPos, 0.0029778f, zPos);
+
+        // Set Velocities to 0
+        ballRB.velocity = new Vector3(0f, 0f, 0f);
+        ballRB.angularVelocity = new Vector3(0f, 0f, 0f);
+        
+        // Set goal and last kicked Color to none
+        inGoalColor = PlayerColor.none;
+        lastKickedColor = PlayerColor.none;
+        collision_rod = CollisionRod.none;
+        hitAngularVelocity = 0f;
+        kicked = false;
+        
+        // Reset the position
+        gameObject.transform.localPosition = ballResetPos;
+
+        AutoKick();
     }
 
     public void OnCollisionEnter(Collision collisionData)
@@ -57,6 +84,32 @@ public class Ball : MonoBehaviour
             //print("=========KICKED=========== you whore: " + ballLastHit);
             lastKickedColor = PlayerColor.blue;
             kicked = true;
+            //print(collisionData.gameObject.name);
+            if (collisionData.gameObject.name.Equals("Team.Blue.Attack"))
+            {
+                collision_rod = CollisionRod.Attack;
+
+            } else if (collisionData.gameObject.name.Equals("Team.Blue.Defence"))
+            {
+                collision_rod = CollisionRod.Defence;
+
+            } else if (collisionData.gameObject.name.Equals("Team.Blue.Midfield"))
+            {
+                collision_rod = CollisionRod.Midfield;
+
+            } else if (collisionData.gameObject.name.Equals("Team.Blue.Goalkeeper"))
+            {
+                collision_rod = CollisionRod.Goalkeeper;
+
+            } else
+            {
+                collision_rod = CollisionRod.none;
+            }
+            
+            hitAngularVelocity = getHitAngularVelocity(collisionData);
+            // Use collisionRod enum and tags on rods to get which rod hit the ball, and the angular velocity of that rod at that time
+            // no reward for hitting towards the ally goal, positive reward hitting toward the enemy goal (ex CW vs CCW)
+            // keep reward for hitting the ball, just make it smaller that it was before (2) -> (1)
         }
         else if (ballLastHit == "RedPlayer")
         {
@@ -69,12 +122,20 @@ public class Ball : MonoBehaviour
             kicked = false;
             //print("=========Hit wall======== ur bad");
         }
-   }
 
-   public void OnCollisionExit(Collision collisionData)
-   {
 
    }
+
+    public float getHitAngularVelocity(Collision collisionData)
+    { 
+        Rigidbody collisionRB = collisionData.gameObject.GetComponent<Rigidbody>();
+        return collisionRB.angularVelocity.z;
+    }
+
+    public void OnCollisionExit(Collision collisionData)
+    {
+
+    }
 
     public void AutoKick()
     {   

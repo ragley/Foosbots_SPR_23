@@ -1,0 +1,84 @@
+behaviors:
+  Foosbots_MultiRod_5:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 5192
+      buffer_size: 51920
+      learning_rate: 0.0002       #0.0002
+      beta: 0.002                 #0.003
+      epsilon: 0.125              #0.15
+      lambd: 0.95
+      num_epoch: 5
+      learning_rate_schedule: constant
+      beta_schedule: linear
+      epsilon_schedule: linear
+    network_settings:
+      normalize: true
+      hidden_units: 512
+      num_layers: 2  #increase?
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+    max_steps: 400e6
+    time_horizon: 1000
+    summary_freq: 10000
+environment_parameters:
+  reward_switch:
+    curriculum:
+      - name: Touch # The '-' is important as this is a list
+        completion_criteria:
+          measure: progress
+          behavior: Foosbots_MultiRod_5
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.15
+        value: 0.0
+      - name: Forward # This is the start of the second lesson
+        completion_criteria:
+          measure: progress
+          behavior: Foosbots_MultiRod_5
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.3
+          require_reset: true
+        value: 1.0
+      - name: Forward_w_Back_Penalty # This is the start of the second lesson
+        completion_criteria:
+          measure: progress
+          behavior: Foosbots_MultiRod_5
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.45
+          require_reset: true
+        value: 2.0
+      - name: Force # This is the start of the second lesson
+        completion_criteria:
+          measure: progress
+          behavior: Foosbots_MultiRod_5
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.6
+          require_reset: true
+        value: 3.0
+      - name: Continuous_Shot_Evaluation # This is the start of the second lesson
+        completion_criteria:
+          measure: progress
+          behavior: Foosbots_MultiRod_5
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.8
+          require_reset: true
+        value: 4.0
+      - name: Goals_Only # This is the start of the second lesson
+        completion_criteria:
+          measure: progress
+          behavior: Foosbots_MultiRod_5
+          signal_smoothing: true
+        value: 5.0
+    #self_play:
+    #    window: 10
+     #   play_against_latest_model_ratio: 0.5
+      #  save_steps: 50000
+       # swap_steps: 50000
+        #team_change: 100000
