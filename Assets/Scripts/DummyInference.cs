@@ -242,9 +242,9 @@ public class DummyInference : MonoBehaviour
                 Constants.TwoRod.Z_Correction(Converters.IRL_2_U_Z(rod2z)),
                 System.Convert.ToSingle(received.data["robot_2_rod_angle_current"]) * -1,
                 Converters.IRL_2_U_X(rod2P0x) + Constants.TwoRod.X_Correction,
-                Converters.IRL_2_U_Z(rod2P0z) * -1,
+                Converters.IRL_2_U_Z(rod2P0z),
                 Converters.IRL_2_U_X(rod2P1x) + Constants.TwoRod.X_Correction,
-                Converters.IRL_2_U_Z(rod2P1z) * -1
+                Constants.TwoRod.Z_Correction_P0(Converters.IRL_2_U_Z(rod2P1z) * -1)
             };
 
             // Goal Rod / Goalkeeper Rod

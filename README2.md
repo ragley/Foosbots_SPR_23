@@ -19,26 +19,13 @@ Once your virtual environment is activated follow these steps to install all nec
   
       python -m pip install mlagents==0.28.0
   4.) Install imutils PythonPackage
-<<<<<<< HEAD
-=======
-      
-      pip install "need command"
-  5.) Download the Unity Assets Hosted in the MS Teams files. They are too large to be hosted here unfortunately, and git LFS does not function for public repositories.
->>>>>>> 6a43521ce2107ab37272a13eb12b8779e16f6e7e
       
       pip install "need actual command"
   5.) Download the Unity Assets Hosted in the MS Teams files. They are too large to be hosted here unfortunately, and git LFS does not function for public repositories.
 <br></br>
-  
-## Training the Network
-In order to train the network, open the project in Unity and then open a command prompt terminal. From within the terminal, navigate to the directory containing the Unity project and activate your virtual environment. Then run the following command:
 
-    mlagents-learn config/foosball_config.yaml --run-id TITLE_OF_TRAINING_RUN
-    
-This should prompt you to click play in the Unity editor, do so and the training will commence. Replace TITLE_OF_TRAINING_RUN with whatever you wish to call that particular session of training. 
 
-To edit the hyperparameters of the network, open the file foosball_config.yaml and make any necessary changes, then save the file. More information about the hyperparameters and their various effects on training can be found at the following link: <https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md>
-<br></br>
+
 
 ## Important Components of Agent Script
 There are several agent scripts included in the project from the various phases of testing and developing the project. The one that is currently being used and is most up to date is called `SelfPlayAgentJoint.cs`. Public variables should be set in the `TableEnvHandler.cs` to ensure settings are the same for both agents. All agents have the following important methods:
@@ -57,6 +44,23 @@ This method is utilized to obtain observations for the neural network and is cal
 ### `OnActionReceived()` - Void
 This method is the main driver function of the agent in charge of both producing actions and producing rewards, this function is called every interval set in `Decision Requester`, so, `OnActionsRecieved()` is called every `DecisionInterval` `FixedUpdate()` steps. This project makes use of a continuous action space where all outputs are naturally in the range (-1,1) but we manually clip them to guarantee that they stay in that range, per recommendation of the ML Agents team. Currently the actions of the agent are in the form of "Desired Position" or where the agent wants to be in terms of its minimum and maximum actuation values for the specific action. 
 
+To actuate the rods themselves based on the outputs from the neural network, each rod has two actuation values that move the rod. 
+- For Linear:
+  
+      allyAttackRod.AddForce(Vector3.Scale(inputRandomization, getRodVelLinear(0, allyAttackRod.transform.localPosition, controlAttackForce.z)), ForceMode.VelocityChange);
+
+  This function call adds force to the rod (Unity's method of moving Rigidbodies continuously with physics) in a very specific manner that is indicitave of motor control. The force is applied with Unity's `ForceMode.VelocityChange` method, which ignores object mass and directly sets the velocity, but in a continous manner. The values are determined by the `getRodVelLinear()` function and the outputs from the neural network. Additionally the Agent's actuation vector derived from it's output is randomized by the `inputRandomization` variable. This aids in domain randomization, helping the AI not to rely on fully reliable outcomes to its outputs.
+
+
+
+- For Rotation:
+      
+      allyAttackRod.AddTorque(Vector3.Scale(inputRandomization, getRodVelRot(allyAttackRod.transform.localRotation.z, controlAttackTorque.z)), ForceMode.VelocityChange);
+  The same methodology is applied to rotation, but instead uses `getRodVelRot()`.
+
+>*DO NOT EVER set the velocity with `rbody.velocity`. This will result in unreliable physics. If you are needing to change velocity on a rigidbody for some reason use `ForceMode.VelocityChange`.* 
+
+<br></br>
 The reward structure is designed to work with curriculum based training or Self Play, depending on settings defined in the unity build and training configuration .yaml file. Rewards are designed to be symmetric in their application, meaning you should be able to train either red or blue team individually (Or both in terms of Self Play), without modifying the reward code. 
 
 Rewards in this section can be tricky. The way the simulation is currently set up, ONLY rewards that affect a single agent should be placed in this section. If any rewards here are defined based on the outcome of the other agent's actions, a race condition will develop.
@@ -88,8 +92,7 @@ Boolean variables within the Agent script change how this value is applied. Thes
 - `useSingleShotReward`
   - If `true`: Only apply the shot evaluation only when agent makes contact with the ball. 
 
-The resultant float value is multiplied by a user-defined `shotRewardMultiplier` and returned. I've found with `useNegShotPenalty=true`, `usePosessionEval=false`, and `useSingleShotReward=false`, results in a purely symmetric reward system: if red gets `+X` blue gets exactly `-X` for the shot reward at any given time.   
-<br></br>
+The resultant float value is multiplied by a user-defined `shotRewardMultiplier` and returned. I've found with `useNegShotPenalty=true`, `usePosessionEval=false`, and `useSingleShotReward=false`, results in a purely symmetric reward system: if red gets `+X` blue gets exactly `-X` for the shot reward at any given time.<br></br>
 
 ### `SpinPenalty()` - Float
 This function is to prevent the rods from endlessly spinning as fast as possible, as previously the AI would find this is the best solution to getting the ball in the goal as fast as possible.
@@ -136,7 +139,48 @@ This method is used for manual testing. When "heuristic only" is selected within
 <br></br>
 
 ## Important Components of TableEnvHandler Script
-`needs content`
+### `Start()` - Void
+This function is the initial setup function within Unity. It is called only once when the program is in play mode. Currently it:
+- Gets the ball `Rigidbody` component
+- Sets the `autoKickStrength`
+- Sets the value of `timeStepPenalty` (`1 / (MaxEnvSteps / decInterval)`)
+- Resets the scene so everything is in the default starting position
+- Sets the agent variables to match the environment handler to ensure they are the same.
+- Gives the ball its initial kick
+<br></br>
+
+### `FixedUpdate()` - Void
+This is a default Unity function that gets called every incremental update of the Unity engine. Anything that affects both agents simultaneously needs to go here so race conditions between multiple agents don't develop. Currently this function handles curriculum variable changes with the ```lesson``` variable retrieved from the config `.yaml` file through:
+
+    lesson = Academy.Instance.EnvironmentParameters.GetWithDefault("reward_switch", 0.0f);
+
+Currently these lessons change some reward values, and game type. Game types include `touch_ball` and `reg_play`. 
+- `touch_ball`: Ends the episode as soon as blue touches the ball and is used to train the brain to understand where its player feet are and to associate touching the ball with them. Use to train behaviors only with one actively learning agent (default: `Blue`)
+- `reg_play`: General foosball game behavior, used to train more complex and longer-term strategy and behavior such as shots and scoring. 
+
+In addition to game-types the UI can be updated from here. For adding new components to the UI, make changes to `UIManager.cs`
+<br></br>
+
+### `ResetScene()` - Void
+This function is responsible for resetting the scene so a new episode can begin properly. It
+- Calls the `Reset()` function of each agent
+- Resets the ball postion. 
+  - Leftover code is availible commented out for resetting the ball only on the midfield line randomly as opposed to the whole table if it's desired to be used.
+- Randomizes the angular drag of the ball by +/- 10% so the AI doesn't rely on ball physics being identical every time.
+- Sets `hitAngularVelocity` and `hitVelocityReward` back to `0`
+- Resets episode timer
+- Sets the agent variables to be the same as they are in `TableEnvHandler.cs` in case they have changed somehow
+- Increments episode count in UI
+<br></br>
+
+### `EndSummary()` - Void
+Debug statement that gets the `SummaryStr()` from each agent and prints it to the debug console. Useful for ensuring rewards are getting implemented properly. 
+
+>*NOTE: Disable calls to this before building as it will slow down the simulation esp. running lots of tables simultaneously.* 
+
+<br></br>
+### `SetAgentVars()` - Void
+This function syncs variables of the `TableEnvHandler.cs` to the agents. Ideally, you will set all variables in the `TableEnvHandler.cs` and they will be propogated to the Agents properly. If you add more variables to the agent that affect the behavior, add a variable here to sync them properly.
 <br></br>
 
 ## Important Components of Agent in Unity Editor
@@ -180,6 +224,43 @@ This component determines how often the agent makes decisions within a training 
 Note that "Take Actions Between" is unchecked and that the `Decision Period > 1` ***NEEDS CHECK***, we found that when allowed to make decisions at every step the agent would get stuck moving its rods only in one direction but when it was slightly throttled it had full range of motion. In the main simulation this can be set to whatever, but it's recommended that when running inference on the table it be set to 1.
 <br></br>
 
+## Training a Brain for Use on the Physical Table
+### Preperation
+To train a brain for use on the physical table first open the ```Final_BallTouchTrainer.unity``` scene (availiable on Teams if you're a future project member, or you can send a request to me on discord at Ragley#1700 and I will send you the file. They are too large to put here and git-lfs has trouble with collaborative repos.)
+
+If developing on VSCode on the main computer, make and save your training changes to the scripts you've modified according to the guidelines above. The main ones affecting the agent are the ```SelfPlayAgentJoint.cs``` and ```TableEnvHandler.cs```. I would highly recommend testing the changes made in play mode with both agents running in inference to see if your new rewards/etc. are applying properly. Don't fall into the trap of making your changes and immediately jumping into training, only to find out your rewards were not applying properly. There are unity debug log print statements within ```TableEnvHandler.cs``` that give some general reward breakdowns for each agent. These can be used to ensure rewards are being implemented properly.
+
+
+<br></br>
+
+## Training the Network
+
+In order to train the network, open the project in Unity and then open a command prompt terminal. From within the terminal, navigate to the directory containing the Unity project and activate your virtual environment. Then run the following command:
+
+    mlagents-learn config/<config_name>.yaml --run-id=<TITLE_OF_TRAINING_RUN> --env=<BuildFolder>/Foosbots_MultiRod_5.exe --time-scale=1 --num-envs=<num>
+    
+This should prompt you to click play in the Unity editor, do so and the training will commence. Replace  with whatever you wish to call that particular session of training. 
+
+`BuildFolder` is the directory of the latest built .exe from unity. 
+
+`time-scale` should always be set to 1. It is tempting to increase this to reduce training time, however evidence shows higher time scale will affect the performance of the resulting brain negatively.
+
+The `--env` parameter can be dropped if testing inside the editor, however the editor noticably reduces performance and is not recommended unless debugging.
+
+To utilize a build that has multiple instances, the best one I've found for using on the main computer (RTX4090, 7950X) with a build of 128 concurrent tables is with:
+- `num-envs`: Between `6` and `8`. 8x128 = 1024 concurrent tables
+
+More information about `mlagents-learn` parameters and their uses can be found [Here.](https://github.com/gzrjzcx/ML-agents/blob/master/docs/Training-ML-Agents.md)
+
+To edit the hyperparameters of the network, open the chosen (or new) `.yaml` file in `/config/` and make any necessary changes, then save the file. When running `mlagents-learn` replace `config_name` with your configuration file. The current config files are: 
+- `foosball_config_curr.yaml` for single agent training with a curriculum
+- `foosball_config_currSP.yaml` for self play training
+
+More information about the hyperparameters and their various effects on training can be found [Here.](https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md)
+
+
+<br></br>
+
 ## Accessing and Evaluating Results
 In order to view tensorboard graphs to evaluate training, activate the virtual environment and navigate to the directory containing the Unity project then run the following command:
 
@@ -209,7 +290,7 @@ Notes:
 - Sometimes it takes a while to display new values especially with long training runs saved, these add up to several Gb of data. Just keep refreshing or go grab a coffee, it can take 5-10 minutes to display sometimes.
 
 More information about the use of tensorboard and evaluation of these statisitics can be found at the following link: <https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Using-Tensorboard.md>
-<<<<<<< HEAD
+
 <br></br>
 
 ## Deployment on the Physical Table
@@ -217,7 +298,6 @@ More information about the use of tensorboard and evaluation of these statisitic
 ### Input Observations
 Fourty-six obervations are assigned in SelfPlay, and then passed along to the Inference file. 
 These inputs can be viewed in Unity in the *Dummy Inference (Script)* section within the  **Inspector** tab. 
-All these observations are slightly randomized.
 
 | Index | Object                    | Obervation    |
 | ------| ------------------------- |-------------  |
@@ -275,25 +355,25 @@ All these observations are slightly randomized.
 <br></br>
 
 ### Neural Network Decisions 
-This array of 8 objects is defined in SelfPlay within the *OnActionRecieved()* function, and passed to Inference. 
+This array of 8 objects is defined in SelfPlay within the *OnActionRecieved()* function, and passed to Inference. Outputs from the neural network are continuous values on the domain of ```[-1, 1]```.  The order of these is the same as they are called within the simulation.
 
 | Index  | Object                      | Action    |
 | ------ | --------------------------- |---------- |
-| 0      | allyAttack (3-Rod)          | Force     |
-| 1      | allyAttack (3-Rod)          | Torque    |
+| 0      | allyAttack (3-Rod)          | Linear     |
+| 1      | allyAttack (3-Rod)          | Rotation    |
 |        |                             |           |
-| 2      | allyMidfield (5-Rod)        | Force     |
-| 3      | allyMidfield (5-Rod)        | Torque    |
+| 2      | allyMidfield (5-Rod)        | Linear     |
+| 3      | allyMidfield (5-Rod)        | Rotation    |
 |        |                             |           |
-| 4      | allyDefence (2-Rod)         | Force     |
-| 5      | allyDefence (2-Rod)         | Torque    |
+| 4      | allyDefence (2-Rod)         | Linear     |
+| 5      | allyDefence (2-Rod)         | Rotation    |
 |        |                             |           |
-| 6      | allyGoalkeeper (goal-Rod)   | Force     |
-| 7      | allyGoalkeeper (goal-Rod)   | Torque    |
+| 6      | allyGoalkeeper (goal-Rod)   | Linear     |
+| 7      | allyGoalkeeper (goal-Rod)   | Rotation    |
 <br></br>
 
 ### Output Commands
-This array is the output decisions of the NN. These are defined in the Inference file. Max actuation, player spacing, and the conversion required for Unity -> IRL are all accounted for in these outputs. 
+This array is the output decisions of the NN. These are defined in the Inference file. Max actuation, player spacing, and the conversion required for Unity -> IRL are all accounted for in these outputs. The domains of these values are in relation to locations on the table. 
 
 | Index  | Object                      | Command             |
 | ------ | --------------------------- |-------------------- |
@@ -308,15 +388,10 @@ This array is the output decisions of the NN. These are defined in the Inference
 |        |                             |                     |
 | 6      | allyAttack (3-Rod)          | Linear movement     |
 | 7      | allyAttack (3-Rod)          | Rotational movement |
-<br></br>
+<br></br> 
 
 
 ## Helpful Links
-=======
-
-## Helpful Links
-
->>>>>>> 6a43521ce2107ab37272a13eb12b8779e16f6e7e
 - [Tips on Training with PPO Specifically](https://github.com/yosider/ml-agents-1/blob/master/docs/Training-PPO.md)
 - [Tips on Training with SAC Specifically](https://github.com/yosider/ml-agents-1/blob/master/docs/Training-SAC.md)
 - [Overview on ML-Agents with some example scenarios](https://github.com/Unity-Technologies/ml-agents/blob/develop/docs/ML-Agents-Overview.md)

@@ -234,7 +234,8 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
                     
             //print(allyColor + " " + convertAngle(allyAttackJoint.transform.rotation.eulerAngles.z) + "  -  " + UnityEditor.TransformUtils.GetInspectorRotation(allyAttack.transform).z);
             // Observations are relative to ally team's goal, this way they can be symmetric regardless of side
-            float[] tempObs = new float[] {
+            // Domain Randomization
+            float[] tempObs = new float[] { 
                 Random.Range(domainRandLower, domainRandUpper) * getGoalRelPos(ball.transform.position).x, 
                 Random.Range(domainRandLower, domainRandUpper) * getGoalRelPos(ball.transform.position).z,
                 Random.Range(domainRandLower, domainRandUpper) * getGoalRelDir(ball.ballRB.velocity).x,
@@ -472,7 +473,6 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
             // }
         
 
-
             // Spin Penalty
             // Sum of angular velocities of rods
             // float spin = 0f;
@@ -530,7 +530,7 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
                         }
 
                         // Optional Reward for continuous reward signaling every step based on shots
-                        // Ex: Ai hits it off the wall directly in the goal
+                        // Ex: AI hits it off the wall directly in the goal
                         // Single shot won't consider this a good kick but when the ball changes direction to travel towards the goal
                         // this function will reward that shot
                         // Note: This function will also work the same as the single shot the moment the ball is hit
@@ -604,21 +604,21 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
 
     float ShotReward()
     {
-
-        //TODO: Refine Scoring Vectors, more accurate 
+        // TODO: Refine Scoring Vectors, more accurate 
         // forward/towards enemy goal = good
         // backwards/towards own goal = bad
 
         float shotValue = 0;
 
-        //Vector from current ball positon to enemy goal: "Perfect Shot"
+        // Vector from current ball positon to enemy goal: "Perfect Shot"
         Vector3 deltaEnemyGoal = getGoalRelPos(enemyGoal.transform.position) - getGoalRelPos(ball.transform.position);
-        //Vector from current ball position to ally goal: "Worst Shot"
+        //V ector from current ball position to ally goal: "Worst Shot"
         Vector3 deltaAllyGoal = getGoalRelPos(allyGoal.transform.position) - getGoalRelPos(ball.transform.position);
         
         // Calc Shot value based on vector towards center of enemy goal
         float shotOnEnemyValue = Vector3.Dot(deltaEnemyGoal.normalized, getGoalRelDir(ball.ballRB.velocity));
         float shotOnAllyValue = Vector3.Dot(deltaAllyGoal.normalized, getGoalRelDir(ball.ballRB.velocity));
+
         // If it's negative apply penalty based on vector towards ally goal ("don't hit it towards your own goal")
         if (useNegShotPenalty == true)
         {    

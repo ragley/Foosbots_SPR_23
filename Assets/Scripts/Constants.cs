@@ -65,6 +65,23 @@ public static class Constants
             float cor = ((z_pos - Conv_Table_Obs_Min)/(Conv_Table_Obs_Max - Conv_Table_Obs_Min)) * (Sim_Lin_Max - Sim_Lin_Min) + Sim_Lin_Min;
             return cor;
         }
+
+        public const float Sim_P0_Max = 1.325498f;
+        public const float Sim_P0_Min = 0.3026522f;
+        public const float Sim_P1_Max = 0.5110245f;
+        public const float Sim_P1_Min = -0.5118214f;
+        public const float Sim_P2_Max = -0.30345f;
+        public const float Sim_P2_Min = -1.326296f;
+
+        public const float Tab_P0_Max = 0.2771656f;
+        public const float Tab_P0_Min = 1.293255f;
+        
+        public const float Tab_P1_Max = -0.5278198f;
+        public const float Tab_P1_Min = 0.4882698f;
+        
+        public const float Tab_P2_Max = -1.332805f;
+        public const float Tab_P2_Min = -0.3167155f;
+
     }
 
     public static class TwoRod
@@ -89,6 +106,31 @@ public static class Constants
             return cor;
         }
 
+        public const float Sim_P0_Max = 1.325499f;
+        public const float Sim_P0_Min = -0.1078728f;
+
+        public const float Sim_P1_Max = 0.1070763f;
+        public const float Sim_P1_Min = -1.326296f;
+
+        public const float Tab_P0_Max = -0.2551277f;
+        public const float Tab_P0_Min = 1.293255f;
+        
+        public const float Tab_P1_Max = -1.288852f;
+        public const float Tab_P1_Min = 0.2595308f;
+
+        public static float Z_Correction_P0(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P0_Min)/(Tab_P0_Max - Tab_P0_Min)) * (Sim_P0_Max - Sim_P0_Min) + Sim_P0_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P1(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P1_Min)/(Tab_P1_Max - Tab_P1_Min)) * (Sim_P1_Max - Sim_P1_Min) + Sim_P1_Min;
+            return cor;
+        }
+
+
     }
 
     public static class FiveRod
@@ -112,6 +154,33 @@ public static class Constants
             float cor = ((z_pos - Conv_Table_Obs_Min)/(Conv_Table_Obs_Max - Conv_Table_Obs_Min)) * (Sim_Lin_Max - Sim_Lin_Min) + Sim_Lin_Min;
             return cor;
         }
+        
+        public const float Sim_P0_Max = 1.325495f;
+        public const float Sim_P0_Min = 0.7903686f;
+        public const float Sim_P1_Max = 0.7965519f;
+        public const float Sim_P1_Min = 0.2614254f;
+        public const float Sim_P2_Max = 0.2671649f;
+        public const float Sim_P2_Min = -0.2679616f;
+        public const float Sim_P3_Max = -0.2622219f;
+        public const float Sim_P3_Min = -0.7973484f;
+        public const float Sim_P4_Max = -0.7911691f;
+        public const float Sim_P4_Min = -1.326296f;
+
+        public const float Tab_P0_Max = 0.7961355f;
+        public const float Tab_P0_Min = 1.293255f;
+        
+        public const float Tab_P1_Max = 0.2770739f;
+        public const float Tab_P1_Min = 0.7741935f;
+        
+        public const float Tab_P2_Max = -0.2419877f;
+        public const float Tab_P2_Min = 0.255132f;
+
+        public const float Tab_P3_Max = -0.7610492f;
+        public const float Tab_P3_Min = -0.2639296f;
+        
+        public const float Tab_P4_Max = -1.280111f;
+        public const float Tab_P4_Min = -0.7829912f;
+
     }
 
     public static class ThreeRod
@@ -129,11 +198,29 @@ public static class Constants
         public const float Conv_Table_Obs_Zero = -1.103643f;
         public const float Conv_Table_Obs_Max = -0.4970205f; 
         public const float Conv_Table_Obs_Min = -1.5f;
+
+
         public static float Z_Correction(float z_pos)
         {
             float cor = ((z_pos - Conv_Table_Obs_Min)/(Conv_Table_Obs_Max - Conv_Table_Obs_Min)) * (Sim_Lin_Max - Sim_Lin_Min) + Sim_Lin_Min;
             return cor;
         }
+
+        public const float Sim_P0_Max = 1.325498f;
+        public const float Sim_P0_Min = 0.302652f;
+        public const float Sim_P1_Max = 0.5110235f;
+        public const float Sim_P1_Min = -0.5118223f;
+        public const float Sim_P2_Max = -0.3034502f;
+        public const float Sim_P2_Min = -1.326296f;
+
+        public const float Tab_P0_Max = 0.290275f;
+        public const float Tab_P0_Min = 1.293255f;
+        
+        public const float Tab_P1_Max = -0.5147098f;
+        public const float Tab_P1_Min = 0.4882698f;
+        
+        public const float Tab_P2_Max = -1.319695f;
+        public const float Tab_P2_Min = -0.3167155f;
 
     }
 

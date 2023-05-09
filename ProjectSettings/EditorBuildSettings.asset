@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/mainScene.unity
+    path: Assets/Scenes/old scenes/mainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Scenes/Inference Test.unity
+    path: Assets/Scenes/old scenes/Inference Test.unity
     guid: e97269edebd3e0c42a2e14712655095b
   - enabled: 0
-    path: Assets/Scenes/JointTest.unity
+    path: Assets/Scenes/old scenes/JointTest.unity
     guid: 67db98908035e674f8a8ff2d56d60aa3
   - enabled: 1
-    path: Assets/Scenes/BallTouchTrainer.unity
+    path: Assets/Scenes/FINAL_BallTouchTrainer.unity
     guid: bb37ddb9939c99741a0b2afa40a22ac6
   m_configObjects: {}

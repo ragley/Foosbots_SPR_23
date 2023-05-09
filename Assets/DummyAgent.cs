@@ -10,8 +10,6 @@ public class DummyAgent : Agent
     //Define Observation Variables
     // Make Public so can be watched in unity editor and accessed
 
-
-
     public float allyAttackLinearCommand;
     public float allyAttackRotationCommand;
     public float allyMidfieldLinearCommand;

@@ -673,15 +673,15 @@ Dictionary<string, int> TABLE = new Dictionary<string, int>(){{"robot_goalX",120
     float ShotReward()
     {
 
-        //TODO: Refine Scoring Vectors, more accurate 
+        // TODO: Refine Scoring Vectors, more accurate 
         // forward/towards enemy goal = good
         // backwards/towards own goal = bad
 
         float shotValue = 0;
 
-        //Vector from current ball positon to enemy goal: "Perfect Shot"
+        // Vector from current ball positon to enemy goal: "Perfect Shot"
         Vector3 deltaEnemyGoal = getGoalRelPos(enemyGoal.transform.position) - getGoalRelPos(ball.transform.position);
-        //Vector from current ball position to ally goal: "Worst Shot"
+        // Vector from current ball position to ally goal: "Worst Shot"
         Vector3 deltaAllyGoal = getGoalRelPos(allyGoal.transform.position) - getGoalRelPos(ball.transform.position);
         
         // Calc Shot value based on vector towards center of enemy goal

@@ -118,7 +118,7 @@ public class TableEnvHandler : MonoBehaviour
 
         } else
         {
-            Play_Type = playType.touch_ball;
+            Play_Type = playType.reg_play;
         }
 
         ui.updateCumReward(blueAgent.GetCumulativeReward(), redAgent.GetCumulativeReward());
