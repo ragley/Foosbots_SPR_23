@@ -24,7 +24,46 @@ Once your virtual environment is activated follow these steps to install all nec
   5.) Download the Unity Assets Hosted in the MS Teams files. They are too large to be hosted here unfortunately, and git LFS does not function for public repositories.
 <br></br>
 
+## Important Components of Agent in Unity Editor
+In addition to the script, every game object that is being used as an agent must have the following components
+<br></br>
 
+### Multiple Table Formation
+`needs content`
+<br></br>
+
+### Actuating Components
+`needs content`
+<br></br>
+
+### Behvaior Parameters
+This component determines how an agent makes decisions and  has several important sub-components `NEEDS PIC UPDATE`
+
+![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png)
+
+`Behavior Name:` This field must match the behavior named specified in the .yaml file referenced during training
+
+`Vector Observation Space:` The number of elements in the `CollectObservations()` method, we have 46 in our script.
+
+`Actions:` The size of the action space, for this project there are 8 continuous action outputs (2 per rod, translation, rotation) and 0 discrete actions.
+
+`Model`: Allows for the option of loading a brain for inference. Put the brains in `Assets/Brains/` to have them show up. (Make sure to name them someting easily identifiable!)
+
+`Behavior Type:` What type of behavior the AI has. 
+- `Default` Will either run inference with the selected brain if not training, or if `mlagents-learn` is active it will train.
+- `Inference Only`: Like it says, will always run inference on selected device, useful if training one team only.
+- `Heuristic Only`: Like it says, useful for controlling rods yourself and seeing actuation behaviors.
+
+
+`Team ID:` Which team each agent is on, it is important for the self play training that each team have a different ID.
+
+### Decision Requester
+This component determines how often the agent makes decisions within a training run
+
+![foosball_decison_requester](https://user-images.githubusercontent.com/35296087/206738764-6a268c05-15dd-489e-bd67-06885dccc74e.png)
+
+Note that "Take Actions Between" is unchecked and that the `Decision Period > 1` ***NEEDS CHECK***, we found that when allowed to make decisions at every step the agent would get stuck moving its rods only in one direction but when it was slightly throttled it had full range of motion. In the main simulation this can be set to whatever, but it's recommended that when running inference on the table it be set to 1.
+<br></br>
 
 
 ## Important Components of Agent Script
@@ -183,53 +222,13 @@ Debug statement that gets the `SummaryStr()` from each agent and prints it to th
 This function syncs variables of the `TableEnvHandler.cs` to the agents. Ideally, you will set all variables in the `TableEnvHandler.cs` and they will be propogated to the Agents properly. If you add more variables to the agent that affect the behavior, add a variable here to sync them properly.
 <br></br>
 
-## Important Components of Agent in Unity Editor
-In addition to the script, every game object that is being used as an agent must have the following components
-<br></br>
 
-### Multiple Table Formation
-`needs content`
-<br></br>
-
-### Actuating Components
-`needs content`
-<br></br>
-
-### Behvaior Parameters
-This component determines how an agent makes decisions and  has several important sub-components `NEEDS PIC UPDATE`
-
-![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png)
-
-`Behavior Name:` This field must match the behavior named specified in the .yaml file referenced during training
-
-`Vector Observation Space:` The number of elements in the `CollectObservations()` method, we have 46 in our script.
-
-`Actions:` The size of the action space, for this project there are 8 continuous action outputs (2 per rod, translation, rotation) and 0 discrete actions.
-
-`Model`: Allows for the option of loading a brain for inference. Put the brains in `Assets/Brains/` to have them show up. (Make sure to name them someting easily identifiable!)
-
-`Behavior Type:` What type of behavior the AI has. 
-- `Default` Will either run inference with the selected brain if not training, or if `mlagents-learn` is active it will train.
-- `Inference Only`: Like it says, will always run inference on selected device, useful if training one team only.
-- `Heuristic Only`: Like it says, useful for controlling rods yourself and seeing actuation behaviors.
-
-
-`Team ID:` Which team each agent is on, it is important for the self play training that each team have a different ID.
-
-### Decision Requester
-This component determines how often the agent makes decisions within a training run
-
-![foosball_decison_requester](https://user-images.githubusercontent.com/35296087/206738764-6a268c05-15dd-489e-bd67-06885dccc74e.png)
-
-Note that "Take Actions Between" is unchecked and that the `Decision Period > 1` ***NEEDS CHECK***, we found that when allowed to make decisions at every step the agent would get stuck moving its rods only in one direction but when it was slightly throttled it had full range of motion. In the main simulation this can be set to whatever, but it's recommended that when running inference on the table it be set to 1.
-<br></br>
 
 ## Training a Brain for Use on the Physical Table
 ### Preperation
 To train a brain for use on the physical table first open the ```Final_BallTouchTrainer.unity``` scene (availiable on Teams if you're a future project member, or you can send a request to me on discord at Ragley#1700 and I will send you the file. They are too large to put here and git-lfs has trouble with collaborative repos.)
 
 If developing on VSCode on the main computer, make and save your training changes to the scripts you've modified according to the guidelines above. The main ones affecting the agent are the ```SelfPlayAgentJoint.cs``` and ```TableEnvHandler.cs```. I would highly recommend testing the changes made in play mode with both agents running in inference to see if your new rewards/etc. are applying properly. Don't fall into the trap of making your changes and immediately jumping into training, only to find out your rewards were not applying properly. There are unity debug log print statements within ```TableEnvHandler.cs``` that give some general reward breakdowns for each agent. These can be used to ensure rewards are being implemented properly.
-
 
 <br></br>
 
@@ -257,7 +256,6 @@ To edit the hyperparameters of the network, open the chosen (or new) `.yaml` fil
 - `foosball_config_currSP.yaml` for self play training
 
 More information about the hyperparameters and their various effects on training can be found [Here.](https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md)
-
 
 <br></br>
 
