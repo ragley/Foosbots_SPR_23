@@ -97,9 +97,9 @@ public class TableEnvHandler : MonoBehaviour
         //     haltVelocity();
         // }
 
-        // Update UI 
         lesson = Academy.Instance.EnvironmentParameters.GetWithDefault("reward_switch", 0.0f);
         //print(lesson);
+        
 
         if (lesson == 4.0f || lesson == 5.0f)
         {
@@ -118,10 +118,16 @@ public class TableEnvHandler : MonoBehaviour
 
         } else
         {
+            // changed this to playType.reg_play because when doing inference or SP curriculum
+            // it defaults to this value, easy fix but dont have time ¯\_(ツ)_/¯
+            // sowwy (^.^)
+
             Play_Type = playType.reg_play;
         }
-
+        // Update UI 
         ui.updateCumReward(blueAgent.GetCumulativeReward(), redAgent.GetCumulativeReward());
+        
+        // Regular Play Conditions, etc. 
         if (Play_Type == playType.reg_play) {
             // Ball in goal
             if (ball.inGoalColor == redAgent.allyColor)
@@ -155,7 +161,7 @@ public class TableEnvHandler : MonoBehaviour
 
             } 
 
-            // Idle Timer
+            // Idle Timer, then bump the ball in a random direction (dead ball)
             if (ballRB.velocity.magnitude <= velocityThreshold)
             {
                 idleTimer += 1;
@@ -166,7 +172,7 @@ public class TableEnvHandler : MonoBehaviour
                 }
             }
 
-            // Episode Reset 
+            // Episode Reset if max environment steps is reached
             if (resetTimer >= MaxEnvSteps && MaxEnvSteps > 0)
             {
                 
@@ -179,44 +185,53 @@ public class TableEnvHandler : MonoBehaviour
             }
 
         }
+
+
         // Training set up for blue side only.
         if (Play_Type == playType.touch_ball)
         { 
+            // Check if ball is hit and then apply rewards
             if (ball.kicked == true){
                 if (ball.lastKickedColor == blueAgent.allyColor)
                 {
+                    // End red episode and update UI
                     redAgent.EndEpisode();
                     ui.scoreBlue();
                     
+                    // get the angular velocity of the rod that has hit the ball
                     hitAngularVelocity = ball.hitAngularVelocity;
                     hitVelocityReward = hitAngularVelocity / maxAngularVelocity;
                     
                     if (lesson == 0.0f)
                     {
+                        //Reward simply for hitting
                         blueAgent.AddReward(1f);
                     } else if(lesson == 1.0f)
                     {
+                        // Reward fixed amount for positive angular velocity
                         if (hitAngularVelocity > 0)
                         {
                             blueAgent.AddReward(1f);
                         }
                     }else if(lesson == 2.0f)
                     {
+                        // Reward a proportional amount to angular velocity (can be neg. / penalty for hitting backwards)
                         blueAgent.AddReward(hitAngularVelocity);
                     }
 
+                    // End episode and reset
                     blueAgent.EndEpisode();
                     ResetScene();
                 }
             }
 
+            // End if in goal, don't reward since thats not what this training is for
             if (ball.inGoalColor == redAgent.allyColor)
             {
 
                 redAgent.EndEpisode();
                 blueAgent.EndEpisode();
                 ResetScene();
-
 
             } else if(ball.inGoalColor == blueAgent.allyColor)
             {
@@ -227,6 +242,7 @@ public class TableEnvHandler : MonoBehaviour
 
             } 
             
+            // Bump the ball if it is going too slow for too long (dead ball)
             if (ballRB.velocity.magnitude <= velocityThreshold)
             {
                 idleTimer += 1;
@@ -236,6 +252,8 @@ public class TableEnvHandler : MonoBehaviour
                     idleTimer = 0;
                 }
             }
+
+            // Reset if taking too long and max steps is reached
             if (resetTimer >= MaxEnvSteps && MaxEnvSteps > 0)
             {
                 //EndSummary("Draw.", "Draw.");
@@ -252,7 +270,7 @@ public class TableEnvHandler : MonoBehaviour
     void Update()
     {
         
-    }
+    } 
 
     void ResetScene()
     {

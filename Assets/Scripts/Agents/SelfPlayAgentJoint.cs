@@ -178,20 +178,20 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
     public UIManager ui;
     public Vector3 inputRandomization = new Vector3(1, 1, 1);     
 
-    public ConfigurableJoint allyAttackJoint; //New  
-    public ConfigurableJoint allyDefenceJoint; //New 
-    public ConfigurableJoint allyGoalkeeperJoint; //New 
-    public ConfigurableJoint allyMidfieldJoint; //New                                         
+    public ConfigurableJoint allyAttackJoint;   
+    public ConfigurableJoint allyDefenceJoint;  
+    public ConfigurableJoint allyGoalkeeperJoint;  
+    public ConfigurableJoint allyMidfieldJoint;                                         
 
     // Start up procedures:  
     void Start()
     {
 
-        allyAttackJoint = allyAttack.GetComponent<ConfigurableJoint>(); //new
-        allyDefenceJoint = allyDefence.GetComponent<ConfigurableJoint>(); //new
-        allyGoalkeeperJoint = allyGoalkeeper.GetComponent<ConfigurableJoint>(); //new
-        allyMidfieldJoint = allyMidfield.GetComponent<ConfigurableJoint>(); //new
-        //limit = joint.linearLimit.limit; //new
+        allyAttackJoint = allyAttack.GetComponent<ConfigurableJoint>(); 
+        allyDefenceJoint = allyDefence.GetComponent<ConfigurableJoint>(); 
+        allyGoalkeeperJoint = allyGoalkeeper.GetComponent<ConfigurableJoint>(); 
+        allyMidfieldJoint = allyMidfield.GetComponent<ConfigurableJoint>(); 
+        //limit = joint.linearLimit.limit; 
 
         
         // Obtain rigidbodies
@@ -232,7 +232,6 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
         if (isPlaying == true)
         {   
                     
-            //print(allyColor + " " + convertAngle(allyAttackJoint.transform.rotation.eulerAngles.z) + "  -  " + UnityEditor.TransformUtils.GetInspectorRotation(allyAttack.transform).z);
             // Observations are relative to ally team's goal, this way they can be symmetric regardless of side
             // Domain Randomization
             float[] tempObs = new float[] { 
@@ -335,8 +334,6 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
         if (isPlaying)
         {
             // obtain control forces and torques from network
-
-            
             controlAttackForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[0], -1f, 1f);
             controlAttackTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[1], -1f, 1f);
             controlMidfieldForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[2], -1f, 1f);
@@ -345,6 +342,8 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
             controlDefenceTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[5], -1f, 1f);
             controlGoalkeeperForce.z = Mathf.Clamp(actionBuffers.ContinuousActions[6], -1f, 1f);
             controlGoalkeeperTorque.z = Mathf.Clamp(actionBuffers.ContinuousActions[7], -1f, 1f);
+            
+            // add into array so they can be seen in editor
             actions[0] = controlAttackForce.z;
             actions[1] = controlAttackTorque.z;
             actions[2] = controlMidfieldForce.z;
@@ -383,15 +382,21 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
 
             } else 
             {
-                // not currently work T-T
+                // not currently work T_T
                 // the idea is to have the joints naturally limit the movement of the rods and drive them using the joints
                 // but i cant figure out how exactly to do this
+
+
                 // allyAttackJoint.targetPosition = new Vector3(0, 0, desPosition(0, actions[0], "local"));
                 // allyAttackJoint.anchor =  new Vector3(0, 0, desPosition(0, actions[0], "local"));
                 // allyAttackJoint.targetPosition = new Vector3(0, 0, desPosition(0, actions[0], "local"));
                 // allyAttackJoint.targetVelocity = getRodVelLinear(0, allyAttackRod.transform.position.z, controlAttackForce.z); 
             }
+
             // same with this stuff trying to set the limits of the joint
+            // Ideally movement would fully halt at the target position because this is how the motors move
+            // but this is difficult to do continuously
+
             // SoftJointLimit attackSoftJointLimit = new SoftJointLimit();
             // attackSoftJointLimit.limit = Mathf.Abs(desPosition(0, actions[0], "local"));
             // allyAttackJoint.linearLimit = attackSoftJointLimit;
@@ -411,13 +416,13 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
             
             // rewards:
             //      for self play, one side should always receive negative reward while other receives positive or both get 0
-            
-            // reward scoring ==> Handled by TableEnvHandler.cs
+            // reward for scoring ==> Handled by TableEnvHandler.cs
 
-            //print(allyColor + " Ball in Goal:" + ball.inGoalColor);
+
             // Set reward to 1 if negative overall because it still scored
-            // With self play one side must be positive and the other negative, so cannot have negative reward if it "Wins"
-            // Note: Not reslly sure how exactly self play reward signaling works, need more tuning and research, conflicting arguments in docu. 
+            // With self play one side must be positive and the other negative, so cannot have negative reward if it "Wins".
+            // Also draw condition must SET the reward to 0 for both agents, this is different from no reward. Took way too long
+            // to figure that out lol. It's handled in TableEnvHandler.cs
             
             // Check if agent is registering goals
             // Note: should always have one agent who is registering goals
@@ -427,62 +432,16 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
                 if (ball.inGoalColor == enemyColor)
                 {                    
                     endReward = goalRewardValue;     
-                    // endType = "Goal by " + allyColor + " Recorded. Ending current Episode. ";
-                    // elapsedTime = Time.realtimeSinceStartup;  
 
-                    // if(ball.inGoalColor == PlayerColor.red)     { ui.scoreBlue();}  // Add to Blue's score on the UI panel
-                    // if(ball.inGoalColor == PlayerColor.blue)    { ui.scoreRed();}   // Add to Red's score on the UI panel        
-                    
-                    // // If the autokick goes in the enemy goal, don't give the team points for that, but note if it goes in the ally
-                    // // goal, it still counts as a score because we want it to not let itself be scored on                    
-                    // if (ball.lastKickedColor == PlayerColor.none){
-                    //     endReward = 0f;
-                    //     endType = "AutoKick Score By: " + allyColor + ", No points given. ";
-                    // }
-                    
-                    // // print(allyColor + " scored");
-                    // goalOccur = true;
                 }
 
                 // penalize being scored on by negative of goal value
                 if (ball.inGoalColor == allyColor)
                 {
                     endReward = -1f * goalRewardValue;
-                    // goalOccur = true;
-                    // endType = allyColor + " was scored on. Ending current Episode. ";               
                 }
                 
-                // For single rod play (early curriculum training) override the goal occur variable 
-                // since the opponent will not update to true on it's own
-                // if (opAgent.regGoals == false)
-                // {
-                //     // Set opponent's goal occur to true
-                //     singlePLayGoalDetectOverRide();
-                // }
             }
-
-            // // Placeholder Conditional for potential differences in team actions
-            // if (allyColor == PlayerColor.blue)
-            // {
-
-            // }
-
-            // if (allyColor == PlayerColor.red)
-            // {
-                
-            // }
-        
-
-            // Spin Penalty
-            // Sum of angular velocities of rods
-            // float spin = 0f;
-
-
-
-            // spin += Mathf.Abs(allyAttackRod.angularVelocity.z);
-            // spin += Mathf.Abs(allyDefenceRod.angularVelocity.z);
-            // spin += Mathf.Abs(allyMidfieldRod.angularVelocity.z);
-            // spin += Mathf.Abs(allyGoalkeeperRod.angularVelocity.z);
 
             // Penalty based on the angular velocity sum (higher is worse)
             if (useSpinPenalty == true)
@@ -553,7 +512,7 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
 
 
             // === STEP REWARD ===
-            // Existential penalty
+            // Existential penalty haha T-T
             if (useTimePenalty == true)
             {
                 stepSumReward += timeStepPenalty; 
@@ -582,19 +541,23 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
 
     float SpinPenalty()
     {
-                    // Sum of angular velocities of rods
-            float spin = 0f;
-            
-            Vector3 locAttackAngularVel = allyAttack.transform.InverseTransformVector(allyAttackRod.angularVelocity);
-            Vector3 locDefenceAngularVel = allyDefence.transform.InverseTransformVector(allyDefenceRod.angularVelocity);
-            Vector3 locMidfieldAngularVel = allyMidfield.transform.InverseTransformVector(allyMidfieldRod.angularVelocity);
-            Vector3 locGoalkeeperAngularVel = allyGoalkeeper.transform.InverseTransformVector(allyGoalkeeperRod.angularVelocity);
+        // this does not currently work properly, perhaps there is another way to do this
+        // Also with the current configuration the rods cannot rotate full 360+ so its not 
+        // really a huge issue
+
+        // Sum of angular velocities of rods
+        float spin = 0f;
+        
+        Vector3 locAttackAngularVel = allyAttack.transform.InverseTransformVector(allyAttackRod.angularVelocity);
+        Vector3 locDefenceAngularVel = allyDefence.transform.InverseTransformVector(allyDefenceRod.angularVelocity);
+        Vector3 locMidfieldAngularVel = allyMidfield.transform.InverseTransformVector(allyMidfieldRod.angularVelocity);
+        Vector3 locGoalkeeperAngularVel = allyGoalkeeper.transform.InverseTransformVector(allyGoalkeeperRod.angularVelocity);
 
 
-            spin += Mathf.Abs(locAttackAngularVel.z);
-            spin += Mathf.Abs(locDefenceAngularVel.z);
-            spin += Mathf.Abs(locMidfieldAngularVel.z);
-            spin += Mathf.Abs(locGoalkeeperAngularVel.z);
+        spin += Mathf.Abs(locAttackAngularVel.z);
+        spin += Mathf.Abs(locDefenceAngularVel.z);
+        spin += Mathf.Abs(locMidfieldAngularVel.z);
+        spin += Mathf.Abs(locGoalkeeperAngularVel.z);
 
         float penalty = -1f * spinPenaltyMult * spin;
         //print(allyColor + " - Spin Penalty:" + penalty);
@@ -827,17 +790,17 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
             allyMidfield.transform.localPosition = new Vector3(0.0007380001f, 0.003497f, 0f);
 
 
-            allyAttackJoint.targetPosition = Vector3.zero; //new
-            allyAttackJoint.targetRotation = Quaternion.identity; //new
+            allyAttackJoint.targetPosition = Vector3.zero; 
+            allyAttackJoint.targetRotation = Quaternion.identity; 
 
-            allyDefenceJoint.targetPosition = Vector3.zero; //new
-            allyDefenceJoint.targetRotation = Quaternion.identity; //new
+            allyDefenceJoint.targetPosition = Vector3.zero; 
+            allyDefenceJoint.targetRotation = Quaternion.identity; 
 
-            allyGoalkeeperJoint.targetPosition = Vector3.zero; //new
-            allyGoalkeeperJoint.targetRotation = Quaternion.identity; //new
+            allyGoalkeeperJoint.targetPosition = Vector3.zero; 
+            allyGoalkeeperJoint.targetRotation = Quaternion.identity; 
 
-            allyMidfieldJoint.targetPosition = Vector3.zero; //new
-            allyMidfieldJoint.targetRotation = Quaternion.identity; //new
+            allyMidfieldJoint.targetPosition = Vector3.zero; 
+            allyMidfieldJoint.targetRotation = Quaternion.identity; 
 
         }
 
@@ -848,17 +811,17 @@ public class SelfPlayAgentJoint : Agent // new (changed class name)
             allyGoalkeeper.transform.localPosition = new Vector3(-0.005166999f, 0.003497f, 0f);
             allyMidfield.transform.localPosition = new Vector3(-0.0007380001f, 0.003497f, 0f);
 
-            allyAttackJoint.targetPosition = Vector3.zero; //new
-            allyAttackJoint.targetRotation = Quaternion.identity; //new
+            allyAttackJoint.targetPosition = Vector3.zero; 
+            allyAttackJoint.targetRotation = Quaternion.identity; 
 
-            allyDefenceJoint.targetPosition = Vector3.zero; //new
-            allyDefenceJoint.targetRotation = Quaternion.identity; //new
+            allyDefenceJoint.targetPosition = Vector3.zero; 
+            allyDefenceJoint.targetRotation = Quaternion.identity; 
 
-            allyGoalkeeperJoint.targetPosition = Vector3.zero; //new
-            allyGoalkeeperJoint.targetRotation = Quaternion.identity; //new
+            allyGoalkeeperJoint.targetPosition = Vector3.zero; 
+            allyGoalkeeperJoint.targetRotation = Quaternion.identity; 
 
-            allyMidfieldJoint.targetPosition = Vector3.zero; //new
-            allyMidfieldJoint.targetRotation = Quaternion.identity; //new
+            allyMidfieldJoint.targetPosition = Vector3.zero; 
+            allyMidfieldJoint.targetRotation = Quaternion.identity; 
         }
 
         // reset rod rotations

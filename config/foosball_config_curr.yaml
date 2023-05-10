@@ -25,8 +25,8 @@ behaviors:
     summary_freq: 10000
 environment_parameters:
   reward_switch:
-    curriculum:
-      - name: Touch # The '-' is important as this is a list
+    curriculum: # The '-' below is important as this is a list
+      - name: Touch # First Lesson: Touch the ball
         completion_criteria:
           measure: progress
           behavior: Foosbots_MultiRod_5
@@ -34,7 +34,7 @@ environment_parameters:
           min_lesson_length: 100
           threshold: 0.15
         value: 0.0
-      - name: Forward # This is the start of the second lesson
+      - name: Forward # Second Lesson: Forward
         completion_criteria:
           measure: progress
           behavior: Foosbots_MultiRod_5
@@ -43,7 +43,7 @@ environment_parameters:
           threshold: 0.3
           require_reset: true
         value: 1.0
-      - name: Forward_w_Back_Penalty # This is the start of the second lesson
+      - name: Forward_w_Back_Penalty # Third Lesson: Forward with back penality
         completion_criteria:
           measure: progress
           behavior: Foosbots_MultiRod_5
@@ -52,7 +52,7 @@ environment_parameters:
           threshold: 0.45
           require_reset: true
         value: 2.0
-      - name: Force # This is the start of the second lesson
+      - name: Force # Forth Lesson: Hit ball with some force
         completion_criteria:
           measure: progress
           behavior: Foosbots_MultiRod_5
@@ -61,7 +61,7 @@ environment_parameters:
           threshold: 0.6
           require_reset: true
         value: 3.0
-      - name: Continuous_Shot_Evaluation # This is the start of the second lesson
+      - name: Continuous_Shot_Evaluation # Fifth Lesson: Continuous reward for shot on goal
         completion_criteria:
           measure: progress
           behavior: Foosbots_MultiRod_5
@@ -70,7 +70,7 @@ environment_parameters:
           threshold: 0.8
           require_reset: true
         value: 4.0
-      - name: Goals_Only # This is the start of the second lesson
+      - name: Goals_Only # Sixth Lesson: Goals only
         completion_criteria:
           measure: progress
           behavior: Foosbots_MultiRod_5
