@@ -94,7 +94,7 @@ This component determines how often the agent makes decisions within a training 
 <br></br>
 
 ### __Important Agent Script Details__
-There are several agent scripts included in the project from the various phases of testing and developing the project. The one that is currently being used and is most up to date is called `SelfPlayAgentJoint.cs`. Public variables should be set in the `TableEnvHandler.cs` to ensure settings are the same for both agents. All agents have the following important methods:
+There are several agent scripts included in the project from the various phases of testing and developing the project. The one that is currently being used and is most up to date for the simulation is called `SelfPlayAgentJoint.cs`. Public variables should be set in the `TableEnvHandler.cs` to ensure settings are the same for both agents. The simulation utilizes the following scripts:
 
 <br></br>
 __`SelfPlayAgentJoint.cs`__
@@ -263,7 +263,129 @@ This function syncs variables of the `TableEnvHandler.cs` to the agents. Ideally
 </details>
 <br></br>
 
+### __Importand Scripts for Inference__
+In order to run inference on the physical table a moderately complex approach had to be taken due to the need of the neural network .onnx brain.  While this is a "usable" neural network brain type generally, since it was created with Unity's ML-Agents, it requires the Barracuda library to be properly parsed and correct outputs generated. Thus the decision was made to run inference within the Unity engine to avoid incorrect outputs. 
 
+To do this I modified the original Python inference script I created to run entirely within Unity in C#. Essentially, we trick the brain into still thinking it is playing within the unity simulation by feeding it the appropriate data as inputs from the physical table. This is why the inference script as well as the inference agent are called `DummyInference.cs` and `DummyAgent.cs` respectively.
+<br></br>
+
+`DummyInference.cs`
+<details>
+  <summary>Click to Expand</summary>
+
+The inference 
+
+</details>
+<br></br>
+
+
+`DummyAgent.cs`
+
+<details>
+  <summary>Click to Expand</summary>
+
+
+### __Input Observations__
+Fourty-six obervations are assigned in the agent script, and then passed along to the Inference file. 
+These inputs can be viewed in Unity in the *Dummy Inference (Script)* section within the  **Inspector** tab. 
+
+
+  <details>
+    <summary>Click to Expand Table</summary>
+
+| Index | Object                    | Obervation    |
+| ------| ------------------------- |-------------  |
+| 0     | Ball                      | *x* position  |
+| 1     | Ball                      | *z* position  |
+| 2     | Ball                      | *x* velocity  |
+| 3     | Ball                      | *z* velocity  |
+|       |                           |               |
+| 4     | allyAttack rod            | *x* position  |
+| 5     | allyAttack rod            | *z* position  |
+| 6     | allyAttack rod            | *z* rotation  |
+| 7     | allyAttack Player 0       | *x* position  |
+| 8     | allyAttack Player 0       | *z* position  |
+| 9     | allyAttack Player 1       | *x* position  |
+| 10    | allyAttack Player 1       | *z* position  |
+| 11    | allyAttack Player 2       | *x* position  |
+| 12    | allyAttack Player 2       | *z* position  | 
+|       |                           |               |
+| 13    | allyMidfield rod          | *x* position  |
+| 14    | allyMidfield rod          | *z* position  |
+| 15    | allyMidfield rod          | *z* rotation  |
+| 16    | allyMidfield Player 0     | *x* position  |
+| 17    | allyMidfield Player 0     | *z* position  |
+| 18    | allyMidfield Player 1     | *x* position  |
+| 19    | allyMidfield Player 1     | *z* position  |
+| 20    | allyMidfield Player 2     | *x* position  |
+| 21    | allyMidfield Player 2     | *z* position  |  
+| 22    | allyMidfield Player 3     | *x* position  |
+| 23    | allyMidfield Player 3     | *z* position  |
+| 24    | allyMidfield Player 4     | *x* position  |
+| 25    | allyMidfield Player 4     | *z* position  |
+|       |                           |               |
+| 26    | allyDefence rod           | *x* position  |
+| 27    | allyDefence rod           | *z* position  |
+| 28    | allyDefence rod           | *z* rotation  |
+| 29    | allyDefence Player 0      | *x* position  |
+| 30    | allyDefence Player 0      | *z* position  |
+| 31    | allyDefence Player 1      | *x* position  |
+| 32    | allyDefence Player 1      | *z* position  |
+|       |                           |               |
+| 33    | allyGoalkeeper rod        | *x* position  |
+| 34    | allyGoalkeeper rod        | *z* position  |
+| 35    | allyGoalkeeper rod        | *z* rotation  |
+| 36    | allyGoalkeeper Player 0   | *x* position  |
+| 37    | allyGoalkeeper Player 0   | *z* position  |
+| 38    | allyGoalkeeper Player 1   | *x* position  |
+| 39    | allyGoalkeeper Player 1   | *z* position  |  
+| 40    | allyGoalkeeper Player 2   | *x* position  |
+| 41    | allyGoalkeeper Player 2   | *z* position  |
+|       |                           |               |
+| 42    | allyGoal                  | *x* position  |
+| 43    | allyGoal                  | *z* position  |
+| 44    | enemyGoal                 | *x* position  |
+| 45    | enemyGoal                 | *z* position  |
+</details>
+<br></br>
+
+### __Neural Network Decisions__
+This array of 8 objects is defined within the `OnActionRecieved()`, and passed to Inference. Outputs from the neural network are continuous values on the domain of ```[-1, 1]```.  The order of these is the same as they are called within the simulation.
+
+| Index  | Object                      | Action    |
+| ------ | --------------------------- |---------- |
+| 0      | allyAttack (3-Rod)          | Linear    |
+| 1      | allyAttack (3-Rod)          | Rotation  |
+|        |                             |           |
+| 2      | allyMidfield (5-Rod)        | Linear    |
+| 3      | allyMidfield (5-Rod)        | Rotation  |
+|        |                             |           |
+| 4      | allyDefence (2-Rod)         | Linear    |
+| 5      | allyDefence (2-Rod)         | Rotation  |
+|        |                             |           |
+| 6      | allyGoalkeeper (goal-Rod)   | Linear    |
+| 7      | allyGoalkeeper (goal-Rod)   | Rotation  |
+
+
+### __Output Commands__
+This array is the output decisions of the NN. These are defined in the Inference file. Max actuation, player spacing, and the conversion required for Unity -> IRL are all accounted for in these outputs. The domains of these values are in relation to locations on the table. 
+
+| Index  | Object                      | Command             |
+| ------ | --------------------------- |-------------------- |
+| 0      | allyGoalkeeper (goal-Rod)   | Linear movement     |
+| 1      | allyGoalkeeper (goal-Rod)   | Rotational movement |
+|        |                             |                     |
+| 2      | allyDefence (2-Rod)         | Linear movement     |
+| 3      | allyDefence (2-Rod)         | Rotational movement |
+|        |                             |                     |
+| 4      | allyMidfield (5-Rod)        | Linear movement     |
+| 5      | allyMidfield (5-Rod)        | Rotational movement |
+|        |                             |                     |
+| 6      | allyAttack (3-Rod)          | Linear movement     |
+| 7      | allyAttack (3-Rod)          | Rotational movement |
+
+</details>
+<br></br> 
 
 ## __Training a Brain for Use on the Physical Table__
 ### __Preperation__
@@ -276,6 +398,7 @@ If developing on VSCode on the main computer, make and save your training change
 >*I would highly recommend testing the changes made in play mode with both agents running in inference to see if your new rewards/etc. are applying properly. Don't fall into the trap of making your changes and immediately jumping into training, only to find out your rewards were not applying properly. There are unity debug log print statements within ```TableEnvHandler.cs``` that give some general reward breakdowns for each agent. These can be used to ensure rewards are being implemented properly.*
 
 <br></br>
+
 ### __Training the Network__
 
 In order to train the network, open the project in Unity. Duplicate as many of the `Foosball_V8_Meters` tables as you want, dragging them into position on the negative x-axis, ensuring they are not overlapping. 
@@ -344,111 +467,11 @@ More information about the use of tensorboard and evaluation of these statisitic
 ## __Deployment on the Physical Table__
 
 ### __Unity Setup for Inference__
-In order to run inference on the physical table a moderately complex approach had to be taken due to the need of the neural network .onnx brain.  While this is a "usable" neural network brain type generally, since it was created with Unity's ML-Agents, it requires the Barracuda library to be properly parsed and correct outputs generated. Thus the decision was made to run inference within the Unity engine to avoid incorrect outputs. 
-
-To do this I modified the original Python inference script I created to run entirely within Unity in C#. Essentially, we trick the brain into still thinking it is playing within the unity simulation by feeding it the appropriate data as inputs from the physical table. This is why the inference script as well as the inference agent are called `DummyInference.cs` and `DummyAgent.cs` respectively.
 
 
 
-### __Input Observations__
-Fourty-six obervations are assigned in the agent script, and then passed along to the Inference file. 
-These inputs can be viewed in Unity in the *Dummy Inference (Script)* section within the  **Inspector** tab. 
 
-<details>
-  <summary>Click to Expand</summary>
 
-| Index | Object                    | Obervation    |
-| ------| ------------------------- |-------------  |
-| 0     | Ball                      | *x* position  |
-| 1     | Ball                      | *z* position  |
-| 2     | Ball                      | *x* velocity  |
-| 3     | Ball                      | *z* velocity  |
-|       |                           |               |
-| 4     | allyAttack rod            | *x* position  |
-| 5     | allyAttack rod            | *z* position  |
-| 6     | allyAttack rod            | *z* rotation  |
-| 7     | allyAttack Player 0       | *x* position  |
-| 8     | allyAttack Player 0       | *z* position  |
-| 9     | allyAttack Player 1       | *x* position  |
-| 10    | allyAttack Player 1       | *z* position  |
-| 11    | allyAttack Player 2       | *x* position  |
-| 12    | allyAttack Player 2       | *z* position  | 
-|       |                           |               |
-| 13    | allyMidfield rod          | *x* position  |
-| 14    | allyMidfield rod          | *z* position  |
-| 15    | allyMidfield rod          | *z* rotation  |
-| 16    | allyMidfield Player 0     | *x* position  |
-| 17    | allyMidfield Player 0     | *z* position  |
-| 18    | allyMidfield Player 1     | *x* position  |
-| 19    | allyMidfield Player 1     | *z* position  |
-| 20    | allyMidfield Player 2     | *x* position  |
-| 21    | allyMidfield Player 2     | *z* position  |  
-| 22    | allyMidfield Player 3     | *x* position  |
-| 23    | allyMidfield Player 3     | *z* position  |
-| 24    | allyMidfield Player 4     | *x* position  |
-| 25    | allyMidfield Player 4     | *z* position  |
-|       |                           |               |
-| 26    | allyDefence rod           | *x* position  |
-| 27    | allyDefence rod           | *z* position  |
-| 28    | allyDefence rod           | *z* rotation  |
-| 29    | allyDefence Player 0      | *x* position  |
-| 30    | allyDefence Player 0      | *z* position  |
-| 31    | allyDefence Player 1      | *x* position  |
-| 32    | allyDefence Player 1      | *z* position  |
-|       |                           |               |
-| 33    | allyGoalkeeper rod        | *x* position  |
-| 34    | allyGoalkeeper rod        | *z* position  |
-| 35    | allyGoalkeeper rod        | *z* rotation  |
-| 36    | allyGoalkeeper Player 0   | *x* position  |
-| 37    | allyGoalkeeper Player 0   | *z* position  |
-| 38    | allyGoalkeeper Player 1   | *x* position  |
-| 39    | allyGoalkeeper Player 1   | *z* position  |  
-| 40    | allyGoalkeeper Player 2   | *x* position  |
-| 41    | allyGoalkeeper Player 2   | *z* position  |
-|       |                           |               |
-| 42    | allyGoal                  | *x* position  |
-| 43    | allyGoal                  | *z* position  |
-| 44    | enemyGoal                 | *x* position  |
-| 45    | enemyGoal                 | *z* position  |
-
-</details>
-<br></br>
-
-### __Neural Network Decisions__
-This array of 8 objects is defined in SelfPlay within the *OnActionRecieved()* function, and passed to Inference. Outputs from the neural network are continuous values on the domain of ```[-1, 1]```.  The order of these is the same as they are called within the simulation.
-
-| Index  | Object                      | Action    |
-| ------ | --------------------------- |---------- |
-| 0      | allyAttack (3-Rod)          | Linear    |
-| 1      | allyAttack (3-Rod)          | Rotation  |
-|        |                             |           |
-| 2      | allyMidfield (5-Rod)        | Linear    |
-| 3      | allyMidfield (5-Rod)        | Rotation  |
-|        |                             |           |
-| 4      | allyDefence (2-Rod)         | Linear    |
-| 5      | allyDefence (2-Rod)         | Rotation  |
-|        |                             |           |
-| 6      | allyGoalkeeper (goal-Rod)   | Linear    |
-| 7      | allyGoalkeeper (goal-Rod)   | Rotation  |
-<br></br>
-
-### __Output Commands__
-This array is the output decisions of the NN. These are defined in the Inference file. Max actuation, player spacing, and the conversion required for Unity -> IRL are all accounted for in these outputs. The domains of these values are in relation to locations on the table. 
-
-| Index  | Object                      | Command             |
-| ------ | --------------------------- |-------------------- |
-| 0      | allyGoalkeeper (goal-Rod)   | Linear movement     |
-| 1      | allyGoalkeeper (goal-Rod)   | Rotational movement |
-|        |                             |                     |
-| 2      | allyDefence (2-Rod)         | Linear movement     |
-| 3      | allyDefence (2-Rod)         | Rotational movement |
-|        |                             |                     |
-| 4      | allyMidfield (5-Rod)        | Linear movement     |
-| 5      | allyMidfield (5-Rod)        | Rotational movement |
-|        |                             |                     |
-| 6      | allyAttack (3-Rod)          | Linear movement     |
-| 7      | allyAttack (3-Rod)          | Rotational movement |
-<br></br> 
 
 
 ## __Helpful Links__
