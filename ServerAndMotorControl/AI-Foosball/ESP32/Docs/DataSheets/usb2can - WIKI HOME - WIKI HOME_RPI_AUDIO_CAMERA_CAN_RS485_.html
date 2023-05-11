@@ -1,0 +1,2575 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://wiki.inno-maker.com/display/HOMEPAGE/usb2can -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                            <title>usb2can - WIKI HOME - WIKI HOME|RPI|AUDIO|CAMERA|CAN|RS485|</title>
+    
+        
+
+                        
+    
+                        
+    
+
+                
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="http://wiki.inno-maker.com">
+
+    <meta id="atlassian-token" name="atlassian-token" content="7253893eff8564d8b2c975cedb63f44d584024f6">
+
+
+<meta id="confluence-space-key" name="confluence-space-key" content="HOMEPAGE">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+    <meta name="confluence-request-time" content="1645116172765">
+        
+    
+        
+            <style>.ia-fixed-sidebar, .ia-splitter-left {width: 285px;}.theme-default .ia-splitter #main {margin-left: 285px;}.ia-fixed-sidebar {visibility: hidden;}</style>
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-discovered-plugin-features" content="$discoveredList">
+            <meta name="ajs-keyboardshortcut-hash" content="caa5c057bcc4b0b0c91a00d4acf9da7b">
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            
+    
+    
+            <meta name="ajs-page-title" content="usb2can">
+            <meta name="ajs-latest-published-page-title" content="usb2can">
+            <meta name="ajs-space-name" content="WIKI HOME">
+            <meta name="ajs-page-id" content="1147280">
+            <meta name="ajs-latest-page-id" content="1147280">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-parent-page-title" content="ALL Product">
+            <meta name="ajs-parent-page-id" content="6950947">
+            <meta name="ajs-space-key" content="HOMEPAGE">
+            <meta name="ajs-max-number-editors" content="12">
+            <meta name="ajs-macro-placeholder-timeout" content="5000">
+            <meta name="ajs-jira-metadata-count" content="0">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-can-remove-page-hierarchy" content="false">
+            <meta name="ajs-browse-page-tree-mode" content="view">
+            <meta name="ajs-shared-drafts" content="true">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="http://wiki.inno-maker.com">
+            <meta name="ajs-version-number" content="7.2.0">
+            <meta name="ajs-build-number" content="8401">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-remote-user-key" content="">
+            <meta name="ajs-remote-user-has-licensed-access" content="false">
+            <meta name="ajs-remote-user-has-browse-users-permission" content="false">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-current-user-avatar-uri-reference" content="/images/icons/profilepics/anonymous.svg">
+            <meta name="ajs-static-resource-url-prefix" content="/s/jwsnoi/8401/912a577971fe711d4a876d9130277d03b009a0bf/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="524288000">
+            <meta name="ajs-global-settings-quick-search-enabled" content="true">
+            <meta name="ajs-user-locale" content="en_US">
+            <meta name="ajs-enabled-dark-features" content="site-wide.shared-drafts,site-wide.synchrony,confluence.view.edit.transition,confluence-inline-comments-resolved,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareContentEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.mentions.api.ConfluenceMentionEvent,frontend.editor.v4.compatibility,atlassian.cdn.static.assets,notification.plugin.api.enabled.com.atlassian.confluence.event.events.security.ForgotPasswordEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.tasklist.event.SendTaskEmailEvent,file-annotations,confluence.efi.onboarding.rich.space.content,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentCreateEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.requestaccess.events.AccessGrantedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.PageMoveEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.follow.FollowEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentReplyEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostCreateEvent,lucene.caching.filter,confluence.table.resizable,notification.batch,confluence-inline-comments-rich-editor,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostUpdateEvent,site-wide.synchrony.opt-in,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageCreatedEvent,mobile.supported.version,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentMentionUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.hipchat.api.events.HipChatUserMapped,quick-reload-inline-comments-flags,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostMovedEvent,clc.quick.create,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.PageUpdateEvent,cql.search.screen,frontend.editor.v4,nps.survey.inline.dialog,confluence.efi.onboarding.new.templates,pdf-preview,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageMovedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareCustomEvent,previews.sharing,previews.versions,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.attachment.AttachmentBatchUploadCompletedEvent,collaborative-audit-log,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingLessUsersEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentRemoveEvent,previews.conversion-service,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentUpdateEvent,editor.ajax.save,graphql,read.only.mode,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageEditedEvent,previews.trigger-all-file-types,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentResolveEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.like.LikeCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentCreateEvent,attachment.extracted.text.extractor,notification.plugin.api.enabled.com.atlassian.confluence.plugins.requestaccess.events.AccessRequestedEvent,previews.sharing.pushstate,file-annotations.likes,v2.content.name.searcher,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.PageCreateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingNoSpaceCreatedEvent,pulp,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareDraftEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareAttachmentEvent,confluence-inline-comments,confluence-inline-comments-dangling-comment">
+            <meta name="ajs-atl-token" content="7253893eff8564d8b2c975cedb63f44d584024f6">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-user-date-pattern" content="dd MMM yyyy">
+            <meta name="ajs-access-mode" content="READ_WRITE">
+            <meta name="ajs-render-mode" content="READ_WRITE">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="http://wiki.inno-maker.com/s/jwsnoi/8401/912a577971fe711d4a876d9130277d03b009a0bf/7/_/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://wiki.inno-maker.com/s/jwsnoi/8401/912a577971fe711d4a876d9130277d03b009a0bf/7/_/favicon.ico">
+
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.inno-maker.com/opensearch/osd.action" title="WIKI HOME|RPI|AUDIO|CAMERA|CAN|RS485|">
+    
+                    
+            <meta name="ajs-create-issue-metadata-show-discovery" content="false">
+            
+
+    <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};window.WRM._unparsedErrors=window.WRM._unparsedErrors||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\u0022\u0022";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-feature-discovery-plugin:confluence-feature-discovery-plugin-resources.test-mode"]="false";
+WRM._unparsedData["com.atlassian.analytics.analytics-client:policy-update-init.policy-update-data-provider"]="false";
+WRM._unparsedData["com.atlassian.analytics.analytics-client:programmatic-analytics-init.programmatic-analytics-data-provider"]="false";
+WRM._unparsedData["com.atlassian.applinks.applinks-plugin:applinks-common-exported.applinks-help-paths"]="{\u0022entries\u0022:{\u0022applinks.docs.root\u0022:\u0022https://confluence.atlassian.com/display/APPLINKS-060/\u0022,\u0022applinks.docs.diagnostics.troubleshoot.sslunmatched\u0022:\u0022SSL+and+application+link+troubleshooting+guide\u0022,\u0022applinks.docs.diagnostics.troubleshoot.oauthsignatureinvalid\u0022:\u0022OAuth+troubleshooting+guide\u0022,\u0022applinks.docs.diagnostics.troubleshoot.oauthtimestamprefused\u0022:\u0022OAuth+troubleshooting+guide\u0022,\u0022applinks.docs.delete.entity.link\u0022:\u0022Create+links+between+projects\u0022,\u0022applinks.docs.adding.application.link\u0022:\u0022Link+Atlassian+applications+to+work+together\u0022,\u0022applinks.docs.administration.guide\u0022:\u0022Application+Links+Documentation\u0022,\u0022applinks.docs.oauth.security\u0022:\u0022OAuth+security+for+application+links\u0022,\u0022applinks.docs.troubleshoot.application.links\u0022:\u0022Troubleshoot+application+links\u0022,\u0022applinks.docs.diagnostics.troubleshoot.unknownerror\u0022:\u0022Network+and+connectivity+troubleshooting+guide\u0022,\u0022applinks.docs.configuring.auth.trusted.apps\u0022:\u0022Configuring+Trusted+Applications+authentication+for+an+application+link\u0022,\u0022applinks.docs.diagnostics.troubleshoot.authlevelunsupported\u0022:\u0022OAuth+troubleshooting+guide\u0022,\u0022applinks.docs.diagnostics.troubleshoot.ssluntrusted\u0022:\u0022SSL+and+application+link+troubleshooting+guide\u0022,\u0022applinks.docs.diagnostics.troubleshoot.unknownhost\u0022:\u0022Network+and+connectivity+troubleshooting+guide\u0022,\u0022applinks.docs.delete.application.link\u0022:\u0022Link+Atlassian+applications+to+work+together\u0022,\u0022applinks.docs.link.applications\u0022:\u0022Link+Atlassian+applications+to+work+together\u0022,\u0022applinks.docs.diagnostics.troubleshoot.oauthproblem\u0022:\u0022OAuth+troubleshooting+guide\u0022,\u0022applinks.docs.diagnostics.troubleshoot.migration\u0022:\u0022Update+application+links+to+use+OAuth\u0022,\u0022applinks.docs.relocate.application.link\u0022:\u0022Link+Atlassian+applications+to+work+together\u0022,\u0022applinks.docs.administering.entity.links\u0022:\u0022Create+links+between+projects\u0022,\u0022applinks.docs.upgrade.application.link\u0022:\u0022OAuth+security+for+application+links\u0022,\u0022applinks.docs.diagnostics.troubleshoot.connectionrefused\u0022:\u0022Network+and+connectivity+troubleshooting+guide\u0022,\u0022applinks.docs.configuring.auth.oauth\u0022:\u0022OAuth+security+for+application+links\u0022,\u0022applinks.docs.insufficient.remote.permission\u0022:\u0022OAuth+security+for+application+links\u0022,\u0022applinks.docs.configuring.application.link.auth\u0022:\u0022OAuth+security+for+application+links\u0022,\u0022applinks.docs.diagnostics\u0022:\u0022Application+links+diagnostics\u0022,\u0022applinks.docs.configured.authentication.types\u0022:\u0022OAuth+security+for+application+links\u0022,\u0022applinks.docs.adding.entity.link\u0022:\u0022Create+links+between+projects\u0022,\u0022applinks.docs.diagnostics.troubleshoot.unexpectedresponse\u0022:\u0022Network+and+connectivity+troubleshooting+guide\u0022,\u0022applinks.docs.configuring.auth.basic\u0022:\u0022Configuring+Basic+HTTP+Authentication+for+an+Application+Link\u0022,\u0022applinks.docs.diagnostics.troubleshoot.authlevelmismatch\u0022:\u0022OAuth+troubleshooting+guide\u0022}}";
+WRM._unparsedData["com.atlassian.applinks.applinks-plugin:applinks-common-exported.applinks-types"]="{\u0022crowd\u0022:\u0022Crowd\u0022,\u0022confluence\u0022:\u0022Confluence\u0022,\u0022fecru\u0022:\u0022FishEye / Crucible\u0022,\u0022stash\u0022:\u0022Stash\u0022,\u0022jira\u0022:\u0022Jira\u0022,\u0022refapp\u0022:\u0022Reference Application\u0022,\u0022bamboo\u0022:\u0022Bamboo\u0022,\u0022generic\u0022:\u0022Generic Application\u0022}";
+WRM._unparsedData["com.atlassian.applinks.applinks-plugin:applinks-common-exported.entity-types"]="{\u0022singular\u0022:{\u0022refapp.charlie\u0022:\u0022Charlie\u0022,\u0022fecru.project\u0022:\u0022Crucible Project\u0022,\u0022fecru.repository\u0022:\u0022FishEye Repository\u0022,\u0022stash.project\u0022:\u0022Stash Project\u0022,\u0022generic.entity\u0022:\u0022Generic Project\u0022,\u0022confluence.space\u0022:\u0022Confluence Space\u0022,\u0022bamboo.project\u0022:\u0022Bamboo Project\u0022,\u0022jira.project\u0022:\u0022Jira Project\u0022},\u0022plural\u0022:{\u0022refapp.charlie\u0022:\u0022Charlies\u0022,\u0022fecru.project\u0022:\u0022Crucible Projects\u0022,\u0022fecru.repository\u0022:\u0022FishEye Repositories\u0022,\u0022stash.project\u0022:\u0022Stash Projects\u0022,\u0022generic.entity\u0022:\u0022Generic Projects\u0022,\u0022confluence.space\u0022:\u0022Confluence Spaces\u0022,\u0022bamboo.project\u0022:\u0022Bamboo Projects\u0022,\u0022jira.project\u0022:\u0022Jira Projects\u0022}}";
+WRM._unparsedData["com.atlassian.applinks.applinks-plugin:applinks-common-exported.authentication-types"]="{\u0022com.atlassian.applinks.api.auth.types.BasicAuthenticationProvider\u0022:\u0022Basic Access\u0022,\u0022com.atlassian.applinks.api.auth.types.TrustedAppsAuthenticationProvider\u0022:\u0022Trusted Applications\u0022,\u0022com.atlassian.applinks.api.auth.types.CorsAuthenticationProvider\u0022:\u0022CORS\u0022,\u0022com.atlassian.applinks.api.auth.types.OAuthAuthenticationProvider\u0022:\u0022OAuth\u0022,\u0022com.atlassian.applinks.api.auth.types.TwoLeggedOAuthAuthenticationProvider\u0022:\u0022OAuth\u0022,\u0022com.atlassian.applinks.api.auth.types.TwoLeggedOAuthWithImpersonationAuthenticationProvider\u0022:\u0022OAuth\u0022}";
+WRM._unparsedData["com.atlassian.confluence.plugins.synchrony-interop:synchrony-status-banner-loader.synchrony-status"]="false";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-license-banner:confluence-license-banner-resources.license-details"]="{\u0022daysBeforeLicenseExpiry\u0022:0,\u0022daysBeforeMaintenanceExpiry\u0022:0,\u0022showLicenseExpiryBanner\u0022:false,\u0022showMaintenanceExpiryBanner\u0022:false,\u0022renewUrl\u0022:null,\u0022salesUrl\u0022:null}";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-search-ui-plugin:confluence-search-ui-plugin-resources.i18n-data"]="{\u0022search.ui.recent.link.text\u0022:\u0022View more recently visited\u0022,\u0022search.ui.filter.space.category.input.label\u0022:\u0022Find space categories...\u0022,\u0022search.ui.filter.clear.selected\u0022:\u0022Clear selected items\u0022,\u0022search.ui.search.results.empty\u0022:\u0022We couldn\u005Cu0027\u005Cu0027t find anything matching \u005C\u0022{0}\u005C\u0022.\u0022,\u0022search.ui.content.name.search.items.panel.load.all.top.items.button.text\u0022:\u0022Show more app results...\u0022,\u0022search.ui.filter.space.archive.label\u0022:\u0022Search archived spaces\u0022,\u0022search.ui.filter.label\u0022:\u0022filter\u0022,\u0022search.ui.filter.contributor.button.text\u0022:\u0022Contributor\u0022,\u0022search.ui.filter.date.all.text\u0022:\u0022Any time\u0022,\u0022search.ui.filter.space.current.label\u0022:\u0022CURRENT\u0022,\u0022search.ui.clear.input.button.text\u0022:\u0022Clear text\u0022,\u0022help.search.ui.link.title\u0022:\u0022Search tips\u0022,\u0022search.ui.search.results.clear.button\u0022:\u0022clear your filters.\u0022,\u0022search.ui.filter.date.hour.text\u0022:\u0022The past day\u0022,\u0022search.ui.filters.heading\u0022:\u0022Filter by\u0022,\u0022search.ui.filter.label.input.label\u0022:\u0022Find labels...\u0022,\u0022search.ui.filter.date.month.text\u0022:\u0022The past month\u0022,\u0022search.ui.recent.items.anonymous\u0022:\u0022Start exploring. Your search results will appear here.\u0022,\u0022search.ui.input.label\u0022:\u0022Search\u0022,\u0022search.ui.search.result\u0022:\u0022{0,choice,1#{0} search result|1\u005Cu003c{0} search results}\u0022,\u0022search.ui.infinite.scroll.button.text\u0022:\u0022More results\u0022,\u0022search.ui.filter.date.button.text\u0022:\u0022Date\u0022,\u0022search.ui.filter.date.week.text\u0022:\u0022The past week\u0022,\u0022search.ui.filter.label.button.text\u0022:\u0022Label\u0022,\u0022search.ui.input.alert\u0022:\u0022Hit enter to search\u0022,\u0022search.ui.filter.no.result.text\u0022:\u0022We can\u005Cu0027\u005Cu0027t find anything matching your search\u0022,\u0022search.ui.result.subtitle.calendar\u0022:\u0022Team calendar\u0022,\u0022search.ui.filter.date.heading\u0022:\u0022Last modified within\u0022,\u0022search.ui.result.subtitle.user\u0022:\u0022User profile\u0022,\u0022search.ui.filter.contributor.input.label\u0022:\u0022Find people...\u0022,\u0022search.ui.filter.content.type.button.text\u0022:\u0022Type\u0022,\u0022search.ui.filter.space.input.label\u0022:\u0022Find spaces...\u0022,\u0022search.ui.filter.date.year.text\u0022:\u0022The past year\u0022,\u0022search.ui.filter.space.button.text\u0022:\u0022Space\u0022,\u0022search.ui.advanced.search.link.text\u0022:\u0022Advanced search\u0022,\u0022search.ui.generic.error\u0022:\u0022Something went wrong. Refresh the page, or contact your admin if this keeps happening.\u0022,\u0022search.ui.recent.spaces\u0022:\u0022Recent Spaces\u0022,\u0022search.ui.search.results.clear.line2\u0022:\u0022Try a different search term or\u0022,\u0022search.ui.filter.space.category.button.text\u0022:\u0022Space category\u0022,\u0022search.ui.search.results.clear.line1\u0022:\u0022We couldn\u005Cu0027\u005Cu0027t find anything matching your search.\u0022,\u0022search.ui.content.name.search.items.panel.load.all.top.items.admin.button.text\u0022:\u0022Show more settings and app results...\u0022,\u0022search.ui.recent.pages\u0022:\u0022Recently visited\u0022,\u0022search.ui.search.result.anonymous\u0022:\u0022{0,choice,1#{0} search result|1\u005Cu003c{0} search results}. Have an account? {1}Log in{2} to expand your search.\u0022,\u0022search.ui.recent.items.empty\u0022:\u0022Start exploring. Pages and spaces you\u005Cu0027\u005Cu0027ve visited recently will appear here.\u0022,\u0022search.ui.result.subtitle.space\u0022:\u0022Space\u0022,\u0022search.ui.filter.space.init.heading\u0022:\u0022recent spaces\u0022}";
+if(window.WRM._dataArrived)window.WRM._dataArrived();</script>
+<link type="text/css" rel="stylesheet" href="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch.css" data-wrm-key="_super" data-wrm-batch-type="context" media="all">
+<link type="text/css" rel="stylesheet" href="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch(1).css" data-wrm-key="atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments,-_super" data-wrm-batch-type="context" media="all">
+<link type="text/css" rel="stylesheet" href="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/colors.css" media="all">
+<script type="text/javascript" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch.js.download" data-wrm-key="_super" data-wrm-batch-type="context" data-initially-rendered=""></script>
+<script type="text/javascript" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch.js(1).download" data-wrm-key="atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments,-_super" data-wrm-batch-type="context" data-initially-rendered=""></script>
+
+    
+
+        
+    
+
+        
+        <meta name="ajs-site-title" content="WIKI HOME|RPI|AUDIO|CAMERA|CAN|RS485|">
+            
+    
+
+    
+                <link rel="canonical" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can">
+        <link rel="shortlink" href="http://wiki.inno-maker.com/x/kIER">
+    <meta name="wikilink" content="[HOMEPAGE:usb2can]">
+    <meta name="page-version" content="64">
+    <meta name="ajs-page-version" content="64">
+
+<script type="text/javascript" charset="utf-8" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch.js(2).download"></script><link rel="stylesheet" type="text/css" href="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch(2).css"><link rel="stylesheet" type="text/css" href="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch(3).css"><script type="text/javascript" charset="utf-8" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch.js(3).download"></script><script type="text/javascript" charset="utf-8" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/batch.js(4).download"></script></head>
+
+    
+<body id="com-atlassian-confluence" class="theme-default  aui-layout aui-theme-default" data-aui-version="8.3.5">
+
+        
+            <div id="stp-licenseStatus-banner"></div>
+    <ul id="assistive-skip-links" class="assistive">
+    <li><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#title-heading">Skip to content</a></li>
+    <li><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#breadcrumbs">Skip to breadcrumbs</a></li>
+    <li><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#header-menu-bar">Skip to header menu</a></li>
+    <li><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#navigation">Skip to action menu</a></li>
+    <li><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#quick-search-query">Skip to quick search</a></li>
+</ul>
+<div id="page">
+<div id="full-height-container"><ul id="messageContainer"></ul>
+    <div id="header-precursor">
+        <div class="cell">
+            
+                            </div>
+    </div>
+        
+
+
+
+
+
+<header id="header" role="banner" class="fixed-header">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation" resolved="" data-aui-responsive="true"><div class="aui-header-inner"><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="http://wiki.inno-maker.com/"><img src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/atl.site.logo" alt="WIKI HOME|RPI|AUDIO|CAMERA|CAN|RS485|" data-aui-responsive-header-index="0"><span class="aui-header-logo-text">WIKI HOME|RPI|AUDIO|CAMERA|CAN|RS485|</span></a></h1><ul class="aui-nav" style="width: auto;">
+                            <li>
+            
+        
+        
+<a id="space-menu-link" class=" aui-dropdown2-trigger aui-nav-link" aria-controls="space-menu-link-content" aria-haspopup="true" role="button" title="Spaces" tabindex="0" data-aui-trigger="" resolved="" aria-expanded="false" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#space-menu-link-content">Spaces</a><div id="space-menu-link-content" class="aui-dropdown2 aui-style-default aui-dropdown2-in-header aui-layer" role="menu" aria-hidden="true" resolved=""><div role="application"></div></div>
+        </li>
+                                <li class="aui-buttons">
+            </li>
+</ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+                        <li>
+        <div id="search-ui" class="aui-quicksearch dont-default-focus header-quicksearch" data-dashlane-rid="53e4fd39762cd0ff"><input id="quick-search-query" aria-label="Search" placeholder="Search" type="text" data-dashlane-rid="be9ac266ff907c67" title=" (Type &#39;g&#39; then &#39;g&#39;OR &#39;/&#39;)"><div id="quick-search-alert" role="alert">Hit enter to search</div><aui-spinner size="small" resolved=""><div class="aui-spinner spinner"><svg focusable="false" size="20" height="20" width="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9"></circle></svg></div></aui-spinner></div>
+    </li>
+        <li>
+            
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger aui-dropdown2-trigger-arrowless" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#" aria-haspopup="true" title="Help" resolved="" aria-controls="help-menu-link-content" aria-expanded="false">
+        <span class="aui-icon aui-icon-small aui-iconfont-question-filled">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default aui-layer" aria-hidden="true" resolved="">
+                    <div class="aui-dropdown2-section">
+                                <ul id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+        
+            
+<a id="confluence-help-link" href="https://docs.atlassian.com/confluence/docs-72/" class="    " title="Visit the Confluence documentation home" target="_blank">
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a id="keyboard-shortcuts-link" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#" class="    " title="View available keyboard shortcuts (Type &#39;?&#39;)">
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a id="feed-builder-link" href="http://wiki.inno-maker.com/dashboard/configurerssfeed.action" class="    " title="Create your custom RSS feed.">
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a id="whats-new-menu-link" href="https://confluence.atlassian.com/display/DOC/Confluence+7.2+Release+Notes" class="    " title="">
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a id="gadget-directory-link" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#" class="   user-item administration-link " title="Browse gadgets provided by Confluence">
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a id="confluence-about-link" href="http://wiki.inno-maker.com/aboutconfluencepage.action" class="    " title="Get more information about Confluence">
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+    </li>
+        <li>
+                
+    
+    </li>
+        <li>
+            
+    </li>
+        <li>
+                                            </li><li>
+        
+            
+<a id="login-link" href="http://wiki.inno-maker.com/login.action?os_destination=%2Fdisplay%2FHOMEPAGE%2Fusb2can" class="   user-item login-link " title="">
+        Log in
+</a>
+</li>
+                        <li>
+    
+            
+<a id="signup-link" href="http://wiki.inno-maker.com/signup.action" class="   user-item signup-link " title="">
+        Sign up
+</a>
+</li>
+                        
+    
+    </ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+    
+
+    
+    	<div class="ia-splitter">
+    		<div class="ia-splitter-left">
+    			<div class="ia-fixed-sidebar" style="top: 40px; left: 0px; width: 285px; visibility: visible;">
+                                            
+                            <div class="acs-side-bar ia-scrollable-section"><div class="acs-side-bar-space-info tipsy-enabled" data-configure-tooltip="Edit space details"><div class="avatar"><div class="space-logo" data-key="HOMEPAGE" data-name="WIKI HOME" data-entity-type="confluence.space"><div class="avatar-img-container"><div class="avatar-img-wrapper"><a href="http://wiki.inno-maker.com/display/HOMEPAGE/InnoMaker+Wiki?src=sidebar" title="WIKI HOME"><img class="avatar-img" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/default-space-logo.svg" alt="WIKI HOME"></a></div></div></div></div><div class="space-information-container"><div class="name"><a href="http://wiki.inno-maker.com/display/HOMEPAGE/InnoMaker+Wiki?src=sidebar" title="WIKI HOME">WIKI HOME</a></div><div class="flyout-handle icon aui-icon aui-icon-small aui-iconfont-edit"></div></div></div><div class="acs-side-bar-content"><div class="acs-nav-wrapper"><div class="acs-nav" data-has-create-permission="false" data-quick-links-state="show" data-page-tree-state="show" data-nav-type="page-tree"><div class="acs-nav-sections"><div class="quick-links-wrapper"><h5 class="ia-quick-links-header-title">Space shortcuts</h5><div class="quick-links-section tipsy-enabled " data-collapsed-tooltip="Space shortcuts"><ul class="acs-nav-list"><li class="acs-nav-item pinned_space"><a class="acs-nav-item-link tipsy-enabled" href="http://wiki.inno-maker.com/display/HOMEPAGE?src=spaceshortcut" data-collapsed-tooltip="null"><span class="icon"></span><span class="acs-nav-item-label">InnoMaker Wiki</span></a></li><li class="acs-nav-item external_link"><a class="acs-nav-item-link tipsy-enabled" href="https://www.inno-maker.com/" data-collapsed-tooltip="null"><span class="icon"></span><span class="acs-nav-item-label">InnMaker Website</span></a></li></ul></div></div></div></div></div><div class="ia-secondary-container tipsy-enabled" data-tree-type="page-tree"><div class="ia-secondary-header"><h5 class="ia-secondary-header-title page-tree"><span class="icon"></span><span class="label">Page tree</span></h5></div><div class="ia-secondary-content">
+
+
+<div class="plugin_pagetree conf-macro output-inline" data-hasbody="false" data-macro-name="pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children" id="children1147600-0">
+        
+
+
+
+<ul class="plugin_pagetree_children_list" id="child_ul1147600-0">
+
+            
+
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus6950991-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="6950991" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950991-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/Catagory?src=contextnavpagetreemode">Catagory</a>
+        </span>
+            </div>
+
+        <div id="children6950991-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus6950947-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-down" data-type="toggle" data-page-id="6950947" data-tree-id="0" data-expanded="true" data-children-loaded="true" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950947-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/ALL+Product?src=contextnavpagetreemode">ALL Product</a>
+        </span>
+            </div>
+
+        <div id="children6950947-0" class="plugin_pagetree_children_container">
+                                                                            <ul class="plugin_pagetree_children_list " id="child_ul6950947-0">
+                                        
+                                                                    <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949835-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/3.5-inch-lcd-c?src=contextnavpagetreemode">3.5-inch-lcd-c</a>
+        </span>
+            </div>
+
+        <div id="children6949835-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949791-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/cam-imx219?src=contextnavpagetreemode">cam-imx219</a>
+        </span>
+            </div>
+
+        <div id="children6949791-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949777-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/cam-ov5647?src=contextnavpagetreemode">cam-ov5647</a>
+        </span>
+            </div>
+
+        <div id="children6949777-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus6949831-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="6949831" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949831-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/cam-mipi290mono?src=contextnavpagetreemode">cam-mipi290mono</a>
+        </span>
+            </div>
+
+        <div id="children6949831-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus6949807-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="6949807" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949807-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/cam-mipi327raw?src=contextnavpagetreemode">cam-mipi327raw</a>
+        </span>
+            </div>
+
+        <div id="children6949807-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus1147750-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="1147750" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan1147750-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/cam-mipi9281-trigger?src=contextnavpagetreemode">cam-mipi9281-trigger</a>
+        </span>
+            </div>
+
+        <div id="children1147750-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949962-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/cam-mipi296-trigger?src=contextnavpagetreemode">cam-mipi296-trigger</a>
+        </span>
+            </div>
+
+        <div id="children6949962-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949921-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/mipi-cam-307-isp?src=contextnavpagetreemode">mipi-cam-307-isp</a>
+        </span>
+            </div>
+
+        <div id="children6949921-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949800-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/mipi-cam-327-isp?src=contextnavpagetreemode">mipi-cam-327-isp</a>
+        </span>
+            </div>
+
+        <div id="children6949800-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950657-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/FT4232x4TTL?src=contextnavpagetreemode">FT4232x4TTL</a>
+        </span>
+            </div>
+
+        <div id="children6950657-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949755-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/hifi-amp-hat?src=contextnavpagetreemode">hifi-amp-hat</a>
+        </span>
+            </div>
+
+        <div id="children6949755-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949448-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/hifi-dac-hat?src=contextnavpagetreemode">hifi-dac-hat</a>
+        </span>
+            </div>
+
+        <div id="children6949448-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949859-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/hifi-dac-pro-9038?src=contextnavpagetreemode">hifi-dac-pro-9038</a>
+        </span>
+            </div>
+
+        <div id="children6949859-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus2424979-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="2424979" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan2424979-0">                        <a href="http://wiki.inno-maker.com/pages/viewpage.action?pageId=2424979&amp;src=contextnavpagetreemode">LA1010/LA2016/LA5016/LA5032</a>
+        </span>
+            </div>
+
+        <div id="children2424979-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949506-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/LD06?src=contextnavpagetreemode">LD06</a>
+        </span>
+            </div>
+
+        <div id="children6949506-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949508-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/LD07?src=contextnavpagetreemode">LD07</a>
+        </span>
+            </div>
+
+        <div id="children6949508-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan5801452-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/Micro+Chip+R-W+Clip?src=contextnavpagetreemode">Micro Chip R-W Clip</a>
+        </span>
+            </div>
+
+        <div id="children5801452-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950625-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/Mini+logic+analyer?src=contextnavpagetreemode">Mini logic analyer</a>
+        </span>
+            </div>
+
+        <div id="children6950625-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950787-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/POE-15W?src=contextnavpagetreemode">POE-15W</a>
+        </span>
+            </div>
+
+        <div id="children6950787-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan1147341-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/rs485-can?src=contextnavpagetreemode">rs485-can</a>
+        </span>
+            </div>
+
+        <div id="children1147341-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6948258-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/skylark-i?src=contextnavpagetreemode">skylark-i</a>
+        </span>
+            </div>
+
+        <div id="children6948258-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6949705-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/Skylark-ii?src=contextnavpagetreemode">Skylark-ii</a>
+        </span>
+            </div>
+
+        <div id="children6949705-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus6948020-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="6948020" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6948020-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/U30-DUAL-MT9V034?src=contextnavpagetreemode">U30-DUAL-MT9V034</a>
+        </span>
+            </div>
+
+        <div id="children6948020-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6948096-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/U30-MT9M031?src=contextnavpagetreemode">U30-MT9M031</a>
+        </span>
+            </div>
+
+        <div id="children6948096-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span plugin_pagetree_current" id="childrenspan1147280-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?src=contextnavpagetreemode">usb2can</a>
+        </span>
+            </div>
+
+        <div id="children1147280-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950838-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can+core+module?src=contextnavpagetreemode">usb2can core module</a>
+        </span>
+            </div>
+
+        <div id="children6950838-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6951174-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can-x2?src=contextnavpagetreemode">usb2can-x2</a>
+        </span>
+            </div>
+
+        <div id="children6951174-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan6950629-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2rs485?src=contextnavpagetreemode">usb2rs485</a>
+        </span>
+            </div>
+
+        <div id="children6950629-0" class="plugin_pagetree_children_container">
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                            <a id="plusminus24513371-0" class="plugin_pagetree_childtoggle aui-icon aui-icon-small aui-iconfont-chevron-right" data-type="toggle" data-page-id="24513371" data-tree-id="0" href="http://wiki.inno-maker.com/display/HOMEPAGE/undefined?src=contextnavpagetreemode">
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+          
+        
+                    <span class="plugin_pagetree_children_span" id="childrenspan24513371-0">                        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/USB2CANFD+Series?src=contextnavpagetreemode">USB2CANFD Series</a>
+        </span>
+            </div>
+
+        <div id="children24513371-0" class="plugin_pagetree_children_container">
+                                                
+            </div>
+    </li>
+                                                                </ul>
+                            
+            </div>
+    </li>
+            </ul>
+</div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=true&amp;placement=sidebar">
+        <input type="hidden" name="treePageId" value="1147280">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="1147600">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="HOMEPAGE">
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FspaceKey%3DHOMEPAGE%26title%3Dusb2can&amp;permissionViolation=true">
+        <input type="hidden" name="mobile" value="false">
+        <input type="hidden" name="placement" value="sidebar">
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="6950947">
+                                    <input type="hidden" name="ancestorId" value="1147600">
+                                    </fieldset>
+    </fieldset>
+</div>
+</div></div></div><div class="hidden"><a href="http://wiki.inno-maker.com/collector/pages.action?key=HOMEPAGE&amp;src=sidebar" id="space-pages-link" title=" (Type &#39;g&#39; then &#39;s&#39;)"></a><script type="text/x-template" title="logo-config-content"><h2>Space Details</h2><div class="personal-space-logo-hint">Your profile picture is used as the logo for your personal space. <a href="/users/profile/editmyprofilepicture.action" target="_blank">Change your profile picture</a>.</div></script></div></div><div class="space-tools-section"><div id="space-tools-menu-additional-items" class="hidden"><div data-label="Browse pages" data-class="" data-href="/pages/reorderpages.action?key=HOMEPAGE">Browse pages</div></div><button id="space-tools-menu-trigger" class=" aui-dropdown2-trigger aui-button aui-button-subtle tipsy-enabled aui-dropdown2-trigger-arrowless " aria-controls="space-tools-menu" aria-haspopup="true" role="button" data-aui-trigger="" resolved="" aria-expanded="false" data-collapsed-tooltip="Space tools"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span><span class="aui-button-label">Space tools</span><span class="aui-icon "></span></button><div id="space-tools-menu" class="aui-dropdown2 aui-style-default space-tools-dropdown aui-layer" role="menu" aria-hidden="true" data-aui-alignment="top left" resolved=""><div role="presentation" class="aui-dropdown2-section space-tools-navigation"><div role="group"><ul class="aui-list-truncate" role="presentation"><li role="presentation"><a role="menuitem" tabindex="-1" class="" href="http://wiki.inno-maker.com/spaces/viewspacesummary.action?key=HOMEPAGE&amp;src=spacetools">Overview</a></li><li role="presentation"><a role="menuitem" tabindex="-1" class="" href="http://wiki.inno-maker.com/pages/reorderpages.action?key=HOMEPAGE&amp;src=spacetools">Content Tools</a></li></ul></div></div><div role="presentation" class="aui-dropdown2-section space-operations"><div role="group"><ul class="aui-list-truncate" role="presentation"><li role="presentation"><a role="menuitem" tabindex="-1" class="" href="http://wiki.inno-maker.com/pages/reorderpages.action?key=HOMEPAGE&amp;src=spacetools">Browse pages</a></li></ul></div></div></div><a class="expand-collapse-trigger aui-icon aui-icon-small aui-iconfont-chevron-double-left" data-tooltip="Collapse sidebar ( [ )"></a></div>
+                    
+                        			<div class="ia-splitter-handle tipsy-enabled" data-tooltip="Collapse sidebar ( [ )" title=" (Type &#39;[&#39;)"><div class="ia-splitter-handle-highlight confluence-icon-grab-handle"></div></div></div>
+    		</div>
+        <!-- \#header -->
+
+            
+    
+        <div id="main" class=" aui-page-panel" style="margin-left: 285px; margin-top: 40px;">
+                    
+        <div id="custom-content-header">
+            <p>Contact: sales@inno-maker.com / support@inno-maker.com /<br>
+Download: wiki.inno-maker.com</p>
+        </div>
+    
+                        <div id="main-header-placeholder" style="margin: -10px 0px 20px; padding: 0px; height: 70px;"><h1 class="with-breadcrumbs" style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 28px; font-style: normal; font-weight: 500; text-decoration: none solid rgb(23, 43, 77); letter-spacing: -0.28px; text-align: start; padding: 35px 0px 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;">
+                                                <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can" style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 28px; font-style: normal; font-weight: 500; margin: 0px; padding: 0px; color: rgb(23, 43, 77); text-decoration: none solid rgb(23, 43, 77); letter-spacing: -0.28px; text-align: start;">usb2can</a>
+                                    </h1></div><div id="main-header" style="position: fixed; width: 1538px; right: 0px; top: -10px; margin-top: 0px; padding: 10px 40px; z-index: 0;">
+                        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                            
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action aui-dropdown2-trigger-arrowless aui-button aui-button-subtle ajs-menu-title aui-dropdown2-trigger" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#" aria-haspopup="true" aria-label="More options" data-container="#navigation" resolved="" aria-controls="action-menu" aria-expanded="false">
+            <span>
+                                    <span class="aui-icon aui-icon-small aui-iconfont-more" aria-label="More options"></span>
+                                
+            </span>
+        </a>         <div id="action-menu" class="aui-dropdown2 aui-style-default aui-layer most-right-menu-item" aria-hidden="true" resolved="">
+                            <div class="aui-dropdown2-section">
+                    <ul id="action-menu-primary" class="section-primary first">
+                                                    <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="view-attachments-link" href="http://wiki.inno-maker.com/pages/viewpageattachments.action?pageId=1147280" rel="nofollow" class="action-view-attachments" accesskey="t" title="View Attachments (Type &#39;t&#39;)">
+                        <span>
+                                A<u>t</u>tachments (10)
+            </span>        </a>
+    </li>
+                                                <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="action-view-history-link" href="http://wiki.inno-maker.com/pages/viewpreviousversions.action?pageId=1147280" rel="nofollow" class="action-view-history" title="">
+                        <span>
+                                Page History
+            </span>        </a>
+    </li>
+                                        </ul>
+                </div>
+                            <div class="aui-dropdown2-section">
+                    <ul id="action-menu-secondary" class="section-secondary">
+                                                    <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="view-page-info-link" href="http://wiki.inno-maker.com/pages/viewinfo.action?pageId=1147280" rel="nofollow" class="action-view-info" title="">
+                        <span>
+                                Page Information
+            </span>        </a>
+    </li>
+                                                <li>
+
+    
+            
+    
+                                                        
+    
+    
+            <a id="view-resolved-comments" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#" rel="nofollow" class="" title="">
+                        <span>Resolved comments (0)</span>        </a>
+    </li>
+                                                <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="view-in-hierarchy-link" href="http://wiki.inno-maker.com/pages/reorderpages.action?key=HOMEPAGE&amp;openId=1147280#selectedPageInHierarchy" rel="nofollow" class="" title="">
+                        <span>
+                                View in Hierarchy
+            </span>        </a>
+    </li>
+                                                <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="action-view-source-link" href="http://wiki.inno-maker.com/plugins/viewsource/viewpagesrc.action?pageId=1147280" rel="nofollow" class="action-view-source popup-link" title="">
+                        <span>
+                                View Source
+            </span>        </a>
+    </li>
+                                                <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="action-export-pdf-link" href="http://wiki.inno-maker.com/spaces/flyingpdf/pdfpageexport.action?pageId=1147280" rel="nofollow" class="" title="">
+                        <span>
+                                Export to PDF
+            </span>        </a>
+    </li>
+                                                <li>
+
+    
+        
+    
+                                                        
+    
+    
+            <a id="action-export-word-link" href="http://wiki.inno-maker.com/exportword?pageId=1147280" rel="nofollow" class="action-export-word" title="">
+                        <span>
+                                Export to Word
+            </span>        </a>
+    </li>
+                                        </ul>
+                </div>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+            
+            <div id="title-heading" class="pagetitle with-breadcrumbs">
+                
+                                    <div id="breadcrumb-section">
+                        
+    
+    
+    <ol id="breadcrumbs">
+                                        
+                        
+        <li class="first">
+                        
+                            <span class=""><a href="http://wiki.inno-maker.com/collector/pages.action?key=HOMEPAGE&amp;src=breadcrumbs-collector">Dashboard</a></span>
+                                                                                    
+                        
+        </li><li>
+                        
+                            <span class=""><a href="http://wiki.inno-maker.com/display/HOMEPAGE/InnoMaker+Wiki?src=breadcrumbs">InnoMaker Wiki</a></span>
+                                                                                    
+                        
+        </li><li>
+                        
+                            <span class=""><a href="http://wiki.inno-maker.com/display/HOMEPAGE/ALL+Product?src=breadcrumbs-parent">ALL Product</a></span>
+                                                                    </li></ol>
+
+
+                    </div>
+                
+                
+        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#page-banner-end" class="assistive">Skip to end of banner</a>
+<div id="page-banner-start" class="assistive"></div>
+
+                    
+            <div id="page-metadata-banner"><ul class="banner"><li id="system-content-items" class="noprint"><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can" title="Unrestricted" id="content-metadata-page-restrictions-hidden" class="hidden"></a><a href="http://wiki.inno-maker.com/pages/viewpageattachments.action?pageId=1147280&amp;metadataLink=true" title="10 attachments" id="content-metadata-attachments" class="aui-icon aui-icon-small aui-iconfont-attachment"></a></li><li class="page-metadata-item noprinthas-button" id="content-metadata-jira-wrapper"><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can" title="" id="content-metadata-jira" class="aui-button aui-button-subtle content-metadata-jira tipsy-disabled hidden"><span>Jira links</span></a></li></ul></div>
+            
+
+<a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#page-banner-start" class="assistive">Go to start of banner</a>
+<div id="page-banner-end" class="assistive"></div>
+    
+
+                <h1 id="title-text" class="with-breadcrumbs" style="display: none;">
+                                                <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can">usb2can</a>
+                                    </h1>
+            </div>
+        </div><!-- \#main-header -->
+        
+        
+
+        <div id="sidebar-container">
+                                                </div><!-- \#sidebar-container -->
+
+        
+    
+
+        
+
+
+
+
+            
+    
+
+                                
+    
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+    
+            
+        
+
+    
+    
+
+    
+            
+        
+
+    
+
+    
+
+    
+<div id="content" class="page view">
+    
+
+
+<div id="action-messages">
+                        </div>
+
+
+
+            <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+            
+
+        
+                            
+    
+
+                    
+
+        
+        <a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+            <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+            
+            Created by <span class="author">     <a href="http://wiki.inno-maker.com/display/~admin" class="url fn">超级管理员</a></span>, last modified on <a class="last-modified" title="Show changes" href="http://wiki.inno-maker.com/pages/diffpagesbyversion.action?pageId=1147280&amp;selectedPageVersions=63&amp;selectedPageVersions=64">Nov 17, 2021</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+        
+                                            
+        <div id="main-content" class="wiki-content">
+                           
+        <div class="contentLayout2">
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="usb2can-Note:"><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);">Note:</span></strong></h1><ul><li><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);">Support Linux/</span></strong><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);">Windows XP/7/8/10/</span></strong><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);">Mac OS</span></strong></li><li><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);">Github Address，</span></strong><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);">Full User Manual,Mac-OS,Windows Software&nbsp;</span></strong><strong style="letter-spacing: 0.0px;"><span style="color: rgb(0,0,0);"><a href="https://github.com/INNO-MAKER/usb2can" class="external-link" rel="nofollow">https://github.com/INNO-MAKER/usb2can</a></span></strong></li><li><span style="color: rgb(0,0,0);"><strong>Raspberry PI System Image：&nbsp;<a href="https://www.jianguoyun.com/p/DWMNDn0QpdSrBxj5ldMD#dir=%2Fusb2can::mode=0" class="external-link" rel="nofollow">https://www.jianguoyun.com/p/DWMNDn0QpdSrBxj5ldMD#dir=%2Fusb2can::mode=0</a></strong></span></li><li><a href="http://wiki.inno-maker.com/download/attachments/1147280/release-package.zip?version=1&amp;modificationDate=1637128487000&amp;api=v2" data-linked-resource-id="24513555" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="release-package.zip" data-nice-type="Zip Archive" data-linked-resource-content-type="application/zip" data-linked-resource-container-id="1147280" data-linked-resource-container-version="64">release-package.zip</a></li></ul><p><br></p><p><br></p><p><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" height="400" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/worddava7b667254d7a0e00fc6c97953d9f9d87.png" data-image-src="/download/attachments/1147280/worddava7b667254d7a0e00fc6c97953d9f9d87.png?version=1&amp;modificationDate=1585361558000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="5801173" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddava7b667254d7a0e00fc6c97953d9f9d87.png" data-base-url="http://wiki.inno-maker.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1147280" data-linked-resource-container-version="64"></span></p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel conf-macro output-block" style="border-width: 1px;" data-hasbody="true" data-macro-name="panel"><div class="panelContent">
+<p> </p><div class="toc-macro client-side-toc-macro  conf-macro output-block hidden-outline" data-headerelements="H1,H2,H3,H4,H5,H6,H7" data-hasbody="false" data-macro-name="toc"><ul style=""><li><span class="toc-item-body" data-outline="1"><span class="toc-outline">1</span><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#usb2can-Note:" class="toc-link">Note:</a></span><ul style=""><li><span class="toc-item-body" data-outline="1.1"><span class="toc-outline">1.1</span><a href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#usb2can-TechnicalSpecification" class="toc-link">Technical Specification</a></span></li><li class="toc-empty-item"><ul style=""><li class="toc-empty-item"></li></ul></li></ul></li></ul></div><p> </p>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="usb2can-TechnicalSpecification">Technical Specification</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col><col></colgroup><tbody><tr><td class="confluenceTd"><p><strong>Connector</strong></p></td><td class="confluenceTd"><p><br></p></td></tr><tr><td class="confluenceTd"><p>CAN</p></td><td class="confluenceTd"><p>D-SUB, 9 pins</p></td></tr><tr><td class="confluenceTd"><p>USB</p></td><td class="confluenceTd"><p>USB 2.0 Full-Speed, Micro USB</p></td></tr><tr><td class="confluenceTd"><p><strong>CAN Features</strong></p></td><td class="confluenceTd"><p><br></p></td></tr><tr><td class="confluenceTd"><p><br></p><p>Specification</p></td><td class="confluenceTd"><p>2.0A (standard format) and 2.0B (extended format), ISO 11898-2 High-speed CAN</p><p><br></p></td></tr><tr><td class="confluenceTd"><p><br></p><p>Data Rate</p></td><td class="confluenceTd"><p>From 20kbps to 1Mbps can be programmed arbitrarily.</p><p><br></p></td></tr><tr><td class="confluenceTd"><p>Isolation Voltage</p></td><td class="confluenceTd"><p>1.5K VDC/min, 3K VDC/1s</p></td></tr><tr><td class="confluenceTd"><p>Microcontroller</p></td><td class="confluenceTd"><p>STM32F0, 48MHz</p></td></tr><tr><td class="confluenceTd"><p>Termination</p></td><td class="confluenceTd"><p>120 Ohm resistor selectable jumper</p></td></tr><tr><td class="confluenceTd"><p>CAN Transceiver</p></td><td class="confluenceTd"><p>ISO1050DUBR ,Texas Instruments</p></td></tr><tr><td class="confluenceTd"><p><strong>Other</strong></p></td><td class="confluenceTd"><p><strong>&nbsp;</strong></p></td></tr><tr><td class="confluenceTd"><p>Work Temperature</p></td><td class="confluenceTd"><p>-40°~ 85°</p></td></tr><tr><td class="confluenceTd"><p>Relative humidity</p></td><td class="confluenceTd"><p>15-90%, not condensing</p></td></tr><tr><td class="confluenceTd"><p>PCBA Size (L * W * H)</p></td><td class="confluenceTd"><p>56.50mm * 31.20mm * 14.20mm</p></td></tr><tr><td class="confluenceTd"><p>Weight</p></td><td class="confluenceTd"><p>15.5 g</p></td></tr></tbody></table></div><h2 id="usb2can-"><span style="letter-spacing: -0.008em;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" height="250" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/image2021-4-17_10-44-51.png" data-image-src="/download/attachments/1147280/image2021-4-17_10-44-51.png?version=1&amp;modificationDate=1618627491000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="6950611" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-4-17_10-44-51.png" data-base-url="http://wiki.inno-maker.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1147280" data-linked-resource-container-version="64"></span></span></h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col><col></colgroup><tbody><tr><td class="confluenceTd"><p>Pin</p></td><td class="confluenceTd"><p>Description</p></td></tr><tr><td class="confluenceTd"><p><br></p><p>1</p></td><td class="confluenceTd"><p>5V/150ma output .</p><p>Weld 0Ω resistor&nbsp;on R9 to enable this function(close to the jumper).</p></td></tr><tr><td class="confluenceTd"><p>2</p></td><td class="confluenceTd"><p>CANL bus line (dominant low)</p></td></tr><tr><td class="confluenceTd"><p>3</p></td><td class="confluenceTd"><p>CAN_GND</p></td></tr><tr><td class="confluenceTd"><p>4</p></td><td class="confluenceTd"><p>NC</p></td></tr><tr><td class="confluenceTd"><p>5</p></td><td class="confluenceTd"><p>NC</p></td></tr><tr><td class="confluenceTd"><p>6</p></td><td class="confluenceTd"><p>NC</p></td></tr><tr><td class="confluenceTd"><p>7</p></td><td class="confluenceTd"><p>CANH bus line (dominant high)</p></td></tr><tr><td class="confluenceTd"><p>8</p></td><td class="confluenceTd"><p>NC</p></td></tr><tr><td class="confluenceTd"><p>9</p></td><td class="confluenceTd"><p>NC</p></td></tr></tbody></table></div><h3 id="usb2can-.1"><br><br></h3></div>
+</div>
+</div>
+</div>
+
+                
+        
+    
+        </div>
+
+                        
+    
+
+
+
+<div id="likes-and-labels-container"><div id="likes-section" class="no-print"><span class="like-summary"><a href="http://wiki.inno-maker.com/display/~chayma.hajjem" class="confluence-userlink userlink-0" data-username="chayma.hajjem" title="" data-user-hover-bound="true">chayma hajjem</a> likes this</span></div><div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="1147280" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+            <li class="no-labels-message">
+            No labels
+        </li>
+            </ul>
+
+    </div>
+</div>
+</div></div>
+        
+		
+            
+
+
+
+
+            
+        
+
+
+
+
+
+
+
+
+                        
+    
+<div id="comments-section" class="pageSection group">
+                <div class="section-header">
+            <h2 id="comments-section-title" class="section-title">
+                                    54 Comments
+                            </h2>
+        </div>
+    
+    
+
+            <ol class="comment-threads top-level" id="page-comments">
+                    <li id="comment-thread-6948975" class="comment-thread">
+        <div class="comment  " id="comment-6948975">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>In der mitgelieferten Software sind nur chinesische Zeichen. Ein Nutzung des Zip. Packetes ist nicht möcglich.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948975#comment-6948975" id="comment-permalink-6948975"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Aug 15, 2020 02:29" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948975#comment-6948975"><span>Aug 15, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6948976" class="comment-thread">
+        <div class="comment   odd" id="comment-6948976">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Dear customer, <br>
+Could you please send me an email that about this? <br>
+Software we provide you including english version and usermanl, please check below link:
+<span class="nobr"><a href="https://www.jianguoyun.com/p/DVvY6VIQpdSrBxjyqKUB" class="external-link" rel="nofollow">https://www.jianguoyun.com/p/DVvY6VIQpdSrBxjyqKUB<sup><img class="rendericon" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></sup></a></span></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948976#comment-6948976" id="comment-permalink-6948976"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Aug 15, 2020 13:02" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948976#comment-6948976"><span>Aug 15, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6948998" class="comment-thread">
+        <div class="comment  " id="comment-6948998">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Is there LabVIEW driver for this hardware ?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948998#comment-6948998" id="comment-permalink-6948998"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Aug 18, 2020 04:01" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948998#comment-6948998"><span>Aug 18, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949000" class="comment-thread">
+        <div class="comment   odd" id="comment-6949000">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>What's the version of labview? We will try to test it.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949000#comment-6949000" id="comment-permalink-6949000"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Aug 19, 2020 12:45" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949000#comment-6949000"><span>Aug 19, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6948999" class="comment-thread">
+        <div class="comment  " id="comment-6948999">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>The Software InnoMakerSetups.msi has only Text in China look.</p><p><br></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948999#comment-6948999" id="comment-permalink-6948999"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Aug 19, 2020 02:27" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6948999#comment-6948999"><span>Aug 19, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949973" class="comment-thread">
+        <div class="comment   odd" id="comment-6949973">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: moradzadeh" title="moradzadeh">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~moradzadeh" class="url fn">Michael D Moradzadeh</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>I see the same problem. Only in Chinese.&nbsp; Unable to install.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949973#comment-6949973" id="comment-permalink-6949973"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Dec 29, 2020 07:04" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949973#comment-6949973"><span>Dec 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949002" class="comment-thread">
+        <div class="comment  " id="comment-6949002">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Do you mean this file for windows?</p><p>You need to download it and rename it as .msi if your computer block it.<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="149" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/image2020-8-19_12-46-9.png" data-image-src="/download/attachments/1147280/image2020-8-19_12-46-9.png?version=1&amp;modificationDate=1597812369000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="6949001" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-8-19_12-46-9.png" data-base-url="http://wiki.inno-maker.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1147280" data-linked-resource-container-version="64"></span></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949002#comment-6949002" id="comment-permalink-6949002"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Aug 19, 2020 12:46" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949002#comment-6949002"><span>Aug 19, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6949015" class="comment-thread">
+        <div class="comment   odd" id="comment-6949015">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello. Do you have a schematic or pinout for this? I see that you have the I2C exported on the board.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949015#comment-6949015" id="comment-permalink-6949015"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Sep 06, 2020 03:58" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949015#comment-6949015"><span>Sep 06, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949018" class="comment-thread">
+        <div class="comment  " id="comment-6949018">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Sorry we don't provide sch for this module. We will launched another  version which will provide.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949018#comment-6949018" id="comment-permalink-6949018"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Sep 17, 2020 17:34" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949018#comment-6949018"><span>Sep 17, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949017" class="comment-thread">
+        <div class="comment   odd" id="comment-6949017">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>We have inno usbtocan device. We are trying to develop a Java application to receive and send CAN Messages thru usbttocan. Could you help us in how to start with it. I am using InnoMakerUsb2CanLib.dll but calling getInnoMakerDeviceCount() but then it gives me an error<br><br>Error looking up function 'getInnoMakerDeviceCount': The specified procedure could not be found.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949017#comment-6949017" id="comment-permalink-6949017"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Sep 15, 2020 09:58" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949017#comment-6949017"><span>Sep 15, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6949019" class="comment-thread">
+        <div class="comment  " id="comment-6949019">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Could you send me email including more information of your project? And what you need from us&nbsp; like the source code of the dll?&nbsp;</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949019#comment-6949019" id="comment-permalink-6949019"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Sep 17, 2020 17:35" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949019#comment-6949019"><span>Sep 17, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6949032" class="comment-thread">
+        <div class="comment   odd" id="comment-6949032">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Thanks. I have sent you an email to support account.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949032#comment-6949032" id="comment-permalink-6949032"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Sep 17, 2020 21:31" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949032#comment-6949032"><span>Sep 17, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6949034" class="comment-thread">
+        <div class="comment  " id="comment-6949034">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello, is there a case for the USBtoCAN converter? Is it possible to buy, otherwise if there's a project for prototyping could be useful. Let me know asap please.</p><p><br></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949034#comment-6949034" id="comment-permalink-6949034"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 02, 2020 21:30" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949034#comment-6949034"><span>Oct 02, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949056" class="comment-thread">
+        <div class="comment   odd" id="comment-6949056">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Same. Would also love to purchase a case for this Ideally with DB9 accessible external and fix mounted usb cable inside.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949056#comment-6949056" id="comment-permalink-6949056"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like"><span class="like-summary"><a href="http://wiki.inno-maker.com/display/~allan" class="confluence-userlink userlink-1" data-username="allan" title="" data-user-hover-bound="true">allan.chow</a> likes this</span></li><li class="first comment-date"><a title="Oct 28, 2020 04:25" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949056#comment-6949056"><span>Oct 28, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949063" class="comment-thread">
+        <div class="comment  " id="comment-6949063">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>we're working on a new version. you can leave your contact info by sending me email allan.chow@inno-maker.com? ,when it's launched, I will let you know. </p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949063#comment-6949063" id="comment-permalink-6949063"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 14:20" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949063#comment-6949063"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                                    <li id="comment-thread-6949066" class="comment-thread">
+        <div class="comment   odd" id="comment-6949066">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p><span style="color: rgb(23,43,77);">we're working on a new version. you can leave your contact info by sending me email <a href="mailto:allan.chow@inno-maker.com" class="external-link" rel="nofollow">allan.chow@inno-maker.com</a>? ,when it's launched, I will let you know.</span></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949066#comment-6949066" id="comment-permalink-6949066"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 14:24" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949066#comment-6949066"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949035" class="comment-thread">
+        <div class="comment  " id="comment-6949035">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello, I tried to download the Manual for Linux, but the jianguoyun page says "<span style="color: rgb(0,0,0);">The account has been locked due to its abnormality.<span>&nbsp;"</span></span></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949035#comment-6949035" id="comment-permalink-6949035"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 06, 2020 13:46" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949035#comment-6949035"><span>Oct 06, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949038" class="comment-thread">
+        <div class="comment   odd" id="comment-6949038">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>hi sorry for late reply. We fix it today.<br>
+Please try again.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949038#comment-6949038" id="comment-permalink-6949038"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 08, 2020 21:57" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949038#comment-6949038"><span>Oct 08, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949043" class="comment-thread">
+        <div class="comment  " id="comment-6949043">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Could you please provide a link to sample code how to implement in c/c++ winapi? As previously mentioned the supplied DLL does not expose any function entry points. At least a small hint for how to access the device would be great. And same here: The installer (msi-file) seems to have chinese localization only (or at least any fancy writings).</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949043#comment-6949043" id="comment-permalink-6949043"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 13, 2020 18:22" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949043#comment-6949043"><span>Oct 13, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949045" class="comment-thread">
+        <div class="comment   odd" id="comment-6949045">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hi, it may takes us one more week workload. Please wait and keep in contact with us</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949045#comment-6949045" id="comment-permalink-6949045"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 15, 2020 12:02" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949045#comment-6949045"><span>Oct 15, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949052" class="comment-thread">
+        <div class="comment  " id="comment-6949052">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello!</p><p>Can you state a date, when an englisch version of the software will be available?</p><p>Currently I cannot use the hardware because only a chinese version of software is available.</p><p>Thank you...</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949052#comment-6949052" id="comment-permalink-6949052"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 26, 2020 20:57" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949052#comment-6949052"><span>Oct 26, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949054" class="comment-thread">
+        <div class="comment   odd" id="comment-6949054">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>hi, the windows software is multilanguage supported!</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949054#comment-6949054" id="comment-permalink-6949054"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 27, 2020 14:04" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949054#comment-6949054"><span>Oct 27, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949055" class="comment-thread">
+        <div class="comment  " id="comment-6949055">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello! The software might be multilingual, but the installer is chinese only. Can you change the installer language to english, please? Thank you!</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949055#comment-6949055" id="comment-permalink-6949055"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 27, 2020 17:58" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949055#comment-6949055"><span>Oct 27, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949064" class="comment-thread">
+        <div class="comment   odd" id="comment-6949064">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>The installer is followed the windows setup. could you send me picture about teh UI? allan.chow@inno-maker.com?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949064#comment-6949064" id="comment-permalink-6949064"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 14:21" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949064#comment-6949064"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                                    <li id="comment-thread-6949278" class="comment-thread">
+        <div class="comment  " id="comment-6949278">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>just run the msi and press enter all the way through, it gets installed and is in english.</p><p>If there are any options when installing they would be unknown as I cant decode chinese</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949278#comment-6949278" id="comment-permalink-6949278"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 29, 2020 09:54" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949278#comment-6949278"><span>Nov 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949974" class="comment-thread">
+        <div class="comment   odd" id="comment-6949974">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: moradzadeh" title="moradzadeh">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~moradzadeh" class="url fn">Michael D Moradzadeh</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>This is not working for me</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949974#comment-6949974" id="comment-permalink-6949974"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Dec 29, 2020 07:08" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949974#comment-6949974"><span>Dec 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949977" class="comment-thread">
+        <div class="comment  " id="comment-6949977">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p style="text-align: left;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" height="150" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/image2020-12-29_10-46-5.png" data-image-src="/download/attachments/1147280/image2020-12-29_10-46-5.png?version=1&amp;modificationDate=1609209966000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="6949975" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-12-29_10-46-5.png" data-base-url="http://wiki.inno-maker.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1147280" data-linked-resource-container-version="64"></span></span></p><p style="text-align: left;">Hi,</p><p style="text-align: left;">Do you notice that language can change in red circle?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949977#comment-6949977" id="comment-permalink-6949977"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Dec 29, 2020 10:47" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949977#comment-6949977"><span>Dec 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6950006" class="comment-thread">
+        <div class="comment   odd" id="comment-6950006">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: moradzadeh" title="moradzadeh">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~moradzadeh" class="url fn">Michael D Moradzadeh</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>the software is good, but the INSTALLER (.msi) is Chinese only.&nbsp; If I accept all default options and restart the PC, it works, but English Language version of the installer would be very nice.</p><p><br></p><p>Xie xie</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950006#comment-6950006" id="comment-permalink-6950006"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Jan 20, 2021 01:35" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950006#comment-6950006"><span>Jan 20, 2021</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6950010" class="comment-thread">
+        <div class="comment  " id="comment-6950010">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: admin" title="admin">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~admin" class="url fn">超级管理员</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>We'll update this version soon.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950010#comment-6950010" id="comment-permalink-6950010"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Jan 21, 2021 13:33" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950010#comment-6950010"><span>Jan 21, 2021</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949057" class="comment-thread">
+        <div class="comment   odd" id="comment-6949057">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hi, with raspberry pi is it possible to use the 2x4 connector (GND, VDD, RX, TX etc ..) instead of the USB connector? Thank you</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949057#comment-6949057" id="comment-permalink-6949057"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 28, 2020 19:04" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949057#comment-6949057"><span>Oct 28, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949065" class="comment-thread">
+        <div class="comment  " id="comment-6949065">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Do you mean a cable with miniusb and the other end is with 2*4 connector which connect to rpi usb interface?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949065#comment-6949065" id="comment-permalink-6949065"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 14:23" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949065#comment-6949065"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949069" class="comment-thread">
+        <div class="comment   odd" id="comment-6949069">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>I would like to connect usb-can innomaker to raspberry without using the USB port. The device should be put in a box but due to various problems we cannot use a classic USB cable. So I was wondering if it was possible to interface the raspberry pi with the usb-can via the 6 (2x4) pins I see on the your board (GND, VDD, RX, TX, VDO, CLK, GND, IO).</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949069#comment-6949069" id="comment-permalink-6949069"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 18:09" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949069#comment-6949069"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949070" class="comment-thread">
+        <div class="comment  " id="comment-6949070">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>These signals are used for debuging and flashing firmware. Not for can communication.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949070#comment-6949070" id="comment-permalink-6949070"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 01, 2020 10:04" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949070#comment-6949070"><span>Nov 01, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949058" class="comment-thread">
+        <div class="comment   odd" id="comment-6949058">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello, is it possible to use this interface with an android device?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949058#comment-6949058" id="comment-permalink-6949058"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 28, 2020 22:08" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949058#comment-6949058"><span>Oct 28, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6949059" class="comment-thread">
+        <div class="comment  " id="comment-6949059">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello, I am using the windows application, it reads the telegrams correctly, but does not send them. Frame id = 85 10 32 03, Data = C4 09 D0 01 E8 08 00 00 and I press the Send button. How to solve the problem?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949059#comment-6949059" id="comment-permalink-6949059"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 30, 2020 16:36" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949059#comment-6949059"><span>Oct 30, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949067" class="comment-thread">
+        <div class="comment   odd" id="comment-6949067">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Frame id = 85 10 32 03 maximum frame has been exceeded, max it's 7f. Normal&nbsp;Frame is 11bit,&nbsp;Extend frame is 29bit.&nbsp;</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949067#comment-6949067" id="comment-permalink-6949067"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 14:40" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949067#comment-6949067"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949277" class="comment-thread">
+        <div class="comment  " id="comment-6949277">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>from that frame ID (ignoring the rogue 8) it is priority=1 PGN=01 10 32 from address 03</p><p>In the windows app I can send that ID and Data without a problem, I receive it on a kvaser device running CanKing to view the message.</p><p><br></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949277#comment-6949277" id="comment-permalink-6949277"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 29, 2020 09:51" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949277#comment-6949277"><span>Nov 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949060" class="comment-thread">
+        <div class="comment   odd" id="comment-6949060">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello, from a windows application it cannot send a telegram until it stops receiving. Thus it is unusable.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949060#comment-6949060" id="comment-permalink-6949060"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 30, 2020 22:33" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949060#comment-6949060"><span>Oct 30, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949061" class="comment-thread">
+        <div class="comment  " id="comment-6949061">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>We've tested that it can send and receive at the same time.Could you send me email allan.chow@inno-maker.com photo how to connect and windows version?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949061#comment-6949061" id="comment-permalink-6949061"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Oct 31, 2020 14:16" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949061#comment-6949061"><span>Oct 31, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949080" class="comment-thread">
+        <div class="comment   odd" id="comment-6949080">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hi, is there a c++ interface for Windows? I only found the C# example with a .NET Assembly DLL.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949080#comment-6949080" id="comment-permalink-6949080"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 03, 2020 03:21" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949080#comment-6949080"><span>Nov 03, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949082" class="comment-thread">
+        <div class="comment  " id="comment-6949082">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>hi，<br>
+Could you send email to me allan.chow@inno-maker.com？<br>
+Or you can download：
+<span class="nobr"><a href="https://www.jianguoyun.com/p/DcVSKugQpdSrBxjm08gD" class="external-link" rel="nofollow">https://www.jianguoyun.com/p/DcVSKugQpdSrBxjm08gD<sup><img class="rendericon" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></sup></a></span></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949082#comment-6949082" id="comment-permalink-6949082"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 03, 2020 15:11" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949082#comment-6949082"><span>Nov 03, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949081" class="comment-thread">
+        <div class="comment   odd" id="comment-6949081">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hello, is there a way to send extended frames even if the frame ID "fits in the standard frame format" (e.g. how do i send frame id 0x100 as extended instead of standard format(</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949081#comment-6949081" id="comment-permalink-6949081"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 03, 2020 03:27" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949081#comment-6949081"><span>Nov 03, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949084" class="comment-thread">
+        <div class="comment  " id="comment-6949084">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>you can do it under raspberry pi， this windows demo do not support.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949084#comment-6949084" id="comment-permalink-6949084"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 04, 2020 13:06" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949084#comment-6949084"><span>Nov 04, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949243" class="comment-thread">
+        <div class="comment   odd" id="comment-6949243">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Hi, I'm running on a Raspberry Pi 3B+.&nbsp;</p><p>I am running through the documentation and can see can0 with ifconfig.&nbsp; I can then put the link up and down and set the bitrate etc.</p><p>However whenever I try to run candump can0 I get the following error:</p><pre><code>    socket: Address family not supported by protocol<br><br></code></pre>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949243#comment-6949243" id="comment-permalink-6949243"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 18, 2020 01:52" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949243#comment-6949243"><span>Nov 18, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949258" class="comment-thread">
+        <div class="comment  " id="comment-6949258">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Sorry for late reply.</p><p>Could you send me kernel version , you can use uname -a getting them.&nbsp;</p><p>And please send me email allan.chow@inno-maker.com</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949258#comment-6949258" id="comment-permalink-6949258"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 23, 2020 13:37" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949258#comment-6949258"><span>Nov 23, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                                    <li id="comment-thread-6949260" class="comment-thread">
+        <div class="comment   odd" id="comment-6949260">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p class="src grammarSection">Please Post your operations log, then we can analyze and see what happened.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949260#comment-6949260" id="comment-permalink-6949260"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 23, 2020 14:00" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949260#comment-6949260"><span>Nov 23, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                                    <li id="comment-thread-6949265" class="comment-thread">
+        <div class="comment  " id="comment-6949265">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Please try to reinstallation the can-utils.<br>
+sudo apt-get install can-utils</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949265#comment-6949265" id="comment-permalink-6949265"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 24, 2020 14:01" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949265#comment-6949265"><span>Nov 24, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949264" class="comment-thread">
+        <div class="comment   odd" id="comment-6949264">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Do you have an English version of the "InnoMakerSetup.msi". The one you have is Chinese. I sent you a UI picture to "<a href="mailto:allan.chow@inno-maker.com" class="external-link" rel="nofollow">allan.chow@inno-maker.com</a>"</p><p><br></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949264#comment-6949264" id="comment-permalink-6949264"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 24, 2020 02:46" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949264#comment-6949264"><span>Nov 24, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949976" class="comment-thread">
+        <div class="comment  " id="comment-6949976">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" height="150" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/image2020-12-29_10-46-5.png" data-image-src="/download/attachments/1147280/image2020-12-29_10-46-5.png?version=1&amp;modificationDate=1609209966000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="6949975" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-12-29_10-46-5.png" data-base-url="http://wiki.inno-maker.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1147280" data-linked-resource-container-version="64"></span></p><p>Hi,</p><p>Do you notice that language can change in red circle?</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949976#comment-6949976" id="comment-permalink-6949976"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Dec 29, 2020 10:46" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949976#comment-6949976"><span>Dec 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6949276" class="comment-thread">
+        <div class="comment   odd" id="comment-6949276">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Ive been checking your app to Rx and Tx Extended frame PGNs. For some reason you have to include the top bit set (of the 4 ID Bytes)</p><p>this is wrong as the extended header ID&nbsp; is 29 not 32bit. The UI must have a problem as this produces the correct value on the bus.</p><p>All values are in HEX.</p><p>For instance A NMEA2000 ISO request transmission for an Address claim(ISO NAME) header is 0C EA 03 99 , the 99 being the source address and the 03 meaning Destination</p><p>The C in 0C is the lower 2 bits of the priority = 3 ( If it was 1C it would be 7 [<a class="unresolved" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can#">lowest priorit</a>y]) -<span style="color: rgb(255,0,0);"> In your UI this HAS to be 8C to get a good transmission?</span></p><p><span style="color: rgb(255,0,0);">The correct DLC for this PGN is 3</span> (normally 8) , for which <span style="color: rgb(255,0,0);">you dont have a UI field for</span>....<span style="color: rgb(51,153,102);">Compliant N2K devices may reject 8 for this ISO request</span></p><p>Payload is <span style="color: rgb(255,0,0);">00 EE 00</span> FF FF FF FF FF (FF = dont care)</p><p>However if I set this up to send I get a corrupted header '03 99' and not 0C EA 03 99</p><p>shown in the pic1 - which i cant attach</p><p><br></p><p><br></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949276#comment-6949276" id="comment-permalink-6949276"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 29, 2020 09:36" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949276#comment-6949276"><span>Nov 29, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+            <ol class="comment-threads">
+                                <li id="comment-thread-6949279" class="comment-thread">
+        <div class="comment  " id="comment-6949279">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>We have 2 versions firmware.<br>1,The default version which supports linux,windows,mac os (The one you get)<br>For time being, our windows software and mac os software did not support&nbsp; extended frames yet.<br>However, canutil under linux which support.<br>For windows and mac os, we're planing to update software which support extended frames. when we update I'll let you know the first time.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949279#comment-6949279" id="comment-permalink-6949279"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Nov 30, 2020 22:56" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6949279#comment-6949279"><span>Nov 30, 2020</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                        </ol>
+    </li>
+                    <li id="comment-thread-6950026" class="comment-thread">
+        <div class="comment   odd" id="comment-6950026">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>I am having issues with frame reordering when receiving packets at a high rate.</p><p>Using 1mbit/s and sending packets from one device with "cangen can0 -g 0 -I 42b -L 1 -D i -n 5" they are sometimes received out of order on another similar device.</p><p>This must be an issue with your firmware. I have tried to flash the open source candleLight firmware on the board, but you seem to have locked the STM32.</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950026#comment-6950026" id="comment-permalink-6950026"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Feb 02, 2021 21:01" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950026#comment-6950026"><span>Feb 02, 2021</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6950037" class="comment-thread">
+        <div class="comment  " id="comment-6950037">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: Anonymous" title="Anonymous">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <span class="anonymous-user">Anonymous</span></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p><span style="color: rgb(45,45,45);"><span>Does&nbsp;</span>Innomaker USB-CAN support CAN-FD specification ?</span></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950037#comment-6950037" id="comment-permalink-6950037"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Feb 18, 2021 00:47" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950037#comment-6950037"><span>Feb 18, 2021</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+                    <li id="comment-thread-6950038" class="comment-thread">
+        <div class="comment   odd" id="comment-6950038">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="./usb2can - WIKI HOME - WIKI HOME_RPI_AUDIO_CAMERA_CAN_RS485__files/anonymous.svg" alt="User icon: allan" title="allan">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="http://wiki.inno-maker.com/display/~allan" class="url fn">allan.chow</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>We will launched FD version soon.Could you leave us your email or send your email to me?&nbsp;</p><p>allan.chow@inno-maker.com</p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950038#comment-6950038" id="comment-permalink-6950038"><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="comment-action-like" style="display: none;"><span class="like-summary"></span></li><li class="first comment-date"><a title="Feb 18, 2021 11:30" href="http://wiki.inno-maker.com/display/HOMEPAGE/usb2can?focusedCommentId=6950038#comment-6950038"><span>Feb 18, 2021</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    
+    </li>
+            </ol>
+
+
+</div>
+        
+
+
+                
+    
+            
+</div>
+
+    
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+    
+<div id="space-tools-web-items" class="hidden">
+                <div data-label="Overview" data-href="/spaces/viewspacesummary.action?key=HOMEPAGE">Overview</div>
+            <div data-label="Content Tools" data-href="/pages/reorderpages.action?key=HOMEPAGE">Content Tools</div>
+    </div>
+        
+
+
+
+                    
+        <div id="custom-content-footer">
+            <p>© 2019 InnoMaker /<br>
+Contact: sales@inno-maker.com / support@inno-maker.com /<br>
+sales@inno-maker.com&lt;/br&gt;<br>
+Download: wiki.inno-maker.com</p>
+        </div>
+    
+            </div><!-- \#main -->
+            
+    
+    
+        
+            
+            
+
+<div id="footer" role="contentinfo" style="margin-left: 285px;">
+    <section class="footer-body">
+
+                                                    
+        
+
+        <ul id="poweredby">
+            <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link" rel="nofollow">Atlassian Confluence</a> <span id="footer-build-information">7.2.0</span></li>
+            <li class="print-only">Printed by Atlassian Confluence 7.2.0</li>
+            <li class="noprint"><a href="https://support.atlassian.com/help/confluence" class="hover-footer-link" rel="nofollow">Report a bug</a></li>
+            <li class="noprint"><a href="https://www.atlassian.com/company" class="hover-footer-link" rel="nofollow">Atlassian News</a></li>
+        </ul>
+
+        
+
+        <div id="footer-logo"><a href="http://www.atlassian.com/" rel="nofollow">Atlassian</a></div>
+
+                    
+        
+    </section>
+</div>
+
+    
+</div>
+
+</div><!-- \#full-height-container -->
+</div><!-- \#page -->
+
+    <span style="display:none;" id="confluence-server-performance">{"serverDuration": 369, "requestCorrelationId": "6fb86a1fd0e258bc"}</span>
+
+
+    
+<div id="editor-preload-container" style="display: none;"></div><div id="content-hover-0" class="ajs-content-hover aui-box-shadow" style="display: none;"><div class="contents" style="width: 300px;"></div></div><div id="content-hover-1" class="ajs-content-hover aui-box-shadow" style="display: none;"><div class="contents" style="width: 300px;"></div></div></body></html>

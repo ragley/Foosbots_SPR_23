@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Foosbots GUI</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id="main-app" class="container">
+      <div id="Header">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <h3 class="card-title">Foosbots Foosball</h3>
+        </a>
+        <img src="../images/osu-brand.png" alt="OSU Logo" id="osuLogo" class="logo-size" />
+      </header>
+    </div>
+      <div class="row">
+        <div id="game-buttons" class="col padding">
+          <button id="startGameBtn" type="button" class="btn btn-success">Start Game</button>
+          <button id="pauseGameBtn" type="button" class="btn btn-warning">Pause Game</button>
+          <button id="endGameBtn" type="button" class="btn btn-danger">Stop Game</button>
+        </div>
+      </div>
+      <div class="row">
+        <div id="scoreboard" class="col game-content--position">
+          <div class="card">
+            <div class="card-body">
+              <img src="../images/people.jpg" class="card-img-top" />
+              <h3 class="card-title">Player Score</h3>
+              <h3 id="playerScore" class="card-subtitle mb-2 text-muted">--</h3>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <img src="../images/robot.jpg" class="card-img-top" />
+                <h3 class="card-title">Robot Score</h3>
+                <h3 id="robotScore" class="card-subtitle mb-2 text-muted">--</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--Dev Modal-->
+    <!-- <button id="devModalOpenBtn" type="button" class="hidden-button">Dev Modal</button> -->
+    
+    <div id="devModal" class="dev-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">DEBUG: Game State</h5>
+          </div>
+          <div class="modal-body">
+            <!-- <span id="devModalCloseBtn" class="dev-modal-close">&times;</span> -->
+            <pre id="devModalContentText"></pre>
+          </div>
+          <div id="devModalFooter" class="modal-footer">
+            <button id="devModalCloseBtn" type="button" class="btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Difficulty Modal -->
+    
+    <div id="difficultyModal" class="difficulty-modal">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Select Difficulty Level</h5>
+          </div>
+          <div class="modal-body">
+            <div id="difficultyBtns">
+              <div class="row">
+                <div class="col-sm center">
+                  <button id="easyBtn" type="button" class="difficulty-btn btn-success">Easy</button>
+                </div>
+                
+              </div>
+              <div class="row">
+                <div class="col-sm center">
+                  <button id="mediumBtn" type="button" class="difficulty-btn btn-warning">Medium</button>
+                </div>
+                
+              </div>
+              <div class="row">
+                <div class="col-sm center">
+                  <button id="hardBtn" type="button" class="difficulty-btn btn-danger">Hard</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

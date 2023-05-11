@@ -1,0 +1,26 @@
+GPIO 23 -> Controller Identifier 1
+GPIO 22 -> Controller Identifier 2
+
+GPIO 1 -> NC (TX)
+GPIO 2 -> NC (RX)
+
+GPIO 18 -> Rot Driver Pulse
+GPIO  5 -> Rot Driver Dir
+GPIO 19 -> Rot Driver Zero
+
+GPIO 17 -> Trans Driver Pulse
+GPIO 16 -> Trans Driver Dir
+GPIO  4 -> Trans Driver Zero
+
+GPIO 21 -> Rot Sensor
+GPIO  2 -> Trans Sensor
+
+GPIO 15 -> CAN Transceiver D
+GPIO 13 -> CAN Transceiver R
+
+GPIO 34 -> ENABLE
+
+
+
+
+
