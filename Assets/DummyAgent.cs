@@ -135,6 +135,8 @@ public class DummyAgent : Agent
         actions[6] = allyGoalkeeperLinearCommand;
         actions[7] = allyGoalkeeperRotationCommand;
 
+
+        // Example reward structure here based on physical table information
         if (prevScore[0] != currentScore[0] || prevScore[1] != currentScore[1])
         {   
             if (currentScore[0] > prevScore[0])

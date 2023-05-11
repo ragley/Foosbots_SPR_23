@@ -23,19 +23,19 @@ from FSMConstants import *
 def nothing(x):
     pass
 
-cv2.namedWindow('Trackbars')
-cv2.moveWindow('Trackbars',1320,530)
+# cv2.namedWindow('Trackbars')
+# cv2.moveWindow('Trackbars',1320,530)
 
-cv2.createTrackbar('hueLower', 'Trackbars', 47,  179, nothing)
-cv2.createTrackbar('hueUpper', 'Trackbars', 76, 179, nothing)
+# cv2.createTrackbar('hueLower', 'Trackbars', 47,  179, nothing)
+# cv2.createTrackbar('hueUpper', 'Trackbars', 76, 179, nothing)
 
-cv2.createTrackbar('hue2Lower', 'Trackbars', 0, 179, nothing)
-cv2.createTrackbar('hue2Upper', 'Trackbars', 0, 179, nothing)
+# cv2.createTrackbar('hue2Lower', 'Trackbars', 0, 179, nothing)
+# cv2.createTrackbar('hue2Upper', 'Trackbars', 0, 179, nothing)
 
-cv2.createTrackbar('satLow', 'Trackbars', 0, 255, nothing)
-cv2.createTrackbar('satHigh', 'Trackbars', 255, 255, nothing)
-cv2.createTrackbar('valLow','Trackbars', 165, 255, nothing)
-cv2.createTrackbar('valHigh','Trackbars', 250, 255, nothing)
+# cv2.createTrackbar('satLow', 'Trackbars', 0, 255, nothing)
+# cv2.createTrackbar('satHigh', 'Trackbars', 255, 255, nothing)
+# cv2.createTrackbar('valLow','Trackbars', 165, 255, nothing)
+# cv2.createTrackbar('valHigh','Trackbars', 250, 255, nothing)
 
 
 dispW = 640
@@ -150,8 +150,8 @@ def ballTracking():
 		# performance testing
 		startTime = cv2.getTickCount()
 
-		cv2.imshow('nanoCam',frame)
-		cv2.moveWindow('nanoCam',0,0)
+		# cv2.imshow('nanoCam',frame)
+		# cv2.moveWindow('nanoCam',0,0)
 
 		hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
 
@@ -192,23 +192,23 @@ def ballTracking():
 		FGmask2 = cv2.erode(FGmask2, None, iterations=2)
 		FGmask2 = cv2.dilate(FGmask2, None, iterations=2)
 		FGmaskComp = cv2.add(FGmask,FGmask2)
-		cv2.imshow('FGmaskComp',FGmaskComp)
-		cv2.moveWindow('FGmaskComp',0,530)
+		# cv2.imshow('FGmaskComp',FGmaskComp)
+		# cv2.moveWindow('FGmaskComp',0,530)
 
 		FG = cv2.bitwise_and(frame, frame, mask=FGmaskComp)
-		cv2.imshow('FG',FG)
-		cv2.moveWindow('FG',700,0)
+		# cv2.imshow('FG',FG)
+		# cv2.moveWindow('FG',700,0)
 
 		bgMask = cv2.bitwise_not(FGmaskComp)
 		bgMask = cv2.erode(bgMask, None, iterations=2)
 		bgMask = cv2.dilate(bgMask, None, iterations=2)
-		cv2.imshow('bgMask',bgMask)
-		cv2.moveWindow('bgMask',700,530)
+		# cv2.imshow('bgMask',bgMask)
+		# cv2.moveWindow('bgMask',700,530)
 
 		BG = cv2.cvtColor(bgMask,cv2.COLOR_GRAY2BGR)
 		final = cv2.add(FG,BG)
-		cv2.imshow('final',final)
-		cv2.moveWindow('final',1320,0)
+		# cv2.imshow('final',final)
+		# cv2.moveWindow('final',1320,0)
 		mask = FGmaskComp
 		
 		# find contours in the mask and initialize the current
@@ -287,6 +287,7 @@ def ballTracking():
 		# TODO: Remove this for final product
 		# show the frame to our screen
 		cv2.imshow("Circle", frame)
+		cv2.moveWindow('Circle',1200,530)
 		key = cv2.waitKey(1) & 0xFF
 		#if the 'q' key is pressed, stop the loop
 		if key == ord("q"):

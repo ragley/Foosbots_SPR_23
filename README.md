@@ -1,9 +1,9 @@
-# __Foosbots_Fall_22__
-This project leverages the Unity game engine and ML Agents, an open source package for Unity, to train a neural network via reinforcement learning to play the game of foosball.
+# __Oklahoma State AI Foosball__
+This project leverages the Unity game engine and ML Agents, an open source package for Unity, to train a neural network via reinforcement learning to play the game of foosball on a physical foosball table.
 <br></br>
 
 ## __Getting Started__
-First, you will need to install Unity 2021.3.11 which can be found at the following link: <https://unity.com/releases/editor/archive>
+First, you will need to install Unity 2021.3.11 which can be found at the following link: <https://Unity.com/releases/editor/archive>
 
 In order to utilize the precise version of python required, it is recommended that all work be done within a virtual environment. An easy guide for setting up a virtual environment can be found here: <https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Using-Virtual-Environment.md>
 
@@ -18,10 +18,11 @@ Once your virtual environment is activated follow these steps to install all nec
   3.) Install ML Agents' Python package by running the following command from the command line:
   
       python -m pip install mlagents==0.28.0
-  4.) Install imutils PythonPackage
+  4.) Install importlib-metadata Python Package
       
-      pip install "need actual command"
+      pip install importlib-metadata==4.4 
   5.) Download the Unity Assets Hosted in the MS Teams files. They are too large to be hosted here unfortunately, and git LFS does not function for public repositories.
+
 <br></br>
 
 ## __Important Unity Editor Components__
@@ -30,7 +31,7 @@ Once your virtual environment is activated follow these steps to install all nec
 <details>
   <summary>Click to Expand</summary> 
 
-| Name | For | Description | Location | 
+| Name        | For        | Description | Location    | 
 | ----------- |----------- | ----------- | ----------- |
 | foosball_config.yaml | Configuration | Configuration file for neural network | `Assets\config` |
 | SelfPlayAgentJoint.cs | Unity | Gives brain a body for acting on the simulated table. Defines foosball objects, collects observations, sets rewards/penalties, and outputs decisions | `Assets\Scripts\Agents` |
@@ -65,7 +66,7 @@ This component determines how an agent makes decisions and  has several importan
 
 ![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png)
 
-`Behavior Name:` This field must match the behavior named specified in the .yaml file referenced during training
+`Behavior Name:` This field must match the behavior named specified in the `.yaml` file referenced during training
 
 `Vector Observation Space:` The number of elements in the `CollectObservations()` method, we have 46 in our script.
 
@@ -83,18 +84,22 @@ This component determines how an agent makes decisions and  has several importan
 <br></br>
 
 ### __Decision Requester__
-This component determines how often the agent makes decisions within a training run
+This component determines how often the agent makes decisions. The `OnActionsRecieved()` function gets called every `Decision Period` steps. The agent makes decisions and outputs commands at this step. 
+
+For Example:
+- If the environment goes through 300 steps with the decision requester is set to 12, the Agent will make decisions every 12 steps, for a total of 25 decisions being made.   
 
 ![foosball_decison_requester](https://user-images.githubusercontent.com/35296087/206738764-6a268c05-15dd-489e-bd67-06885dccc74e.png)
 
+
 >*__NOTE:__*
 >
->*"Take Actions Between" is unchecked and that the `Decision Period > 1`, we found that when allowed to make decisions at every step the agent would get stuck moving its rods only in one direction but when it was slightly throttled it had full range of motion. In the main simulation this can be set to something else (`12-20`), but it's recommended that when running inference on the table it be set to 1.*
+>Ensure *"Take Actions Between" checkbox is unchecked and that the `Decision Period > 1`. We found that when allowed to make decisions at every step (Decision Period = 1), the agent would get stuck moving its rods only in one direction. However, when it was slightly throttled it had full range of motion. When training in the simulation, a value of 12 produces a better simulated result, while a value of 20 produced a better result on the physical table. This is likely due to the AI learning to compensate for delays in input which it might experience on the physical table. When running on the physical table the `Decision Period = 1`.
 
 <br></br>
 
 ### __Important Agent Script Details__
-There are several agent scripts included in the project from the various phases of testing and developing the project. The one that is currently being used and is most up to date for the simulation is called `SelfPlayAgentJoint.cs`. Public variables should be set in the `TableEnvHandler.cs` to ensure settings are the same for both agents. The simulation utilizes the following scripts:
+There are several agent scripts included in the project from the various phases of testing and developing the project. The one that is currently being used and is most up to date for the simulation is called `SelfPlayAgentJoint.cs`. Public variables should be set in the `TableEnvHandler.cs` to ensure settings are the same for both agents. Important functions are explained in the *Click to Expand* section under each script. The simulation utilizes the following scripts: 
 
 <br></br>
 __`SelfPlayAgentJoint.cs`__
@@ -112,7 +117,8 @@ This method is utilized to obtain observations for the neural network and is cal
 <br></br>
 
 ### __`OnActionReceived()` - Void__
-This method is the main driver function of the agent in charge of both producing actions and producing rewards, this function is called every interval set in `Decision Requester`, so, `OnActionsRecieved()` is called every `DecisionInterval` `FixedUpdate()` steps. This project makes use of a continuous action space where all outputs are naturally in the range (-1,1) but we manually clip them to guarantee that they stay in that range, per recommendation of the ML Agents team. Currently the actions of the agent are in the form of "Desired Position" or where the agent wants to be in terms of its minimum and maximum actuation values for the specific action. 
+This method is the main driver function of the agent in charge of both producing actions and producing rewards, this function is called every interval set in `Decision Requester`. The `OnActionsRecieved()` function is called every `DecisionInterval` `FixedUpdate()` steps. This project makes use of a continuous action space where all outputs are naturally in the range (-1,1), but we manually clip them to guarantee that they stay in that range, per recommendation of the ML Agents team. Currently the actions of the agent are in the form of "Desired Position" or where the agent wants to be in terms of its minimum and maximum actuation values for the specific action. 
+
 
 To actuate the rods themselves based on the outputs from the neural network, each rod has two actuation values that move the rod. 
 - __For Linear:__
@@ -129,9 +135,10 @@ To actuate the rods themselves based on the outputs from the neural network, eac
   The same methodology is applied to rotation, but instead uses `getRodVelRot()`.
 
 >*DO NOT EVER set the velocity with `rbody.velocity`. This will result in unreliable physics. If you are needing to change velocity on a rigidbody for some reason use `ForceMode.VelocityChange`.* 
+<!-- (◐ω◑ ) -->
 
 <br></br>
-The reward structure is designed to work with curriculum based training or Self Play, depending on settings defined in the unity build and training configuration .yaml file. Rewards are designed to be symmetric in their application, meaning you should be able to train either red or blue team individually (Or both in terms of Self Play), without modifying the reward code. 
+The reward structure is designed to work with curriculum based training or Self Play, depending on settings defined in the Unity build and training configuration `.yaml` file. Rewards are designed to be symmetric in their application, meaning you should be able to train either red or blue team individually (or both in terms of Self Play), without modifying the reward code. 
 
 Rewards in this section can be tricky. The way the simulation is currently set up, ONLY rewards that affect a single agent should be placed in this section. If any rewards here are defined based on the outcome of the other agent's actions, a race condition will develop.
 
@@ -165,7 +172,7 @@ Boolean variables within the Agent script change how this value is applied. Thes
 The resultant float value is multiplied by a user-defined `shotRewardMultiplier` and returned. I've found with `useNegShotPenalty=true`, `usePosessionEval=false`, and `useSingleShotReward=false`, results in a purely symmetric reward system: if red gets `+X` blue gets exactly `-X` for the shot reward at any given time.<br></br>
 
 ### __`SpinPenalty()` - Float__
-This function is to prevent the rods from endlessly spinning as fast as possible, as previously the AI would find this is the best solution to getting the ball in the goal as fast as possible.
+This function is to prevent the rods from endlessly spinning as fast as possible. Previously the AI would find this is the best solution to getting the ball in the goal as fast as possible.  <!--  its right, but that not how you play foosball -->
 
 *This function currently needs further testing and balancing and/or is obsolete. Currently Rods are unable to fully spin more than 354 degrees (-177, 177)*
 <br></br>
@@ -179,7 +186,7 @@ This function converts the desired position output by the neural network `(-1, 1
 <br></br>
 
 ### __`getRodVelLinear(int rod, Vector3 curPos, float inputDesiredPos)` - Vector3__
-This is a very important function as it's responsible for actuating the rods in a similar manner to the methods used by the physical table. Since the physical table is actuated by stepper motors, operating on desired position commands, the unity simulation is required to actuate in a similar manner. The difficulty with this is maintaining a continuous physics simulation that allows for consistent collisions. The rods could be easily actuated with the `Transform.position` and `Transform.rotation` commands within Unity but these ignore the physics system. Taking inspiration from the [paper published by KIcker](https://www.researchgate.net/publication/341204434_KIcker_An_Industrial_Drive_and_Control_Foosball_System_automated_with_Deep_Reinforcement_Learning), the decision was made to utilize target velocities.
+This is a very important function as it's responsible for actuating the rods in a similar manner to the methods used by the physical table. Since the physical table is actuated by stepper motors, operating on desired position commands, the Unity simulation is required to actuate in a similar manner. The difficulty with this is maintaining a continuous physics simulation that allows for consistent collisions. The rods could be easily actuated with the `Transform.position` and `Transform.rotation` commands within Unity but these ignore the physics system. Taking inspiration from the [paper published by KIcker](https://www.researchgate.net/publication/341204434_KIcker_An_Industrial_Drive_and_Control_Foosball_System_automated_with_Deep_Reinforcement_Learning), the decision was made to utilize target velocities.
 
 The function takes in the current `Vector3` Position the selected rod, as well as calls `desPosition()` to get the neural network's desired `z` position. Both these values are converted to relative space to the ally goal. It then calculates the velocity required to get the rod from the current position, to the desired position in one timestep, capped at a specific velocity, ideally set to a value correspondig to the table's max actuation speed.
 <br></br>
@@ -266,14 +273,65 @@ This function syncs variables of the `TableEnvHandler.cs` to the agents. Ideally
 ### __Importand Scripts for Inference__
 In order to run inference on the physical table a moderately complex approach had to be taken due to the need of the neural network .onnx brain.  While this is a "usable" neural network brain type generally, since it was created with Unity's ML-Agents, it requires the Barracuda library to be properly parsed and correct outputs generated. Thus the decision was made to run inference within the Unity engine to avoid incorrect outputs. 
 
-To do this I modified the original Python inference script I created to run entirely within Unity in C#. Essentially, we trick the brain into still thinking it is playing within the unity simulation by feeding it the appropriate data as inputs from the physical table. This is why the inference script as well as the inference agent are called `DummyInference.cs` and `DummyAgent.cs` respectively.
+To do this I modified the original Python inference script I created to run entirely within Unity in C#. Essentially, we trick the brain into still thinking it is playing within the Unity simulation by feeding it the appropriate data as inputs from the physical table. This is why the inference script as well as the inference agent are called `DummyInference.cs` and `DummyAgent.cs` respectively.
 <br></br>
 
 `DummyInference.cs`
 <details>
   <summary>Click to Expand</summary>
 
-The inference 
+### __`commands` - Dictionary<string, object>__
+Contains names and values of commands that are sent to the server.
+
+### __`server_data` - Dictionary<string, object>__
+Contains names and values of data retrieved from the server.
+
+### __`ConnectToServer()` - Socket__
+Takes in the `host` ip address and `port` as arguments, and attempts to connect to the Raspberry Pi server. 
+
+>*NOTE:*
+>
+>*Unity will freeze if it cannot connect to the server. Ensure the server is already running before pressing play in Unity or executing the Unity build.*
+
+### __`Start()` - Void__
+Gets the Rigidbody component for the visuals and calls `ConnectToServer()` 
+
+### __`FixedUpdate()` - Void__
+This function is the main loop for running inference on the physical table and thus has many components, expanded upon below.
+- Rotates the cube visualization shown during play.
+- Defines, recieves, and parses data `message` from the server.
+- Converts all server data into usable data types
+- Checks for a goal condition based on server information, and pauses inference for 6 seconds, ideally to allow the rods to reset.
+- Assigns data from the server to the AI's observations. 
+  - Ball
+    - Gets ball X and Z positions and velocity
+  - Player Rods
+    - Gets rod position and rotation, as well positions of each player piece
+  - Goals
+    - Gets goal X and Z positons 
+  >*NOTE:*
+  >
+  > *The data from the server (except ball tracking) is taken from different coordinate spaces than the simulation. All observations in the simulation are taken from the perspective of the ally goal as the origin. Observations for the player rods on the physical table are taken with the "zero" side wall being the Z origin, and the human goal wall as the X origin. Additionally there are correction factors used to ensure the values are as close as possible to the values experienced by the brain within the simulation. The functions that handle these are in `Converters.cs` and `Constants.cs`.* 
+- Takes the neural network outputs and translates them to actuation commands for the physical table.
+- Sends the commands to the server.
+
+### __Output Commands__
+This array is the output decisions of the NN. Max actuation, player spacing, and the conversion required for Unity -> IRL are all accounted for in these outputs. The domains of these values are in relation to locations on the table. 
+
+| Index  | Object                      | Command             |
+| ------ | --------------------------- |-------------------- |
+| 0      | allyGoalkeeper (goal-Rod)   | Linear movement     |
+| 1      | allyGoalkeeper (goal-Rod)   | Rotational movement |
+|        |                             |                     |
+| 2      | allyDefence (2-Rod)         | Linear movement     |
+| 3      | allyDefence (2-Rod)         | Rotational movement |
+|        |                             |                     |
+| 4      | allyMidfield (5-Rod)        | Linear movement     |
+| 5      | allyMidfield (5-Rod)        | Rotational movement |
+|        |                             |                     |
+| 6      | allyAttack (3-Rod)          | Linear movement     |
+| 7      | allyAttack (3-Rod)          | Rotational movement |
+
 
 </details>
 <br></br>
@@ -284,6 +342,21 @@ The inference
 <details>
   <summary>Click to Expand</summary>
 
+The `DummyAgent` is very similar to the `SelfPlayAgentJoint`. It functions generally the same way, but retrieves observations from the server as its inputs. 
+
+>*NOTE:*
+>
+> *With the neural network running within unity, it is theoretically possible to assign reward structures here and train the AI on the physical table. With the addition of more encoder hardware and additional code, it would also be possible to implement behavioral cloning to attempt to mimic human behavior on the table. 
+
+
+### __`Start()` - Void__
+Initializes score from values retrieved from `DummyInference.cs`.
+
+### __`OnEpisodeBegin()` - Void__
+Initializes score from values retrieved from `DummyInference.cs`.
+
+### __`CollectObservations()` - Void__
+This function retrieves all input values consolidated in `DummyInference.cs` and adds them to a vector of observations. The order is very important and must be identical to what the AI recieves in the simulation, or improper output will be generated from the brain.
 
 ### __Input Observations__
 Fourty-six obervations are assigned in the agent script, and then passed along to the Inference file. 
@@ -347,10 +420,12 @@ These inputs can be viewed in Unity in the *Dummy Inference (Script)* section wi
 | 44    | enemyGoal                 | *x* position  |
 | 45    | enemyGoal                 | *z* position  |
 </details>
-<br></br>
+
+### __`OnActionsReceived()` - Void__
+Similar to the `SelfPlayAgentJoint.cs` script, this function gets the output from the neural network as an array of actions, that is subsequently parsed by the `DummyAgent.cs` script to be sent to the server as movement commands. Additionally, there is an example reward structure included which rewards/penalizes the AI for scoring on the physical table.
 
 ### __Neural Network Decisions__
-This array of 8 objects is defined within the `OnActionRecieved()`, and passed to Inference. Outputs from the neural network are continuous values on the domain of ```[-1, 1]```.  The order of these is the same as they are called within the simulation.
+This array of 8 objects is defined within the `OnActionReceived()`, and passed to Inference. Outputs from the neural network are continuous values on the domain of ```[-1, 1]```.  The order of these is the same as they are called within the simulation.
 
 | Index  | Object                      | Action    |
 | ------ | --------------------------- |---------- |
@@ -366,36 +441,22 @@ This array of 8 objects is defined within the `OnActionRecieved()`, and passed t
 | 6      | allyGoalkeeper (goal-Rod)   | Linear    |
 | 7      | allyGoalkeeper (goal-Rod)   | Rotation  |
 
+### __`Heuristic()` - Void__
+The heuristic method allows for manual input from the arrow keys on the keyboard to act as outputs from the AI.
 
-### __Output Commands__
-This array is the output decisions of the NN. These are defined in the Inference file. Max actuation, player spacing, and the conversion required for Unity -> IRL are all accounted for in these outputs. The domains of these values are in relation to locations on the table. 
-
-| Index  | Object                      | Command             |
-| ------ | --------------------------- |-------------------- |
-| 0      | allyGoalkeeper (goal-Rod)   | Linear movement     |
-| 1      | allyGoalkeeper (goal-Rod)   | Rotational movement |
-|        |                             |                     |
-| 2      | allyDefence (2-Rod)         | Linear movement     |
-| 3      | allyDefence (2-Rod)         | Rotational movement |
-|        |                             |                     |
-| 4      | allyMidfield (5-Rod)        | Linear movement     |
-| 5      | allyMidfield (5-Rod)        | Rotational movement |
-|        |                             |                     |
-| 6      | allyAttack (3-Rod)          | Linear movement     |
-| 7      | allyAttack (3-Rod)          | Rotational movement |
 
 </details>
 <br></br> 
 
 ## __Training a Brain for Use on the Physical Table__
 ### __Preperation__
-To train a brain for use on the physical table first open the ```Final_BallTouchTrainer.unity``` scene (availiable on Teams if you're a future project member, or you can send a request to me on discord at Ragley#1700 and I will send you the file. They are too large to put here and git-lfs has trouble with collaborative repos.)
+To train a brain for use on the physical table first open the ```Final_BallTouchTrainer.Unity``` scene (availiable on Teams if you're a future project member, or you can send a request to me on discord at Ragley#1700 and I will send you the file. They are too large to put here and git-lfs has trouble with collaborative repos.)
 
 If developing on VSCode on the main computer, make and save your training changes to the scripts you've modified according to the guidelines above. The main ones affecting the agent are the ```SelfPlayAgentJoint.cs``` and ```TableEnvHandler.cs```. 
 
 >*__NOTE:__*
 >
->*I would highly recommend testing the changes made in play mode with both agents running in inference to see if your new rewards/etc. are applying properly. Don't fall into the trap of making your changes and immediately jumping into training, only to find out your rewards were not applying properly. There are unity debug log print statements within ```TableEnvHandler.cs``` that give some general reward breakdowns for each agent. These can be used to ensure rewards are being implemented properly.*
+>*I would highly recommend testing the changes made in play mode with both agents running in inference to see if your new rewards/etc. are applying properly. Don't fall into the trap of making your changes and immediately jumping into training, only to find out your rewards were not applying properly. There are Unity debug log print statements within ```TableEnvHandler.cs``` that give some general reward breakdowns for each agent. These can be used to ensure rewards are being implemented properly.*
 
 <br></br>
 
@@ -407,7 +468,11 @@ In order to train the network, open the project in Unity. Duplicate as many of t
   >
   >*Tables can be placed in a regtangular-grid formation, but this reduces performance significantly, so is not recommended if wanting to visually monitor progress.*
 
-Once this is complete, create a build within unity of the `Final_BallTouchTrainer.unity` scene, saving it to `<BuildFolder>`. 
+Once this is complete, ensure `Product Name` under `Project Settings > Player > Product Name` is: 
+    
+    Foosbots_MultiRod_5
+
+Then create a build within Unity of the `Final_BallTouchTrainer.Unity` scene, saving it to `<BuildFolder>`. 
 
 Next open a PowerShell terminal with your virtual environment active and navigate to the directory containing the Unity project, and then run the following command:
 
@@ -415,7 +480,7 @@ Next open a PowerShell terminal with your virtual environment active and navigat
     
 Replace with whatever you wish to call that particular session of training. 
 
-`<BuildFolder>` is the directory of the latest built .exe from unity. 
+`<BuildFolder>` is the directory of the latest built .exe from Unity. 
 
 `time-scale` should always be set to 1. It is tempting to increase this to reduce training time, however evidence shows higher time scale will affect the performance of the resulting brain negatively.
 
@@ -465,8 +530,37 @@ More information about the use of tensorboard and evaluation of these statisitic
 <br></br>
 
 ## __Deployment on the Physical Table__
-
+The following steps outline how to deploy a trained brain onto the physical table for testing. 
 ### __Unity Setup for Inference__
+Unity requires configuration for running inference on the physical table, since the brain is running through Unity to get the proper outputs from the neural network.
+
+1) First, load the the scene `FINAL_InferenceDUMMY` in the Unity editor.
+2) Select the `Cube` object from the heirarchy, this contains the `DummyAgent.cs` and `DummyInference.cs` scripts as well as all components related to Agent functions.
+3) Make a copy of the latest trained brain (`.onnx` file) from the `results/<RUN_ID>` folder, and rename it something reasonable. 
+4) Copy the brain to `Assets/Brains/` in order for it to show up in the Unity Editor as an availiable object. 
+5) Select your desired `Behavior Type`, likely this will be `Inference Only` if you are wanting to test a brain.
+
+Unity should essentially be set up at this point to start running inference on the physical table. After you do these steps, ensure the table is turned on with the server running, then start the ball tracking program to ensure the server has all necessary data for the AI. 
+
+
+### __Running Inference__
+There are now two options availible for testing your brain:
+
+1) Run the brain through the Unity Editor
+   - This is likely the best option if you are testing a new brain for a short time period. It allows for easily hot swapping brains, changing behavior type, adjusting parameters, etc.
+   - To do this all you need to do once the server is running is press `Play` in the Unity Editor.
+2) Create a build for the Inference.
+   - This is the best option for running inference on the table with a brain usable for long term, and for a more "user-friendly" operation experience, compared to a development oriented one. 
+   - This does __not__ allow you to change brains, settings, or any other parameters during play.
+   - This does however, run faster than running it through the editor, as well as makes it easier to start up the whole system.
+   - To do this, create a build as previously mentioned in the Training The Network section. However, it is important to make the following changes if you would like to use the startup script. (Otherwise you can start the programs manually.)
+     - The `Product Name` __must__ be:
+          
+            Foosbots_Inference_Engine
+     - The build folder __must__ be `InfBuild` in the root directory.
+
+Now that your brain is running in inference, touch the OSU logo at the top of the Raspberry Pi screen, which opens the debug menu. Ensure all data is being displayed (Ball tracking, rod positions, rod commands, etc.). If everything is there, hit `Play` then any difficulty. Your brain should now be actuating the computer rods on the physical table. To pause play, simply hit `Pause Game`. To unpause, hit `Resume Game` (__Not Play__, it will not work).
+
 
 
 

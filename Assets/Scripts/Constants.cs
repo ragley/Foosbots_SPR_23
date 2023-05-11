@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using sowwy.(◐ω◑ );
 
 public static class Constants
 {
@@ -66,6 +67,8 @@ public static class Constants
             return cor;
         }
 
+        // Min/Max values shown for players in the sim
+        // Pics of data are on computer pictures folder
         public const float Sim_P0_Max = 1.325498f;
         public const float Sim_P0_Min = 0.3026522f;
         public const float Sim_P1_Max = 0.5110245f;
@@ -73,6 +76,7 @@ public static class Constants
         public const float Sim_P2_Max = -0.30345f;
         public const float Sim_P2_Min = -1.326296f;
 
+        // Min/Max values shown for players on the Table
         public const float Tab_P0_Max = 0.2771656f;
         public const float Tab_P0_Min = 1.293255f;
         
@@ -81,6 +85,27 @@ public static class Constants
         
         public const float Tab_P2_Max = -1.332805f;
         public const float Tab_P2_Min = -0.3167155f;
+
+        // Correction functions for converting player table locations to correct unity locations
+        
+        public static float Z_Correction_P0(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P0_Min)/(Tab_P0_Max - Tab_P0_Min)) * (Sim_P0_Max - Sim_P0_Min) + Sim_P0_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P1(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P1_Min)/(Tab_P1_Max - Tab_P1_Min)) * (Sim_P1_Max - Sim_P1_Min) + Sim_P1_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P2(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P2_Min)/(Tab_P2_Max - Tab_P2_Min)) * (Sim_P2_Max - Sim_P2_Min) + Sim_P2_Min;
+            return cor;
+        }
+
 
     }
 
@@ -181,6 +206,43 @@ public static class Constants
         public const float Tab_P4_Max = -1.280111f;
         public const float Tab_P4_Min = -0.7829912f;
 
+
+        public static float Z_Correction_P0(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P0_Min)/(Tab_P0_Max - Tab_P0_Min)) * (Sim_P0_Max - Sim_P0_Min) + Sim_P0_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P1(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P1_Min)/(Tab_P1_Max - Tab_P1_Min)) * (Sim_P1_Max - Sim_P1_Min) + Sim_P1_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P2(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P2_Min)/(Tab_P2_Max - Tab_P2_Min)) * (Sim_P2_Max - Sim_P2_Min) + Sim_P2_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P3(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P3_Min)/(Tab_P3_Max - Tab_P3_Min)) * (Sim_P3_Max - Sim_P3_Min) + Sim_P3_Min;
+            return cor;
+        }
+        public static float Z_Correction_P4(float z_pos )
+        {
+            float cor = ((z_pos - Tab_P4_Min)/(Tab_P4_Max - Tab_P4_Min)) * (Sim_P4_Max - Sim_P4_Min) + Sim_P4_Min;
+            return cor;
+        }
+
+            //         ⠀⠀⠀⢠⣿⣶⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            // ⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣄⣀⡀⣠⣾⡇⠀⠀⠀I should have made a function that takes
+            // ⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀parameters of zPos, and all 4 min/max  
+            // ⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⢿⣿⣿⡇⠀⠀⠀values, but realized this mistake very
+            // ⠀⣶⣿⣦⣜⣿⣿⣿⡟⠻⣿⣿⣿⣿⣿⣿⣿⡿⢿⡏⣴⣺⣦⣙⣿⣷⣄⠀ late and have not had time to refactor.
+            // ⠀⣯⡇⣻⣿⣿⣿⣿⣷⣾⣿⣬⣥⣭⣽⣿⣿⣧⣼⡇⣯⣇⣹⣿⣿⣿⣿⣧⠀⠀
+            // ⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣷⠀
     }
 
     public static class ThreeRod
@@ -221,6 +283,24 @@ public static class Constants
         
         public const float Tab_P2_Max = -1.319695f;
         public const float Tab_P2_Min = -0.3167155f;
+
+        public static float Z_Correction_P0(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P0_Min)/(Tab_P0_Max - Tab_P0_Min)) * (Sim_P0_Max - Sim_P0_Min) + Sim_P0_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P1(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P1_Min)/(Tab_P1_Max - Tab_P1_Min)) * (Sim_P1_Max - Sim_P1_Min) + Sim_P1_Min;
+            return cor;
+        }
+
+        public static float Z_Correction_P2(float z_pos)
+        {
+            float cor = ((z_pos - Tab_P2_Min)/(Tab_P2_Max - Tab_P2_Min)) * (Sim_P2_Max - Sim_P2_Min) + Sim_P2_Min;
+            return cor;
+        }
 
     }
 

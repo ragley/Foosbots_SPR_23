@@ -88,19 +88,6 @@ public class DummyInference : MonoBehaviour
     {
         // RB for visuals 
         rb = GetComponent<Rigidbody>();
-        // var p = new System.Diagnostics.Process();
-        // p.StartInfo.FileName = "Scripts/Python/ball_tracking.py";
-        // //p.StartInfo.Arguments = "optional arguments separated with spaces";
-        // p.StartInfo.UseShellExecute = false;
-        // p.StartInfo.RedirectStandardOutput = true;
-        // p.Start();   
-
-        // string input = "(3.14, 2.71)";
-        // string[] values = input.Substring(1, input.Length - 2).Split(',');
-        // float firstValue = float.Parse(values[0]);
-        // float secondValue = float.Parse(values[1]);
-        // Commands and server data dictionaries
-
         socket = ConnectToServer(host,port);
 
     }
@@ -143,16 +130,7 @@ public class DummyInference : MonoBehaviour
 
         if (run)
         {
-           
-    
-            // if (Mathf.Abs(previous_X - System.Convert.ToSingle(received.data["ball_x"])) > Constants.NOISE_THRESHOLD)
-            // {
-                
-            // }
-            // if (Mathf.Abs(previous_Y - System.Convert.ToSingle(received.data["ball_y"])) > Constants.NOISE_THRESHOLD)
-            // {
-            //     previous_Y = System.Convert.ToSingle(received.data["ball_y"]);
-            // }
+        
             previous_Y = System.Convert.ToSingle(received.data["ball_y"]);
             previous_X = System.Convert.ToSingle(received.data["ball_x"]);
             if (robot_score != System.Convert.ToInt32(received.data["robot_score"]) || player_score != System.Convert.ToInt32(received.data["player_score"]))
@@ -168,9 +146,7 @@ public class DummyInference : MonoBehaviour
 
 
             // Assign inputs to values received from the server
-
-            //TODO Correct player values in z position in same way as rod position
-
+            // Some z had to be multiplied by negative 1 cause of how the system was set up on the new table
             // Three Rod / Attack Rod 
             float rod3x = Constants.ThreeRod.rodX;
             float rod3z = System.Convert.ToSingle(received.data["robot_3_rod_displacement_current"]);
@@ -178,23 +154,21 @@ public class DummyInference : MonoBehaviour
             float rod3P1z = Constants.MIN_PLAYER_OFFSET + rod3z + Constants.ThreeRod.playerSpacing;
             float rod3P2z = Constants.MIN_PLAYER_OFFSET + rod3z + 2 * Constants.ThreeRod.playerSpacing;
             
-            // add difference between unity output and converters to make sure inf on table sees the same
             float rod3P0x = Constants.ThreeRod.rodX; 
             float rod3P1x = Constants.ThreeRod.rodX;
             float rod3P2x = Constants.ThreeRod.rodX;
 
             // add difference between unity output and converters to make sure inf on table sees the same
-
             float[] rod3Obs = { 
                 Converters.IRL_2_U_X(rod3x) + Constants.ThreeRod.X_Correction, 
                 Constants.ThreeRod.Z_Correction(Converters.IRL_2_U_Z(rod3z)), 
                 System.Convert.ToSingle(received.data["robot_3_rod_angle_current"]) * -1, 
                 Converters.IRL_2_U_X(rod3P0x) + Constants.ThreeRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod3P0z) * -1, 
+                Constants.ThreeRod.Z_Correction_P0(Converters.IRL_2_U_Z(rod3P0z) * -1), 
                 Converters.IRL_2_U_X(rod3P1x) + Constants.ThreeRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod3P1z) * -1, 
+                Constants.ThreeRod.Z_Correction_P1(Converters.IRL_2_U_Z(rod3P1z) * -1), 
                 Converters.IRL_2_U_X(rod3P2x) + Constants.ThreeRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod3P2z) * -1 
+                Constants.ThreeRod.Z_Correction_P2(Converters.IRL_2_U_Z(rod3P2z) * -1) 
             };
 
 
@@ -217,15 +191,15 @@ public class DummyInference : MonoBehaviour
                 Constants.FiveRod.Z_Correction(Converters.IRL_2_U_Z(rod5z)), 
                 System.Convert.ToSingle(received.data["robot_5_rod_angle_current"]) * -1, 
                 Converters.IRL_2_U_X(rod5P0x) + Constants.FiveRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod5P0z) * -1, 
+                Constants.FiveRod.Z_Correction_P0(Converters.IRL_2_U_Z(rod5P0z) * -1), 
                 Converters.IRL_2_U_X(rod5P1x) + Constants.FiveRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod5P1z) * -1, 
+                Constants.FiveRod.Z_Correction_P1(Converters.IRL_2_U_Z(rod5P1z) * -1), 
                 Converters.IRL_2_U_X(rod5P2x) + Constants.FiveRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod5P2z) * -1, 
+                Constants.FiveRod.Z_Correction_P2(Converters.IRL_2_U_Z(rod5P2z) * -1), 
                 Converters.IRL_2_U_X(rod5P3x) + Constants.FiveRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod5P3z) * -1, 
+                Constants.FiveRod.Z_Correction_P3(Converters.IRL_2_U_Z(rod5P3z) * -1), 
                 Converters.IRL_2_U_X(rod5P4x) + Constants.FiveRod.X_Correction, 
-                Converters.IRL_2_U_Z(rod5P4z) * -1
+                Constants.FiveRod.Z_Correction_P4(Converters.IRL_2_U_Z(rod5P4z) * -1)
             };
 
 
@@ -242,9 +216,9 @@ public class DummyInference : MonoBehaviour
                 Constants.TwoRod.Z_Correction(Converters.IRL_2_U_Z(rod2z)),
                 System.Convert.ToSingle(received.data["robot_2_rod_angle_current"]) * -1,
                 Converters.IRL_2_U_X(rod2P0x) + Constants.TwoRod.X_Correction,
-                Converters.IRL_2_U_Z(rod2P0z),
+                Constants.TwoRod.Z_Correction_P0(Converters.IRL_2_U_Z(rod2P0z) * -1),
                 Converters.IRL_2_U_X(rod2P1x) + Constants.TwoRod.X_Correction,
-                Constants.TwoRod.Z_Correction_P0(Converters.IRL_2_U_Z(rod2P1z) * -1)
+                Constants.TwoRod.Z_Correction_P1(Converters.IRL_2_U_Z(rod2P1z) * -1)
             };
 
             // Goal Rod / Goalkeeper Rod
@@ -262,11 +236,11 @@ public class DummyInference : MonoBehaviour
                 Constants.GoalRod.Z_Correction(Converters.IRL_2_U_Z(rodgz)),
                 System.Convert.ToSingle(received.data["robot_goal_rod_angle_current"]) * -1,
                 Converters.IRL_2_U_X(rodgP0x) + Constants.GoalRod.X_Correction,
-                Converters.IRL_2_U_Z(rodgP0z) * -1,
+                Constants.GoalRod.Z_Correction_P0(Converters.IRL_2_U_Z(rodgP0z) * -1),
                 Converters.IRL_2_U_X(rodgP1x) + Constants.GoalRod.X_Correction,
-                Converters.IRL_2_U_Z(rodgP1z) * -1,
+                Constants.GoalRod.Z_Correction_P1(Converters.IRL_2_U_Z(rodgP1z) * -1),
                 Converters.IRL_2_U_X(rodgP2x) + Constants.GoalRod.X_Correction,
-                Converters.IRL_2_U_Z(rodgP2z) * -1
+                Constants.GoalRod.Z_Correction_P2(Converters.IRL_2_U_Z(rodgP2z) * -1)
             };
 
             // Irl to Unity calc done in ball_tracking.py
@@ -373,26 +347,6 @@ public class DummyInference : MonoBehaviour
 
         }
 
-
-        
-        
-
-        // Getter
-        // Needs: Sock
-        // Get data
-        
-        
-        // Unity
-
-        // Sender
-
-
-
-        // Get server info as inputs as array
-        // Dummy Agent to do Inference
-        // Get NN Outputs, save to array
-        // Send NN Outputs to python that sends to server
     }
-    // Update is called once per frame
 
 }

@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/old scenes/JointTest.unity
     guid: 67db98908035e674f8a8ff2d56d60aa3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FINAL_BallTouchTrainer.unity
     guid: bb37ddb9939c99741a0b2afa40a22ac6
+  - enabled: 1
+    path: Assets/Scenes/FINAL_InterenceDUMMY.unity
+    guid: c3d06da2524d6fc4eb0eaa32b46b55d4
   m_configObjects: {}
