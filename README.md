@@ -1,5 +1,8 @@
 # __Oklahoma State AI Foosball__
 This project leverages the Unity game engine and ML Agents, an open source package for Unity, to train a neural network via reinforcement learning to play the game of foosball on a physical foosball table.
+
+A video overview is availible [here](https://www.youtube.com/watch?v=JQMWti5Pj_U).
+
 <br></br>
 
 ## __Getting Started__
