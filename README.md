@@ -577,3 +577,4 @@ Now that your brain is running in inference, touch the OSU logo at the top of th
 - [Another implementation of Foosball using ML-Agents.](https://github.com/mbaske/ml-table-football)
   - Be cautious if trying to adapt things from this, as it is on different versions of packages, and was also not designed with the intent of being used to actuate motors
 - [Example of adversarial self play in a volleyball environment using ML-Agents](https://github.com/CoderOneHQ/ultimate-volleyball/)
+- [Self Play Parameters and Descriptions](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/#self-play)
