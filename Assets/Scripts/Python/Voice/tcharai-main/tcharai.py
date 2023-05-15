@@ -23,7 +23,7 @@ def run(stdscr):
     page.goto('https://beta.character.ai/chat?char='+chara_id)
     page.get_by_role("button", name="Accept").click()
     
-    apiKey = "a86c4cc123e533706ec3686e24154f6a"
+    apiKey = ""
     user = ElevenLabsUser(apiKey)
     voice_name = "hk47"
     voice = user.get_voices_by_name(voice_name)[0]
