@@ -64,9 +64,11 @@ Once your virtual environment is activated follow these steps to install all nec
    - `Team.<PlayerColor>.Goal`: This is the goal object, and includes the trigger collider for goal detection.
 <br></br>
 ### __Behvaior Parameters__
-This component determines how an agent makes decisions and  has several important sub-components `NEEDS PIC UPDATE`
+This component determines how an agent makes decisions and  has several important sub-components 
 
-![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png)
+<!--![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png) --> 
+
+![foosball_behavior_parameters](https://github.com/ragley/OKStateAIFoosball/assets/51537233/6670ce3d-caf3-4e29-b4a7-6313e4e1ca70)
 
 `Behavior Name:` This field must match the behavior named specified in the `.yaml` file referenced during training
 
