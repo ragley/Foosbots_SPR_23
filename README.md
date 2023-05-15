@@ -64,7 +64,7 @@ Once your virtual environment is activated follow these steps to install all nec
    - `Team.<PlayerColor>.Goal`: This is the goal object, and includes the trigger collider for goal detection.
 <br></br>
 ### __Behvaior Parameters__
-This component determines how an agent makes decisions and  has several important sub-components 
+This component determines how an agent makes decisions and  has several important sub-components.
 
 <!--![foosball_behavior_parameters](https://user-images.githubusercontent.com/35296087/206737538-0e228616-4cff-4555-ba08-375b74c02f06.png) --> 
 
@@ -85,6 +85,7 @@ This component determines how an agent makes decisions and  has several importan
 
 
 `Team ID:` Which team each agent is on, it is important for the self play training that each team have a different ID.
+<!-- Red team is Team ID = 1, while Blue team is Team ID 2. -->
 <br></br>
 
 ### __Decision Requester__
@@ -551,7 +552,7 @@ Unity should essentially be set up at this point to start running inference on t
 There are now two options availible for testing your brain:
 
 1) Run the brain through the Unity Editor
-   - This is likely the best option if you are testing a new brain for a short time period. It allows for easily hot swapping brains, changing behavior type, adjusting parameters, etc.
+   - This is likely the best option if you are testing a new brain for a short time period. It allows for easily hot-swapping brains, changing behavior type, adjusting parameters, etc.
    - To do this all you need to do once the server is running is press `Play` in the Unity Editor.
 2) Create a build for the Inference.
    - This is the best option for running inference on the table with a brain usable for long term, and for a more "user-friendly" operation experience, compared to a development oriented one. 
@@ -563,10 +564,12 @@ There are now two options availible for testing your brain:
             Foosbots_Inference_Engine
      - The build folder __must__ be `InfBuild` in the root directory.
 
-Now that your brain is running in inference, touch the OSU logo at the top of the Raspberry Pi screen, which opens the debug menu. Ensure all data is being displayed (Ball tracking, rod positions, rod commands, etc.). If everything is there, hit `Play` then any difficulty. Your brain should now be actuating the computer rods on the physical table. To pause play, simply hit `Pause Game`. To unpause, hit `Resume Game` (__Not Play__, it will not work).
-
-
-
+Now that your brain is running in inference, touch the OSU logo at the top of the Raspberry Pi screen, which opens the debug menu. 
+Ensure all data is being displayed (ball tracking, rod positions, rod commands, etc.). 
+If everything is there, hit `Play` and select a difficulty. 
+Your brain should now be actuating the computer rods on the physical table. 
+To pause play, simply hit `Pause Game`. To unpause, hit `Resume Game`. 
+Hitting the `play` button after pausing the game *will not* resume the game.  <!--(__Not Play__, it will not work). -->
 
 
 
@@ -577,6 +580,6 @@ Now that your brain is running in inference, touch the OSU logo at the top of th
 - [Tips on Training with SAC Specifically](https://github.com/yosider/ml-agents-1/blob/master/docs/Training-SAC.md)
 - [Overview on ML-Agents with some example scenarios](https://github.com/Unity-Technologies/ml-agents/blob/develop/docs/ML-Agents-Overview.md)
 - [Another implementation of Foosball using ML-Agents.](https://github.com/mbaske/ml-table-football)
-  - Be cautious if trying to adapt things from this, as it is on different versions of packages, and was also not designed with the intent of being used to actuate motors
+  - Be cautious if trying to adapt things from this. It is on different versions of packages, and was also not designed with the intent of being used to actuate motors.
 - [Example of adversarial self play in a volleyball environment using ML-Agents](https://github.com/CoderOneHQ/ultimate-volleyball/)
 - [Self Play Parameters and Descriptions](https://unity-technologies.github.io/ml-agents/Training-Configuration-File/#self-play)
